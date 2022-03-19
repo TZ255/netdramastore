@@ -1,0 +1,65 @@
+<script>
+    const real = document.getElementById('real')
+    const shadow = document.getElementById('shadow')
+    const wait = document.getElementById('wait')
+    const youhave = document.getElementById('youhave')
+    const mainPoints = document.getElementById('mainPoints')
+    const modalReal = document.querySelectorAll('.modalReal')
+    const footerbtn = document.querySelector('.footerbtn')
+    const modalDesc = document.querySelector('.modalDesc')
+    const dots5 = document.querySelector('.dots-5')
+    const spinner4 = document.querySelector('.spinner-4')
+    const userId = '<%= user.userId %>'
+
+    function waiting() {
+        let counting = 7
+
+        let interval = setInterval(() => {
+            counting--
+            wait.innerText = counting
+            if (counting == 0) {
+                real.style.display = 'block'
+                shadow.style.display = 'none'
+                clearInterval(counting)
+            }
+        }, 1000)
+    }
+    waiting()
+
+    real.addEventListener('click', async () => {
+        try {
+            let res = await fetch(`/dramastore-add-points/user/${userId}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            let data = await res.json()
+            youhave.innerText = data.points
+            mainPoints.innerText = data.points
+            dots5.style.display = 'none'
+            spinner4.style.display = 'none'
+            footerbtn.style.display = 'block'
+            modalDesc.style.display = 'flex'
+
+        } catch (err) {
+            let errorWindow = window.open("")
+            errorWindow.document.write(err.message + "<br></h3><h3>Error! Failed to add points, Telegram the screenshot of this error to @shemdoe</h3>")
+            console.log(err.message)
+        }
+    })
+
+    function closeModal(e) {
+        window.open(`/user/${userId}/boost/${e}`, '_self')
+    }
+
+    function todayDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = dd + '/' + mm + '/' + yyyy;
+        document.getElementById('date').innerText = today
+    }
+    todayDate()
+
+</script>

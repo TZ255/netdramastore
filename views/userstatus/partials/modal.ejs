@@ -1,0 +1,37 @@
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pointsModal">
+    Launch demo modal
+  </button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="pointsModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="pointsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pointsModalLabel">
+                    <%= user.fname.substring(0,16) %>
+                </h5>
+                <button type="button" class="btn-close closeM" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal('<%= user.points %>')"></button>
+            </div>
+            <div id="body1" class="modal-body">
+                <div class="spinner-4"></div>
+                <div class="modalDesc">
+                    <span class="tick">
+                        ✔
+                    </span>
+                    <span class="youInc" style="display: block;">
+                       You add +1 point to your points balance, you have
+                    </span>
+                    <span id="youhave" class="youhave">
+
+                    </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn footerbtn btn-primary" data-bs-dismiss="modal" onclick="closeModal('<%= user.points %>')">👌 Ok I understood</button>
+                <div class="dots-5"></div>
+            </div>
+        </div>
+    </div>
+</div>
