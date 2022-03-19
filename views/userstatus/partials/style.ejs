@@ -60,7 +60,6 @@
     }
 
     .red .nump {
-        border: lightgray solid 1px;
         color: red;
     }
 
@@ -116,7 +115,6 @@
 
     .userbox .stts {
         font-family: 'Caveat', cursive;
-        border: 1px lightgray solid;
         padding: 3px 9px;
         border-radius: 4px;
         background-color: aliceblue;
@@ -134,7 +132,7 @@
     }
 
     .green .stts {
-        color: green;
+        color: black;
     }
 
     .green .white {
@@ -152,8 +150,8 @@
 
     .userbox .buttons button {
         margin-top: 8px;
-        width: 80%;
-        border-radius: 24px;
+        width: 85%;
+        border-radius: 4px;
         padding: 16px 3px;
         font-weight: bold;
         outline: none;
@@ -163,19 +161,16 @@
     .userbox .buttons .real {
         box-shadow: 4px 4px 4px black;
         display: none;
+        background-color: green;
+        color: white;
+    }
+
+    .userbox .buttons .real:active,
+    .userbox .buttons .real:hover
+    {
         background-color: white;
-    }
-
-    .userbox .buttons .real:active {
-        width: 75%;
-        box-shadow: none;
-    }
-
-    .green .buttons .real {
         color: green;
-    }
-    .red .buttons .real {
-        color: black;
+        box-shadow: none;
     }
 
     .userbox .buttons .shadow {
@@ -187,7 +182,7 @@
         font-style: italic;
         color: aliceblue;
         display: inline-block;
-        margin-top: 6px;
+        margin-top: 12px;
         font-size: small;
         justify-content: center;
         align-items: center;
@@ -276,6 +271,14 @@
     #shemdoe {
         text-decoration: underline;
         cursor: pointer;
+    }
+
+    .ads {
+        width: 95%;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 
