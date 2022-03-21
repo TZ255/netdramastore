@@ -1,0 +1,157 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Acme&family=Caveat&family=Hurricane&family=Palette+Mosaic&family=Smokum&display=swap');
+
+    body {
+        max-width: 480px;
+        min-width: 320px;
+        margin: 0 auto;
+        background-color: aliceblue;
+    }
+
+    .most {
+        margin-top: 16px;
+        background-color: black;
+        color: white;
+        padding: 4px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .most .header {
+        margin: 4px auto;
+        padding: 4px;
+        font-weight: bold;
+        font-family: 'Acme', cursive;
+    }
+
+    .most .title {
+        font-size: large;
+        text-transform: uppercase;
+    }
+
+    .most span {
+        display: block;
+    }
+
+    .most .list-group {
+        height: 360px;
+        overflow: scroll;
+        font-weight: bold;
+    }
+
+    .most .list-group li {
+        color: brown;
+    }
+
+    .most .list-group li:hover,
+    .most .list-group li:active {
+        color: gray;
+        cursor: pointer;
+    }
+
+    .latest {
+        margin-top: 24px;
+    }
+
+    .latest .title {
+        display: block;
+        font-family: 'Acme', cursive;
+        margin-bottom: 8px;
+        padding: 12px;
+        font-weight: bold;
+        font-size: larger;
+        background-color: black;
+        color: white;
+    }
+
+    .drama-cont {
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .latest .drama {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        
+        color: white;
+        padding: 12px 0;
+        border-radius: 4px;
+    }
+
+    .latest .drama .img {
+        width: 160px;
+        height: 230px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: aliceblue;
+        margin: 4px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .latest .drama .img h3 {
+        font-size: 12px;
+        color: brown;
+        font-family: 'Acme', cursive;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 90%;
+        margin: 8px auto 0 auto;
+        text-align: center;
+    }
+
+    .latest .drama img {
+        width: 150px;
+        height: 200px;
+    }
+    .latest .drama .img h3:hover,
+    .latest .drama .img h3:active {
+        color: brown;
+    }
+
+    .latest .btn {
+        text-align: center;
+        margin: 12px auto;
+        width: 100%;
+    }
+
+    .latest .btn button {
+        font-size: x-large;
+        color: brown;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        font-family: 'Acme', cursive;
+        padding: 12px 3px;
+        width: 88%;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgray;
+        color: gray;
+        font-family: 'Acme', sans-serif;
+        padding: 16px 4px;
+    }
+
+    footer span {
+        margin-top: 12px;
+        font-weight: bold;
+    }
+
+    footer .a {
+        text-decoration: underline;
+        color: gray;
+        cursor: pointer;
+    }
+</style>

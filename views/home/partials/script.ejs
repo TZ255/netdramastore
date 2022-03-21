@@ -1,0 +1,11 @@
+<script>
+    const datet = document.getElementById('date')
+    const dated = document.getElementById('dated')
+
+    setInterval(() => {
+        let day = new Date().toLocaleString()
+        datet.innerText = day
+        dated.innerText = day
+    }, 1000)
+
+</script>

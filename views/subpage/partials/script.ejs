@@ -1,0 +1,20 @@
+<script>
+    let tgChannel = '<%= drama.tgChannel %>'
+    let chName = '<%= drama.newDramaName %>'
+
+    function redirecting() {
+        let tgWindow = window.open(tgChannel, 'Joining Telegram')
+        let linkId = tgChannel.split('tg://join?invite=')[1]
+        let rawLink = `https://t.me/+${linkId}`
+        tgWindow.document.write(`Redirecting to <b>${chName}</b> channel\n\nIf Telegram not opening, copy the following link and paste it to telegram and join the channel from there 👉 <b><a href="${rawLink}">${rawLink}</a></b>`)
+    }
+
+    const datet = document.getElementById('date')
+    const dated = document.getElementById('dated')
+
+    setInterval(() => {
+        let day = new Date().toLocaleString()
+        datet.innerText = day
+        dated.innerText = day
+    }, 1000)
+</script>
