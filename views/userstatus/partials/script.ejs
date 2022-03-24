@@ -20,7 +20,7 @@
             if (counting == 0) {
                 real.style.display = 'block'
                 shadow.style.display = 'none'
-                clearInterval(counting)
+                clearInterval(interval)
             }
         }, 1000)
     }
@@ -39,6 +39,8 @@
             spinner4.style.display = 'none'
             footerbtn.style.display = 'block'
             modalDesc.style.display = 'flex'
+            real.style.display = 'none'
+            shadow.style.display = 'block'
 
         } catch (err) {
             let errorWindow = window.open("")
