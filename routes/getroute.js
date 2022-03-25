@@ -56,6 +56,10 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
     }
 })
 
+//send success (no content) response to browser
+
+router.get('/favicon.ico', (req, res) => res.status(204));
+
 router.get('/:id', async (req, res, next) => {
     try {
         const id = req.params.id
@@ -71,9 +75,10 @@ router.get('/:id', async (req, res, next) => {
         if(!drama) {
             res.send('The drama you try to access is not available, Request it from Drama Store Admin (Telegram @shemdoe)')
         }
-        
-        res.render('subpage/subpage', { drama, popular })
+        else {
+            res.render('subpage/subpage', { drama, popular })
         }
+     }
     } catch (err) {
         console.log(err)
         res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
