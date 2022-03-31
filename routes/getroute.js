@@ -98,6 +98,7 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
         let drama2017 = []
         let drama2016 = []
         let drama2015 = []
+        let allDrama = []
 
 
         // Add new if under foreach to find dramas of new year
@@ -107,6 +108,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
         dramas.forEach(drama=> {
             if(drama.year == 2022 || drama.dramaName.includes('(2022)')) {
                 drama2022.push({
+                    name: drama.dramaName,
+                    path: drama.episodesUrl
+                })
+                allDrama.push({
                     name: drama.dramaName,
                     path: drama.episodesUrl
                 })
@@ -128,6 +133,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                     name: drama.dramaName,
                     path
                 })
+                allDrama.push({
+                    name: drama.dramaName,
+                    path
+                })
             }
 
             else if(drama.year == 2020 || drama.dramaName.includes('(2020)')) {
@@ -143,6 +152,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 }
                 
                 drama2020.push({
+                    name: drama.dramaName,
+                    path
+                })
+                allDrama.push({
                     name: drama.dramaName,
                     path
                 })
@@ -164,6 +177,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                     name: drama.dramaName,
                     path
                 })
+                allDrama.push({
+                    name: drama.dramaName,
+                    path
+                })
             }
 
             else if(drama.year == 2018 || drama.dramaName.includes('(2018)')) {
@@ -179,6 +196,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 }
                 
                 drama2018.push({
+                    name: drama.dramaName,
+                    path
+                })
+                allDrama.push({
                     name: drama.dramaName,
                     path
                 })
@@ -200,6 +221,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                     name: drama.dramaName,
                     path
                 })
+                allDrama.push({
+                    name: drama.dramaName,
+                    path
+                })
             }
 
             else if(drama.year == 2016 || drama.dramaName.includes('(2016)')) {
@@ -215,6 +240,10 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 }
                 
                 drama2016.push({
+                    name: drama.dramaName,
+                    path
+                })
+                allDrama.push({
                     name: drama.dramaName,
                     path
                 })
@@ -236,10 +265,14 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                     name: drama.dramaName,
                     path
                 })
+                allDrama.push({
+                    name: drama.dramaName,
+                    path
+                })
             }
         })
 
-        res.render('searchpage/searchpage', {drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015})
+        res.render('searchpage/searchpage', {drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015, allDrama})
 
     } catch(err) {
         console.log(err)

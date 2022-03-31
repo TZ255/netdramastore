@@ -1,5 +1,22 @@
 <script>
     const dated = document.getElementById('dated')
+    const dramas = document.querySelectorAll('.liDrama')
+    const ulAllDrama = document.getElementById('ulAllDrama')
+
+    function filtering() {
+        let param = document.getElementById('searchBox').value.toLowerCase()
+        ulAllDrama.style.display = 'block'
+        if(param == '') {
+            ulAllDrama.style.display = 'none'
+        }
+        dramas.forEach(drama=> {
+            if(!drama.textContent.toLowerCase().includes(param)) {
+                drama.style.display = 'none'
+            } else {
+                drama.style.display = 'block'
+            }
+        })
+    }
 
     setInterval(() => {
         let day = new Date().toLocaleString()

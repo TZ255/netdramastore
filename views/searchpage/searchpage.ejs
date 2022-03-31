@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,190 +16,207 @@
     <%- include('./partials/style.ejs'); %>
         <%- include('../Global/nav-style.ejs'); %>
 </head>
+
 <body>
     <%- include('../Global/navhtml.ejs'); %>
 
-    <div class="ads adsterra50">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '633eff634a6fe0ef8a4a150bd8980782',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-            };
-            document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://lectureolympics.com/633eff634a6fe0ef8a4a150bd8980782/invoke.js"></scr' + 'ipt>');
-        </script>
-    </div>
-
-    <div id="d2022" class="most d2022">
-        <div class="header">
-            <span class="title">2022 Dramas</span>
-            <a href="#d2021" class="jump">Go 2021 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+        <div class="ads adsterra50">
+            <script type="text/javascript">
+                atOptions = {
+                    'key': '633eff634a6fe0ef8a4a150bd8980782',
+                    'format': 'iframe',
+                    'height': 50,
+                    'width': 320,
+                    'params': {}
+                };
+                document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://lectureolympics.com/633eff634a6fe0ef8a4a150bd8980782/invoke.js"></scr' + 'ipt>');
+            </script>
         </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2022.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
 
-    <div id="d2021" class="most d2021">
-        <div class="header">
-            <span class="title">2021 Dramas</span>
-            <span class="updown">
-                <a href="#d2022" class="jump up">Up 2022 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-                <a href="#d2020" class="jump">Go 2020 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+        <div class="searchBoxCont">
+            <input type="text" id="searchBox" oninput="filtering()" placeholder="🔍 search drama here . . .">
+            <div class="allDrama">
+                <ul id="ulAllDrama">
+                    <% allDrama.forEach(drama=> { %>
+                        <li class="liDrama" onclick="window.open('<%= drama.path %>', '_self')">
+                            <%= drama.name %>
+                        </li>
+                        <% }) %>
+                        <li id="notf" onclick="window.open('tg://resolve?domain=shemdoe', '_self')" >Not find it... request here</li>
+                    </ul>
+            </div>
+        </div>
+
+        <div id="d2022" class="most d2022">
+            <div class="header">
+                <span class="title">2022 Dramas</span>
+                <a href="#d2021" class="jump">Go 2021 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2022.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div id="d2021" class="most d2021">
+            <div class="header">
+                <span class="title">2021 Dramas</span>
+                <span class="updown">
+                    <a href="#d2022" class="jump up">Up 2022 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                    <a href="#d2020" class="jump">Go 2020 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2021.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div class="ads a-ads">
+            <iframe data-aa='1964097' src='//ad.a-ads.com/1964097?size=300x250'
+                style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
+        </div>
+
+        <div id="d2020" class="most d2020">
+            <div class="header">
+                <span class="title">2020 Dramas</span>
+                <span class="updown">
+                    <a href="#d2021" class="jump up">Up 2021 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                    <a href="#d2019" class="jump">Go 2019 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2020.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div id="d2019" class="most d2019">
+            <div class="header">
+                <span class="title">2019 Dramas</span>
+                <span class="updown">
+                    <a href="#d2020" class="jump up">Up 2020 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                    <a href="#d2018" class="jump">Go 2018 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2019.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div class="ads adsterra250">
+            <script type="text/javascript">
+                atOptions = {
+                    'key': '6c89ef113e8ce37b4357824ebcfc4a66',
+                    'format': 'iframe',
+                    'height': 250,
+                    'width': 300,
+                    'params': {}
+                };
+                document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://lectureolympics.com/6c89ef113e8ce37b4357824ebcfc4a66/invoke.js"></scr' + 'ipt>');
+            </script>
+        </div>
+
+        <div id="d2018" class="most d2018">
+            <div class="header">
+                <span class="title">2018 Dramas</span>
+                <span class="updown">
+                    <a href="#d2019" class="jump up">Up 2019 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                    <a href="#d2017" class="jump">Go 2017 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2018.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div id="d2017" class="most d2017">
+            <div class="header">
+                <span class="title">2017 Dramas</span>
+                <span class="updown">
+                    <a href="#d2018" class="jump up">Up 2018 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                    <a href="#d2016" class="jump">Go 2016 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2017.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div id="d2016" class="most d2016">
+            <div class="header">
+                <span class="title">2016 Dramas</span>
+                <span class="updown">
+                    <a href="#d2017" class="jump up">Up 2017 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                    <a href="#d2015" class="jump">Go 2015 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2016.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+        <div id="d2015" class="most d2015">
+            <div class="header">
+                <span class="title">2015 & Older Dramas</span>
+                <span class="updown">
+                    <a href="#d2016" class="jump up">Up 2016 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
+                </span>
+            </div>
+            <ol class="list-group list-group-numbered">
+                <% drama2015.forEach(drama=> { %>
+                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                        <%= drama.name %>
+                    </li>
+                    <% }) %>
+            </ol>
+        </div>
+
+
+
+        <footer>
+            <span>
+                Korean Drama Store
             </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2021.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
-
-    <div class="ads a-ads">
-        <iframe data-aa='1964097' src='//ad.a-ads.com/1964097?size=300x250' style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-    </div>
-
-    <div id="d2020" class="most d2020">
-        <div class="header">
-            <span class="title">2020 Dramas</span>
-            <span class="updown">
-                <a href="#d2021" class="jump up">Up 2021 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-                <a href="#d2019" class="jump">Go 2019 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+            <span class="a" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">
+                <i class="fa-brands fa-telegram"></i> Join Us Telegram
             </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2020.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
-
-    <div id="d2019" class="most d2019">
-        <div class="header">
-            <span class="title">2019 Dramas</span>
-            <span class="updown">
-                <a href="#d2020" class="jump up">Up 2020 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-                <a href="#d2018" class="jump">Go 2018 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+            <span id="dated">
             </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2019.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
-
-    <div class="ads adsterra250">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '6c89ef113e8ce37b4357824ebcfc4a66',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
-            document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://lectureolympics.com/6c89ef113e8ce37b4357824ebcfc4a66/invoke.js"></scr' + 'ipt>');
-        </script>
-    </div>
-
-    <div id="d2018" class="most d2018">
-        <div class="header">
-            <span class="title">2018 Dramas</span>
-            <span class="updown">
-                <a href="#d2019" class="jump up">Up 2019 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-                <a href="#d2017" class="jump">Go 2017 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
-            </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2018.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
-
-    <div id="d2017" class="most d2017">
-        <div class="header">
-            <span class="title">2017 Dramas</span>
-            <span class="updown">
-                <a href="#d2018" class="jump up">Up 2018 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-                <a href="#d2016" class="jump">Go 2016 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
-            </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2017.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
-
-    <div id="d2016" class="most d2016">
-        <div class="header">
-            <span class="title">2016 Dramas</span>
-            <span class="updown">
-                <a href="#d2017" class="jump up">Up 2017 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-                <a href="#d2015" class="jump">Go 2015 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
-            </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2016.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
-
-    <div id="d2015" class="most d2015">
-        <div class="header">
-            <span class="title">2015 & Older Dramas</span>
-            <span class="updown">
-                <a href="#d2016" class="jump up">Up 2016 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
-            </span>
-        </div>
-        <ol class="list-group list-group-numbered">
-            <% drama2015.forEach(drama => { %>
-             <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                <%= drama.name %>
-            </li>
-            <% }) %>
-        </ol>
-    </div>
+        </footer>
 
 
-
-    <footer>
-        <span>
-            Korean Drama Store
-        </span>
-        <span class="a" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">
-            <i class="fa-brands fa-telegram"></i> Join Us Telegram
-        </span>
-        <span id="dated">
-        </span>
-    </footer>
-    
-    
-    <%- include('./partials/script.ejs'); %>
+        <%- include('./partials/script.ejs'); %>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                 crossorigin="anonymous"></script>
 
-    <%- include('../Global/propellarads.ejs'); %>
+            <%- include('../Global/propellarads.ejs'); %>
 </body>
+
 </html>
