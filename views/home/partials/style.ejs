@@ -78,7 +78,7 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        
+
         color: white;
         padding: 12px 0;
         border-radius: 4px;
@@ -97,6 +97,13 @@
         cursor: pointer;
     }
 
+    .latest .drama .img:active,
+    .latest .drama .img:hover {
+        box-shadow: 4px 4px 4px brown, -4px -4px 4px brown;
+        width: 164px;
+        height: 234px;
+    }
+
     .latest .drama .img h3 {
         font-size: 12px;
         color: brown;
@@ -113,6 +120,7 @@
         width: 150px;
         height: 200px;
     }
+
     .latest .drama .img h3:hover,
     .latest .drama .img h3:active {
         color: brown;
@@ -155,5 +163,24 @@
         text-decoration: underline;
         color: gray;
         cursor: pointer;
+    }
+
+    @media (min-width: 480px) {
+        .latest .drama .img {
+            width: 180px;
+            height: 270px;
+        }
+
+        .latest .drama .img:active,
+        .latest .drama .img:hover {
+            box-shadow: 4px 4px 4px brown, -4px -4px 4px brown;
+            width: 184px;
+            height: 274px;
+        }
+
+        .latest .drama img {
+            width: 174px;
+            height: 240px;
+        }
     }
 </style>

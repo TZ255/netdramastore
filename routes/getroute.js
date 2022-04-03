@@ -3,10 +3,12 @@ const mongoose = require('mongoose')
 const botUsersModel = require('../models/botusers')
 const newDramaModel = require('../models/vue-new-drama')
 const homeModel = require('../models/vue-home-db')
+const ohmyBotUsersModel = require('../models/ohmyusers')
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
+const boosterBot = new Telegraf(process.env.OH_BOT2)
 
 // TELEGRAPH
 const telegraph = require('telegraph-node')
@@ -64,21 +66,21 @@ router.get('/:id', async (req, res, next) => {
     try {
         const id = req.params.id
 
-        if(id.startsWith('list-of')) {
+        if (id.startsWith('list-of')) {
             next()
         }
 
         else {
-            const drama = await newDramaModel.findOneAndUpdate({ id }, { $inc: { timesLoaded: 100}}, { new: true })
-        const popular = await newDramaModel.find().sort('-timesLoaded').limit(50)
+            const drama = await newDramaModel.findOneAndUpdate({ id }, { $inc: { timesLoaded: 100 } }, { new: true })
+            const popular = await newDramaModel.find().sort('-timesLoaded').limit(50)
 
-        if(!drama) {
-            res.send('The drama you try to access is not available, Request it from Drama Store Admin (Telegram @shemdoe)')
+            if (!drama) {
+                res.send('The drama you try to access is not available, Request it from Drama Store Admin (Telegram @shemdoe)')
+            }
+            else {
+                res.render('subpage/subpage', { drama, popular })
+            }
         }
-        else {
-            res.render('subpage/subpage', { drama, popular })
-        }
-     }
     } catch (err) {
         console.log(err)
         res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
@@ -86,7 +88,7 @@ router.get('/:id', async (req, res, next) => {
 
 })
 
-router.get('/list-of-dramastore-dramas', async (req, res)=> {
+router.get('/list-of-dramastore-dramas', async (req, res) => {
     try {
         let dramas = await homeModel.find().sort('-year').sort('dramaName')
 
@@ -105,8 +107,8 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
         // Add new if under foreach to find dramas of new year
         // Add new if under foreach to find dramas of new year
 
-        dramas.forEach(drama=> {
-            if(drama.year == 2022 || drama.dramaName.includes('(2022)')) {
+        dramas.forEach(drama => {
+            if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
                 drama2022.push({
                     name: drama.dramaName,
                     path: drama.episodesUrl
@@ -117,14 +119,14 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 })
             }
 
-            else if(drama.year == 2021 || drama.dramaName.includes('(2021)')) {
+            else if (drama.year == 2021 || drama.dramaName.includes('(2021)')) {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
@@ -139,18 +141,18 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 })
             }
 
-            else if(drama.year == 2020 || drama.dramaName.includes('(2020)')) {
+            else if (drama.year == 2020 || drama.dramaName.includes('(2020)')) {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
-                
+
                 drama2020.push({
                     name: drama.dramaName,
                     path
@@ -161,18 +163,18 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 })
             }
 
-            else if(drama.year == 2019 || drama.dramaName.includes('(2019)')) {
+            else if (drama.year == 2019 || drama.dramaName.includes('(2019)')) {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
-                
+
                 drama2019.push({
                     name: drama.dramaName,
                     path
@@ -183,18 +185,18 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 })
             }
 
-            else if(drama.year == 2018 || drama.dramaName.includes('(2018)')) {
+            else if (drama.year == 2018 || drama.dramaName.includes('(2018)')) {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
-                
+
                 drama2018.push({
                     name: drama.dramaName,
                     path
@@ -205,18 +207,18 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 })
             }
 
-            else if(drama.year == 2017 || drama.dramaName.includes('(2017)')) {
+            else if (drama.year == 2017 || drama.dramaName.includes('(2017)')) {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
-                
+
                 drama2017.push({
                     name: drama.dramaName,
                     path
@@ -227,18 +229,18 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
                 })
             }
 
-            else if(drama.year == 2016 || drama.dramaName.includes('(2016)')) {
+            else if (drama.year == 2016 || drama.dramaName.includes('(2016)')) {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
-                
+
                 drama2016.push({
                     name: drama.dramaName,
                     path
@@ -251,16 +253,16 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
 
             else {
                 let path = drama.episodesUrl
-                if(path.includes('joinchat')) {
+                if (path.includes('joinchat')) {
                     let id = path.split('https://t.me/joinchat/')[1]
                     path = `tg://join?invite=${id}`
                 }
 
-                else if(path.includes('t.me') && !path.includes('joinchat')) {
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
                     let id = path.split('https://t.me/')[1]
                     path = `tg://resolve?domain=${id}`
                 }
-                
+
                 drama2015.push({
                     name: drama.dramaName,
                     path
@@ -272,11 +274,69 @@ router.get('/list-of-dramastore-dramas', async (req, res)=> {
             }
         })
 
-        res.render('searchpage/searchpage', {drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015, allDrama})
+        res.render('searchpage/searchpage', { drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015, allDrama })
 
-    } catch(err) {
+    } catch (err) {
         console.log(err)
         res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
+router.get(['/ohmy-channel-subscribers/:id/boost', '/ohmy-channel-subscribers/:id/boost/:ignore'], async (req, res) => {
+    try {
+        const chatid = req.params.id
+
+        let OhMyUser = await ohmyBotUsersModel.findOne({ chatid })
+        let user = {
+            chatid: OhMyUser.chatid,
+            name: OhMyUser.name,
+            points: OhMyUser.points,
+            siri: 'shemdoe',
+            unano: OhMyUser.unano
+        }
+
+        res.render('ohmyuserstatus/ohmyuserstatus', { user })
+    } catch (err) {
+        console.log(err)
+        res.send(`<h2>Error:</h2> ${err.message}`)
+        boosterBot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
+    }
+})
+
+router.get('/ohmy-add-points/user/:id/:siri/:unano', async (req, res) => {
+    try {
+        const chatid = req.params.id
+        const siri = req.params.siri
+        const unano = req.params.unano
+
+        if (siri == 'shemdoe') {
+            let randomNo = Math.floor(Math.random() * 1000000)
+            let newNano = `user${randomNo}`
+
+            let botuser = await ohmyBotUsersModel.findOne({chatid})
+            if(botuser.unano == unano) {
+                let modUser = await ohmyBotUsersModel.findOneAndUpdate({chatid}, { $inc: { points: 1 }, unano: newNano }, { new: true })
+                
+                let data = {
+                    chatid,
+                    points: modUser.points,
+                    name: modUser.name
+                }
+                boosterBot.telegram.sendMessage(chatid, `+1 more point added... you've <b>${modUser.points} points</b>`, { parse_mode: 'HTML' })
+                res.send(data)
+            } else {
+                res.status(400).send('Not valid request')
+            }
+        }
+
+        else {
+            res.status(400).send('Not valid request')
+        }
+
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`<h2>Error: Could'nt add point, try again later</h2>`)
+        boosterBot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
     }
 })
 

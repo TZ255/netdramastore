@@ -1,0 +1,33 @@
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Points</th>
+      <th scope="col">Eps. downloaded</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% ranks.forEach((user, index)=> { %>
+      <tr>
+        <th scope="row">
+          <%= index + 1 %>
+        </th>
+        <td>
+          <% if (user.userId == 1473393723) { %>
+            <%= user.fname.substring(0, 20) %> <span class="admin">Admin</span>
+          <% } %>
+          <% if(user.userId != 1473393723) { %> 
+            <%= user.fname.substring(0, 16) %>
+          <% } %> 
+        </td>
+        <td>
+          <%= user.points.toLocaleString('en-US') %>
+        </td>
+        <td>
+          <%= user.downloaded.toLocaleString('en-US') %>
+        </td>
+        <% }) %>
+      </tr>
+  </tbody>
+</table>
