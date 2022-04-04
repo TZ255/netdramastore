@@ -16,6 +16,9 @@ const ph = new telegraph()
 
 const router = express.Router()
 
+//send success (no content) response to browser
+router.get('/favicon.ico', (req, res) => res.status(204));
+
 router.get('/', async (req, res) => {
     try {
         const latest = await homeModel.find().sort('-year').sort('-createdAt').limit(10)
@@ -57,10 +60,6 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
         bot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
     }
 })
-
-//send success (no content) response to browser
-
-router.get('/favicon.ico', (req, res) => res.status(204));
 
 router.get('/:id', async (req, res, next) => {
     try {
