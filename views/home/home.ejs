@@ -20,40 +20,223 @@
 
 <body>
     <%- include('../Global/navhtml.ejs'); %>
-
+        <div class="joinus" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">
+            <i class="fa-brands fa-telegram"></i> JOIN US ON TELEGRAM <br>
+            <sup>Download new korean series on Telegram</sup>
+        </div>
         <div class="most">
             <div class="header">
-                <span class="title">Most Downloaded Drama</span>
+                <span class="title">Most Downloaded Drama 🔥</span>
                 <span id="date" class="date">
-
+                    ⌛
                 </span>
             </div>
             <ul class="list-group">
-                <% popular.forEach(drama => { %>
-                 <li onclick="window.open('/<%= drama.id %>', '_self')" class="list-group-item d-flex justify-content-between align-items-center">
-                    <%= drama.newDramaName %> 
-                    <span class="badge bg-primary rounded-pill"><i class="fa-solid fa-download"></i> <%= drama.timesLoaded %> </span>
-                </li>
-                <% }) %>
+                <% popular.forEach(drama=> { %>
+                    <li onclick="window.open('/<%= drama.id %>', '_self')"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        <%= drama.newDramaName %>
+                            <span class="badge bg-primary rounded-pill"><i class="fa-solid fa-download"></i>
+                                <%= drama.timesLoaded %>
+                            </span>
+                    </li>
+                    <% }) %>
             </ul>
         </div>
 
         <div class="latest">
-                <span class="title">Latest Drama</span>
-                <div class="drama-cont">
-                  <div class="drama">
-                      <% latest.forEach(drama => { %>
-                       <div class="img" onclick="window.open('<%= drama.idToHome %>', '_self')">
-                        <img src="<%= drama.imageUrl %> " alt="<%= drama.dramaName %> ">
-                        <h3><%= drama.dramaName %> </h3>
-                    </div>
-                      <% }) %>
+            <span class="title">📅 Latest Drama</span>
+            <div class="drama-cont">
+                <div class="drama">
+                    <% latest.forEach(drama=> { %>
+                        <div class="img" onclick="window.open('<%= drama.idToHome %>', '_self')">
+                            <img src="<%= drama.imageUrl %> " alt="<%= drama.dramaName %> ">
+                            <h3>
+                                <%= drama.dramaName %>
+                            </h3>
+                        </div>
+                        <% }) %>
                 </div>
                 <div class="btn">
-                    <button onclick="window.open('/list-of-dramastore-dramas', '_self')">LOAD MORE &nbsp; <i class="fa-solid fa-circle-chevron-down"></i></button>
-                </div>  
+                    <button onclick="window.open('/list-of-dramastore-dramas', '_self')">LOAD MORE &nbsp; <i
+                            class="fa-solid fa-circle-chevron-down"></i></button>
                 </div>
-                
+            </div>
+        </div>
+        <br>
+
+        <section class="indexed">
+            📃 Indexed Drama (All Years)
+        </section>
+        <div class="yracc">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            📺 2022 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2022.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            📺 2021 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2021.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                            📺 2020 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2020.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFour" aria-expanded="false"
+                            aria-controls="flush-collapseFour">
+                            📺 2019 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFour" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2019.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseFive" aria-expanded="false"
+                            aria-controls="flush-collapseFive">
+                            📺 2018 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseFive" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2018.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSix">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSix" aria-expanded="false"
+                            aria-controls="flush-collapseSix">
+                            📺 2017 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSix" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2017.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingSeven">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSeven" aria-expanded="false"
+                            aria-controls="flush-collapseSeven">
+                            📺 2016 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseSeven" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2016.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingEight">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseEight" aria-expanded="false"
+                            aria-controls="flush-collapseEight">
+                            📺 2015 & Older Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapseEight" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2015.forEach(drama=> { %>
+                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                                        <%= drama.name %>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <br> <br> <br>
         <footer>

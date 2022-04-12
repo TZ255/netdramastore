@@ -24,7 +24,158 @@ router.get('/', async (req, res) => {
         const latest = await homeModel.find().sort('-year').sort('-createdAt').limit(10)
         const popular = await newDramaModel.find().sort('-timesLoaded').limit(15)
 
-        res.render('home/home', { latest, popular })
+        let dramas = await homeModel.find().sort('-year').sort('dramaName')
+
+        let drama2022 = []
+        let drama2021 = []
+        let drama2020 = []
+        let drama2019 = []
+        let drama2018 = []
+        let drama2017 = []
+        let drama2016 = []
+        let drama2015 = []
+
+
+        // Add new if under foreach to find dramas of new year
+        // Add new if under foreach to find dramas of new year
+        // Add new if under foreach to find dramas of new year
+
+        dramas.forEach(drama => {
+            if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
+                drama2022.push({
+                    name: drama.dramaName,
+                    path: drama.episodesUrl
+                })
+            }
+
+            else if (drama.year == 2021 || drama.dramaName.includes('(2021)')) {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2021.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+
+            else if (drama.year == 2020 || drama.dramaName.includes('(2020)')) {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2020.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+
+            else if (drama.year == 2019 || drama.dramaName.includes('(2019)')) {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2019.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+
+            else if (drama.year == 2018 || drama.dramaName.includes('(2018)')) {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2018.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+
+            else if (drama.year == 2017 || drama.dramaName.includes('(2017)')) {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2017.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+
+            else if (drama.year == 2016 || drama.dramaName.includes('(2016)')) {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2016.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+
+            else {
+                let path = drama.episodesUrl
+                if (path.includes('joinchat')) {
+                    let id = path.split('https://t.me/joinchat/')[1]
+                    path = `tg://join?invite=${id}`
+                }
+
+                else if (path.includes('t.me') && !path.includes('joinchat')) {
+                    let id = path.split('https://t.me/')[1]
+                    path = `tg://resolve?domain=${id}`
+                }
+
+                drama2015.push({
+                    name: drama.dramaName,
+                    path
+                })
+            }
+        })
+
+        res.render('home/home', { latest, popular, drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015 })
     } catch (err) {
         console.log(err)
         res.send('Internal Error, try again later')
