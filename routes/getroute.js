@@ -432,62 +432,10 @@ router.get('/list-of-dramastore-dramas', async (req, res) => {
     }
 })
 
-router.get(['/ohmy-channel-subscribers/:id/boost', '/ohmy-channel-subscribers/:id/boost/:ignore'], async (req, res) => {
-    try {
+router.get(['/ohmy-channel-subscribers/:id/boost', '/ohmy-channel-subscribers/:id/boost/:ignore'], (req, res) => {
         const chatid = req.params.id
 
-        let OhMyUser = await ohmyBotUsersModel.findOne({ chatid })
-        let user = {
-            chatid: OhMyUser.chatid,
-            name: OhMyUser.name,
-            points: OhMyUser.points,
-            siri: 'shemdoe',
-            unano: OhMyUser.unano
-        }
-
-        res.render('ohmyuserstatus/ohmyuserstatus', { user })
-    } catch (err) {
-        console.log(err)
-        res.send(`<h2>Error:</h2> ${err.message}`)
-        boosterBot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
-    }
-})
-
-router.get('/ohmy-add-points/user/:id/:siri/:unano', async (req, res) => {
-    try {
-        const chatid = req.params.id
-        const siri = req.params.siri
-        const unano = req.params.unano
-
-        if (siri == 'shemdoe') {
-            let randomNo = Math.floor(Math.random() * 1000000)
-            let newNano = `user${randomNo}`
-
-            let botuser = await ohmyBotUsersModel.findOne({chatid})
-            if(botuser.unano == unano) {
-                let modUser = await ohmyBotUsersModel.findOneAndUpdate({chatid}, { $inc: { points: 1 }, unano: newNano }, { new: true })
-                
-                let data = {
-                    chatid,
-                    points: modUser.points,
-                    name: modUser.name
-                }
-                boosterBot.telegram.sendMessage(chatid, `+1 more point added... you've <b>${modUser.points} points</b>`, { parse_mode: 'HTML' })
-                res.send(data)
-            } else {
-                res.status(400).send('Not valid request')
-            }
-        }
-
-        else {
-            res.status(400).send('Not valid request')
-        }
-
-    } catch (err) {
-        console.log(err)
-        res.status(400).send(`<h2>Error: Could'nt add point, try again later</h2>`)
-        boosterBot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
-    }
+        res.redirect(`http://ohmy-premium-shows.dramastore.net/boost/${chatid}/add`)
 })
 
 module.exports = router
