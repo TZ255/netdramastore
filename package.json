@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gshemdoe/netdramastore.git"
+    "url": "git+https://git.heroku.com/netdramastore.git"
   },
   "author": "shemdoe",
   "license": "MIT",
