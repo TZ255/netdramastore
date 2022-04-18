@@ -9,12 +9,27 @@
     const modalDesc = document.querySelector('.modalDesc')
     const dots5 = document.querySelector('.dots-5')
     const spinner4 = document.querySelector('.spinner-4')
+    const EAT = document.getElementById('eat')
     const chatid = '<%= user.chatid %>'
     const siri = '<%= user.siri %>'
     const unano = '<%= user.unano %>'
+    const points = '<%= user.points %>'
 
     function waiting() {
         let counting = 7
+        if (points > 4 && points < 40) {
+            EAT.innerText = '15 seconds'
+            counting = 15
+        } else if (points > 39 && points < 60) {
+            EAT.innerText = '30 seconds'
+            counting = 30
+        } else if (points > 59) {
+            EAT.innerText = '1 minute'
+            counting = 60
+        } else if (points<5) {
+            EAT.innerText = '7 seconds'
+            counting = 7
+        }
 
         let interval = setInterval(() => {
             counting--
