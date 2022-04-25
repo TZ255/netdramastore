@@ -199,16 +199,18 @@ router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
 })
 
 router.get('/dramastore-add-points/user/:id', async (req, res) => {
+    const userId = req.params.id
     try {
-        const userId = req.params.id
-
         let botuser = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { points: 1 } }, { new: true })
         res.send(botuser)
         bot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
+        .catch((err)=> {
+            res.send("+1 point added successfully but I couldn't send you message on Telegram..... Unblock DRAMASTORE BOT if you blocked it otherwise it might be an error from Telegram")
+        })
     } catch (err) {
         console.log(err)
-        res.status(400).send(`<h2>Error: Could'nt add point, try again later</h2>`)
-        bot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
+        res.status(400).send(`<h2>Error: Couldn't add point, try again later</h2>`)
+        bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}`)
     }
 })
 
