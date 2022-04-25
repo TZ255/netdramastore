@@ -17,7 +17,7 @@ const ph = new telegraph()
 const router = express.Router()
 
 //send success (no content) response to browser
-router.get('/favicon.ico', (req, res) => res.status(204));
+router.get('/favicon.ico', (req, res) => res.status(204).end());
 
 router.get('/', async (req, res) => {
     try {
