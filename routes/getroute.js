@@ -205,7 +205,13 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
         res.send(botuser)
         bot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
         .catch((err)=> {
-            res.send("+1 point added successfully but I couldn't send you message on Telegram..... Unblock DRAMASTORE BOT if you blocked it otherwise it might be an error from Telegram")
+            if(err.description) {
+                bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId} -- ${err.description}`)
+            } else if (err.message) {
+                bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId} -- ${err.message}`)
+            } else {
+                bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
+            }
         })
     } catch (err) {
         console.log(err)
