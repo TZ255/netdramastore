@@ -188,7 +188,7 @@ router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
         const userId = req.params.id
 
         let user = await botUsersModel.findOne({ userId })
-        let ranks = await botUsersModel.find().limit(25).sort('-points')
+        let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
 
         res.render('userstatus/userstatus', { user, ranks })
     } catch (err) {
