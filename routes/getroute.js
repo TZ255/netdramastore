@@ -183,6 +183,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+//only for telegram
+function errorDisplay(error, userId, multiBot) {
+    if(error.message) {
+        console.log(error.message)
+        multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `${error.message} for user with ${userId}`)
+    }
+    if(error.description) {
+        console.log(error.description)
+        multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `${error.description} for user with ${userId}`)
+    } else {
+        multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
+    }
+}
+
 router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
     try {
         const userId = req.params.id
@@ -205,13 +219,7 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
         res.send(botuser)
         bot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
         .catch((err)=> {
-            if(err.description) {
-                bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId} -- ${err.description}`)
-            } else if (err.message) {
-                bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId} -- ${err.message}`)
-            } else {
-                bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
-            }
+            errorDisplay(err, userId, bot) 
         })
     } catch (err) {
         console.log(err)
@@ -444,6 +452,66 @@ router.get(['/ohmy-channel-subscribers/:id/boost', '/ohmy-channel-subscribers/:i
         const chatid = req.params.id
 
         res.redirect(`http://ohmy-premium-shows.dramastore.net/boost/${chatid}/add`)
+})
+
+///tumeanzia hapa
+router.get('/newuser-ds/:id', async (req, res)=> {
+    const chatid = req.params.id
+    try {
+        let user = await botUsersModel.findOne({userId: chatid})
+        if(user) {
+            let data = {
+                userId: user.userId,
+                points: user.points,
+                fname: user.fname,
+                downloaded: user.downloaded
+            }
+            res.send(data)
+        } else {
+            res.send({res: 'user not found'})
+        }
+    } catch (error) {
+        errorDisplay(error, chatid, bot)
+    }
+})
+
+router.get('/users-ds/table', async (req, res)=> {
+    let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
+    res.send(ranks)
+})
+
+//ohmy static page
+router.get('/newuser-oh/:id', async (req, res)=> {
+    const chatid = req.params.id
+    try {
+        let user = await ohmyBotUsersModel.findOne({chatid})
+        if(user) {
+            let data = {
+                userId: user.chatid,
+                points: user.points,
+                fname: user.name,
+            }
+            res.send(data)
+        } else {
+            res.send({res: 'user not found'})
+        }
+    } catch (error) {
+        errorDisplay(error, chatid, boosterBot)
+    }
+})
+
+router.get('/ohmy-add-points/user/:id', async (req, res) => {
+    const userId = req.params.id
+    try {
+        let botuser = await ohmyBotUsersModel.findOneAndUpdate({ chatid: userId }, { $inc: { points: 1 } }, { new: true })
+        res.send(botuser)
+        boosterBot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
+        .catch((err)=> {
+            errorDisplay(err, userId, boosterBot) 
+        })
+    } catch (err) {
+        errorDisplay(err, userId, boosterBot)
+    }
 })
 
 module.exports = router
