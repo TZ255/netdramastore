@@ -520,8 +520,9 @@ router.get('/blog/:id', async (req, res)=> {
     let _id = req.params.id
 
     try {
-        let post = await blogModel.findById(_id)
+        let post = await blogModel.findByIdAndUpdate(_id, {$inc: {visited: 5}}, {new: true})
         if(post) {
+            
             res.send(post)
         } else {
             res.sendStatus(300)
