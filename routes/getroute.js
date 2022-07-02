@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const botUsersModel = require('../models/botusers')
 const newDramaModel = require('../models/vue-new-drama')
 const homeModel = require('../models/vue-home-db')
+const blogModel = require('../models/postmodel')
 const ohmyBotUsersModel = require('../models/ohmyusers')
 
 // TELEGRAM
@@ -511,6 +512,23 @@ router.get('/ohmy-add-points/user/:id', async (req, res) => {
         })
     } catch (err) {
         errorDisplay(err, userId, boosterBot)
+    }
+})
+
+//blog posts
+router.get('/blog/:id', async (req, res)=> {
+    let _id = req.params.id
+
+    try {
+        let post = await blogModel.findById(_id)
+        if(post) {
+            res.send(post)
+        } else {
+            res.sendStatus(300)
+        }
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(404)
     }
 })
 
