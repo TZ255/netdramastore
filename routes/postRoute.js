@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const blogModel = require('../models/postmodel')
+const router = express.Router()
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
@@ -29,10 +30,5 @@ router.post('blog-post', async (req, res) => {
         res.sendStatus(300)
     }
 })
-
-
-const router = express.Router()
-
-
 
 module.exports = router
