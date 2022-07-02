@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const blogSchema = new Schema({
     title: {
-        type: Number
+        type: String,
     },
     body: {
         type: String
@@ -12,7 +12,8 @@ const blogSchema = new Schema({
         type: Array
     },
     visited: {
-        type: Number
+        type: Number,
+        default: 1
     }
 }, { timestamps: true, strict: false })
 
