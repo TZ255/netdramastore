@@ -516,12 +516,12 @@ router.get('/ohmy-add-points/user/:id', async (req, res) => {
 })
 
 //blog side posts
-router.get('/blog', async (req, res)=> {
+router.get('/recent-popular/all-posts', async (req, res)=> {
 
     try {
         let posts = await blogModel.find().sort('-createdAt')
         let pposts = await blogModel.find().sort('-visited')
-        if(posts) {
+        if(posts && pposts) {
             res.send([posts, pposts])
         } else {
             res.sendStatus(300)
