@@ -515,7 +515,24 @@ router.get('/ohmy-add-points/user/:id', async (req, res) => {
     }
 })
 
-//blog posts
+//blog side posts
+router.get('/blog', async (req, res)=> {
+
+    try {
+        let posts = await blogModel.find().sort('-createdAt')
+        let pposts = await blogModel.find().sort('-visited')
+        if(posts) {
+            res.send([posts, pposts])
+        } else {
+            res.sendStatus(300)
+        }
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(404)
+    }
+})
+
+//blog posts wit id
 router.get('/blog/:id', async (req, res)=> {
     let _id = req.params.id
 
