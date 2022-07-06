@@ -460,7 +460,6 @@ router.get('/newuser-ds/:id', async (req, res)=> {
     const chatid = req.params.id
     try {
         let user = await botUsersModel.findOne({userId: chatid})
-        let posts = await blogModel.find()
         if(user) {
             let data = {
                 userId: user.userId,
@@ -468,7 +467,7 @@ router.get('/newuser-ds/:id', async (req, res)=> {
                 fname: user.fname,
                 downloaded: user.downloaded
             }
-            res.send([data, posts])
+            res.send(data)
         } else {
             res.send({res: 'user not found'})
         }
@@ -487,14 +486,13 @@ router.get('/newuser-oh/:id', async (req, res)=> {
     const chatid = req.params.id
     try {
         let user = await ohmyBotUsersModel.findOne({chatid})
-        let posts = await blogModel.find()
         if(user) {
             let data = {
                 userId: user.chatid,
                 points: user.points,
                 fname: user.name,
             }
-            res.send([data, posts])
+            res.send(data)
         } else {
             res.send({res: 'user not found'})
         }
