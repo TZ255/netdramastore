@@ -541,7 +541,7 @@ router.get('/blog/:id', async (req, res)=> {
     try {
         let post = await blogModel.findByIdAndUpdate(_id, {$inc: {visited: 5}}, {new: true})
         let posts = await blogModel.find().sort('-createdAt')
-        let pposts = await blogModel.find().sort('-visited')
+        let pposts = await blogModel.find().sort('-visited').limit(10)
         if(post) {
             
             res.send([post, posts, pposts])
