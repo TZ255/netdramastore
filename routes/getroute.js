@@ -186,11 +186,11 @@ router.get('/', async (req, res) => {
 
 //only for telegram
 function errorDisplay(error, userId, multiBot) {
-    if(error.message) {
+    if (error.message) {
         console.log(error.message)
         multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `${error.message} for user with ${userId}`)
     }
-    if(error.description) {
+    if (error.description) {
         console.log(error.description)
         multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `${error.description} for user with ${userId}`)
     } else {
@@ -219,9 +219,9 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
         let botuser = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { points: 1 } }, { new: true })
         res.send(botuser)
         bot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
-        .catch((err)=> {
-            errorDisplay(err, userId, bot) 
-        })
+            .catch((err) => {
+                errorDisplay(err, userId, bot)
+            })
     } catch (err) {
         console.log(err)
         res.status(400).send(`<h2>Error: Couldn't add point, try again later</h2>`)
@@ -450,18 +450,18 @@ router.get('/list-of-dramastore-dramas', async (req, res) => {
 })
 
 router.get(['/ohmy-channel-subscribers/:id/boost', '/ohmy-channel-subscribers/:id/boost/:ignore'], (req, res) => {
-        const chatid = req.params.id
+    const chatid = req.params.id
 
-        res.redirect(`http://ohmy-premium-shows.dramastore.net/boost/${chatid}/add`)
+    res.redirect(`http://ohmy-premium-shows.dramastore.net/boost/${chatid}/add`)
 })
 
 ///tumeanzia hapa
-router.get('/newuser-ds/:id', async (req, res)=> {
+router.get('/newuser-ds/:id', async (req, res) => {
     const chatid = req.params.id
     try {
-        let user = await botUsersModel.findOne({userId: chatid})
+        let user = await botUsersModel.findOne({ userId: chatid })
         let posts = await blogModel.find()
-        if(user) {
+        if (user) {
             let data = {
                 userId: user.userId,
                 points: user.points,
@@ -470,25 +470,25 @@ router.get('/newuser-ds/:id', async (req, res)=> {
             }
             res.send([data, posts])
         } else {
-            res.send({res: 'user not found'})
+            res.send({ res: 'user not found' })
         }
     } catch (error) {
         errorDisplay(error, chatid, bot)
     }
 })
 
-router.get('/users-ds/table', async (req, res)=> {
+router.get('/users-ds/table', async (req, res) => {
     let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
     res.send(ranks)
 })
 
 //ohmy static page
-router.get('/newuser-oh/:id', async (req, res)=> {
+router.get('/newuser-oh/:id', async (req, res) => {
     const chatid = req.params.id
     try {
-        let user = await ohmyBotUsersModel.findOne({chatid})
+        let user = await ohmyBotUsersModel.findOne({ chatid })
         let posts = await blogModel.find()
-        if(user) {
+        if (user) {
             let data = {
                 userId: user.chatid,
                 points: user.points,
@@ -496,7 +496,7 @@ router.get('/newuser-oh/:id', async (req, res)=> {
             }
             res.send([data, posts])
         } else {
-            res.send({res: 'user not found'})
+            res.send({ res: 'user not found' })
         }
     } catch (error) {
         errorDisplay(error, chatid, boosterBot)
@@ -509,21 +509,21 @@ router.get('/ohmy-add-points/user/:id', async (req, res) => {
         let botuser = await ohmyBotUsersModel.findOneAndUpdate({ chatid: userId }, { $inc: { points: 1 } }, { new: true })
         res.send(botuser)
         boosterBot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
-        .catch((err)=> {
-            errorDisplay(err, userId, boosterBot) 
-        })
+            .catch((err) => {
+                errorDisplay(err, userId, boosterBot)
+            })
     } catch (err) {
         errorDisplay(err, userId, boosterBot)
     }
 })
 
 //blog side posts
-router.get('/recent-popular/all-posts', async (req, res)=> {
+router.get('/recent-popular/all-posts', async (req, res) => {
 
     try {
         let posts = await blogModel.find().sort('-createdAt')
         let pposts = await blogModel.find().sort('-visited')
-        if(posts && pposts) {
+        if (posts && pposts) {
             res.send([posts, pposts])
         } else {
             res.sendStatus(300)
@@ -535,15 +535,15 @@ router.get('/recent-popular/all-posts', async (req, res)=> {
 })
 
 //blog posts wit id
-router.get('/blog/:id', async (req, res)=> {
+router.get('/blog/:id', async (req, res) => {
     let _id = req.params.id
 
     try {
-        let post = await blogModel.findByIdAndUpdate(_id, {$inc: {visited: 5}}, {new: true})
+        let post = await blogModel.findByIdAndUpdate(_id, { $inc: { visited: 5 } }, { new: true })
         let posts = await blogModel.find().sort('-createdAt')
         let pposts = await blogModel.find().sort('-visited').limit(10)
-        if(post) {
-            
+        if (post) {
+
             res.send([post, posts, pposts])
         } else {
             res.sendStatus(300)
@@ -552,6 +552,29 @@ router.get('/blog/:id', async (req, res)=> {
         console.log(err)
         res.sendStatus(404)
     }
+})
+
+// dramastore user status with blog
+router.get('/dsuser/info/:pid/:uid', async (req, res) => {
+    let userId = req.params.uid
+    let postId = req.params.pid
+
+    try {
+        let user = await botUsersModel.findOne({ userId })
+
+        //use ne (not equal) to exclude one
+        let posts = await blogModel.find({_id: {$ne: postId}})
+
+        if(!user) {
+            res.sendStatus(500)
+        }
+
+        res.send([user, posts])
+    } catch (err) {
+        res.sendStatus(501)
+        console.log(`${err.message} -- for user wit id ${userId}`)
+    }
+
 })
 
 module.exports = router
