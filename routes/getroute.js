@@ -477,11 +477,6 @@ router.get('/newuser-ds/:id', async (req, res) => {
     }
 })
 
-router.get('/users-ds/table', async (req, res) => {
-    let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
-    res.send(ranks)
-})
-
 //ohmy static page
 router.get('/newuser-oh/:id', async (req, res) => {
     const chatid = req.params.id
@@ -561,6 +556,7 @@ router.get('/dsuser/info/:pid/:uid', async (req, res) => {
 
     try {
         let user = await botUsersModel.findOne({ userId })
+        let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
 
         //use ne (not equal) to exclude one
         let posts = await blogModel.find({_id: {$ne: postId}})
@@ -569,7 +565,7 @@ router.get('/dsuser/info/:pid/:uid', async (req, res) => {
             res.sendStatus(500)
         }
 
-        res.send([user, posts])
+        res.send([user, posts, ranks])
     } catch (err) {
         res.sendStatus(501)
         console.log(`${err.message} -- for user wit id ${userId}`)
