@@ -598,11 +598,4 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
 
 })
 
-//to support font5 backup for now (delete it after)
-router.get('/users-ds/table', async (req, res)=> {
-    let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
-    res.send(ranks)
-})
-
-
 module.exports = router
