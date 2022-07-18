@@ -568,7 +568,32 @@ router.get('/dsuser/info/:pid/:uid', async (req, res) => {
         res.send([user, posts, ranks])
     } catch (err) {
         res.sendStatus(501)
-        console.log(`${err.message} -- for user wit id ${userId}`)
+        console.log(`DRAMASTOREBOT ${err.message} -- for user wit id ${userId}`)
+        errorDisplay(err, userId, bot)
+    }
+
+})
+
+// ohmy user status with blog
+router.get('/ohuser/info/:pid/:uid', async (req, res) => {
+    let userId = req.params.uid
+    let postId = req.params.pid
+
+    try {
+        let user = await ohmyBotUsersModel.findOne({ chatid: userId })
+
+        //use ne (not equal) to exclude one
+        let posts = await blogModel.find({_id: {$ne: postId}})
+
+        if(!user) {
+            res.sendStatus(500)
+        }
+
+        res.send([user, posts])
+    } catch (err) {
+        res.sendStatus(501)
+        console.log(`OHMY ERROR ${err.message} -- for user wit id ${userId}`)
+        errorDisplay(err, userId, boosterBot)
     }
 
 })
@@ -578,5 +603,6 @@ router.get('/users-ds/table', async (req, res)=> {
     let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
     res.send(ranks)
 })
+
 
 module.exports = router
