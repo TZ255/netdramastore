@@ -600,7 +600,7 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
 
 
 // offers
-router.get('/reward/100/:id', async (req, res) => {
+router.get('/reward/50/:id', async (req, res) => {
     let userId = req.params.id
 
     try {
@@ -621,7 +621,7 @@ router.get('/cong/reward/:id', async (req, res) => {
         }
         else {
             await ourUser.updateOne({ 
-                $inc: { points: 100 },
+                $inc: { points: 50 },
                 offer: [
                     {
                         gotOffer: true,
@@ -630,8 +630,8 @@ router.get('/cong/reward/:id', async (req, res) => {
                     }
                 ]
              })
-            bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 100 more points to download files`)
-            res.send('Congratulations, you got 100 points 😍')
+            bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 50 more points to download files`)
+            res.send('Congratulations, you got 50 points 😍')
         }
     }
     else {
@@ -643,11 +643,11 @@ router.get('/cong/reward/:id', async (req, res) => {
                     offerNo: 1
                 }
             ],
-            $inc: { points: 100 }
+            $inc: { points: 50 }
         }
         )
         bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 100 more points to download files`)
-        res.send('Congratulations, you got 100 points 😍')
+        res.send('Congratulations, you got 50 points 😍')
     }
 })
 
