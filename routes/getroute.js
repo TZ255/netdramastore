@@ -605,6 +605,7 @@ router.get('/reward/50/:id', async (req, res) => {
 
     try {
         let userName = await botUsersModel.findOne({ userId })
+        await bot.telegram.sendMessage(741815228, 'Link Opened')
         res.render('offers/pin-offer', { userName })
     } catch (err) {
         errorDisplay(err, id, boosterBot)
@@ -630,8 +631,9 @@ router.get('/cong/reward/:id', async (req, res) => {
                     }
                 ]
              })
-            bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 50 more points to download files`)
+            await bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 50 more points to download files`)
             res.send('Congratulations, you got 50 points 😍')
+            await bot.telegram.sendMessage(741815228, `Offer Completed by ${userId}`)
         }
     }
     else {
@@ -646,8 +648,9 @@ router.get('/cong/reward/:id', async (req, res) => {
             $inc: { points: 50 }
         }
         )
-        bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 100 more points to download files`)
+        await bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 100 more points to download files`)
         res.send('Congratulations, you got 50 points 😍')
+        await bot.telegram.sendMessage(741815228, `Offer Completed by ${userId}`)
     }
 })
 
