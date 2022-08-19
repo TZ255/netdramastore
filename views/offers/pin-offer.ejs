@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock 100 Points Reward</title>
+    <style>
+        .container {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 400px;
+            width: 80%;
+            margin: auto;
+        }
+
+        .cont2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            margin-top: 24px;
+            font-size: xx-large;
+            font-weight: bolder;
+        }
+
+        .btn button {
+            padding: 16px 12px;
+            background-color: gold;
+            font-weight: bold;
+            border: none;
+            margin-top: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .fname {
+            font-weight: bolder;
+        }
+    </style>
+
+    <!-- pinoffer -->
+    <script type="text/javascript">var lck = false;</script><script type="text/javascript" src="https://tiogafolder.com/script_include.php?id=1195728"></script><script type="text/javascript">if(!lck){top.location = 'https://tiogafolder.com/help/ablk.php?lkt=1'; }</script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="intro">
+            Hello <span class="fname"><%= userName.fname.substring(0, 30) %> </span>,<br>
+            You have successfully completed the offer, now click the button below to get your reward.
+        </div>
+        <div class="btn" id="btnWait">
+            <button id="addPts" onclick="addPts('<%= userName.userId %>')">
+                TAKE YOUR 100 POINTS 😍
+            </button>
+        </div>
+    </div>
+
+    <div class="cont2">
+        <div class="fetch" style="font-size: large;">
+            Fetching your Telegram Info...
+        </div>
+        <div class="num">
+            15 Sec
+        </div>
+    </div>
+
+    <script>
+        let cont2 = document.querySelector('.cont2')
+        let container = document.querySelector('.container')
+        let num = document.querySelector('.num')
+
+        let count = 15
+        let interval = setInterval(()=> {
+          count--
+          num.innerText = count
+
+          if(count == 1) {
+            cont2.style.display = 'none'
+            container.style.display = 'flex'
+          }
+        }, 1000)
+        async function addPts(id) {
+             window.open(`/cong/reward/${id}`, '_self')
+        }
+    </script>
+</body>
+
+</html>

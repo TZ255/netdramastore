@@ -559,9 +559,9 @@ router.get('/dsuser/info/:pid/:uid', async (req, res) => {
         let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
 
         //use ne (not equal) to exclude one
-        let posts = await blogModel.find({_id: {$ne: postId}})
+        let posts = await blogModel.find({ _id: { $ne: postId } })
 
-        if(!user) {
+        if (!user) {
             res.sendStatus(500)
         }
 
@@ -583,9 +583,9 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
         let user = await ohmyBotUsersModel.findOne({ chatid: userId })
 
         //use ne (not equal) to exclude one
-        let posts = await blogModel.find({_id: {$ne: postId}})
+        let posts = await blogModel.find({ _id: { $ne: postId } })
 
-        if(!user) {
+        if (!user) {
             res.sendStatus(500)
         }
 
@@ -596,6 +596,59 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
         errorDisplay(err, userId, boosterBot)
     }
 
+})
+
+
+// offers
+router.get('/reward/100/:id', async (req, res) => {
+    let userId = req.params.id
+
+    try {
+        let userName = await botUsersModel.findOne({ userId })
+        res.render('offers/pin-offer', { userName })
+    } catch (err) {
+        errorDisplay(err, id, boosterBot)
+    }
+})
+
+router.get('/cong/reward/:id', async (req, res) => {
+    let userId = req.params.id
+
+    let ourUser = await botUsersModel.findOne({ userId })
+    if (ourUser.offer) {
+        if (ourUser.offer[0].gotOffer == true) {
+            res.send('You are already completed this offer')
+        }
+        else {
+            await ourUser.updateOne({ 
+                $inc: { points: 100 },
+                offer: [
+                    {
+                        gotOffer: true,
+                        country: 'Nigeria',
+                        offerNo: 1
+                    }
+                ]
+             })
+            bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 100 more points to download files`)
+            res.send('Congratulations, you got 100 points 😍')
+        }
+    }
+    else {
+        let user = await botUsersModel.findOneAndUpdate({ userId }, {
+            offer: [
+                {
+                    country: 'Nigeria',
+                    gotOffer: true,
+                    offerNo: 1
+                }
+            ],
+            $inc: { points: 100 }
+        }
+        )
+        bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 100 more points to download files`)
+        res.send('Congratulations, you got 100 points 😍')
+    }
 })
 
 module.exports = router
