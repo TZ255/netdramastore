@@ -5,6 +5,7 @@ const newDramaModel = require('../models/vue-new-drama')
 const homeModel = require('../models/vue-home-db')
 const blogModel = require('../models/postmodel')
 const ohmyBotUsersModel = require('../models/ohmyusers')
+const ohmyfilesModel = require('../models/ohmyfiles')
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
@@ -596,6 +597,34 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
         errorDisplay(err, userId, boosterBot)
     }
 
+})
+
+//send directly
+router.get('/direct-ds-send/:id/:msid', async (req, res)=> {
+    let id = req.params.id
+    let msid = req.params.msid
+
+    try {
+        bot.telegram.copyMessage(Number(id), -1001239425048, Number(msid))
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(404)
+    }
+})
+
+router.get('/direct-oh-send/:id/:nano', async (req, res)=> {
+    let id = req.params.id
+    let nano = req.params.nano
+
+    try {
+        let file = await ohmyfilesModel.findOne({ nano })
+        await boosterBot.telegram.copyMessage(Number(id), -1001586042518, file.msgId)
+        res.sendStatus(200)
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(404)
+    }
 })
 
 
