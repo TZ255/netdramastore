@@ -687,7 +687,7 @@ router.get('/cong/reward/:id', async (req, res) => {
 //offers
 router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
     try {
-        let id = req.params.id
+        let id = Number(req.params.id)
         let msid = req.params.msid
 
         let offer = await ohmyOffersModel.findOneAndUpdate({pid: 'shemdoe'}, {$inc: {stats: 1}}, {new: true})
