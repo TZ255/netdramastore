@@ -701,7 +701,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
     }
     res.redirect('https://font5.net')
     setTimeout(()=>{
-        bot.telegram.sendMessage(741815228, 'offer imefunguliwa')
+        boosterBot.telegram.sendMessage(741815228, 'offer imefunguliwa')
     }, 10000)
 })
 
