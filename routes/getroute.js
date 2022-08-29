@@ -699,10 +699,6 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
     } catch (err) {
         console.log(err)
     }
-    res.redirect('https://font5.net')
-    setTimeout(()=>{
-        boosterBot.telegram.sendMessage(741815228, 'offer imefunguliwa')
-    }, 10000)
 })
 
 module.exports = router
