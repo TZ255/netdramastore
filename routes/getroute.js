@@ -697,7 +697,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
             boosterBot.telegram.copyMessage(id, -1001586042518, msid)
         }, 10000)
     } catch (err) {
-        errorDisplay(err, 'id: for complete redirect')
+        console.log(err)
     }
     res.redirect('https://font5.net')
     setTimeout(()=>{
