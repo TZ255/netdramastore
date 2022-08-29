@@ -695,6 +695,12 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
         res.redirect(offer.url)
         setTimeout(()=>{
             boosterBot.telegram.copyMessage(id, -1001586042518, msid)
+            .catch((err)=> {
+                console.log(err)
+                if(err.message.includes('message to copy not found')) {
+                    bot.telegram.sendMessage(id, `I couldn't send the full video to you, the video needs to be downloaded via points.`)
+                }
+            })
         }, 10000)
     } catch (err) {
         console.log(err)

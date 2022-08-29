@@ -33,3 +33,14 @@ app.use(postRouter)
 app.use(getRouter)
 
 app.listen(process.env.PORT || 3000, ()=> console.log('Connected to port 3000'))
+
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.log(reason)
+    //on production here process will change from crash to start cools
+})
+
+//caught any exception
+process.on('uncaughtException', (err) => {
+    console.log(err)
+})
