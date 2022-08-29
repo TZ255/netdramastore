@@ -6,7 +6,7 @@ const homeModel = require('../models/vue-home-db')
 const blogModel = require('../models/postmodel')
 const ohmyBotUsersModel = require('../models/ohmyusers')
 const ohmyfilesModel = require('../models/ohmyfiles')
-const ohmyOffersModel = require('../models/ohmy-offers')
+const ohmyOffersModel = require('../models/ohmyOffers')
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
@@ -690,7 +690,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
         let id = req.params.id
         let msid = req.params.msid
 
-        let offer = await ohmyOffersModel.findOneAndUpdate({}, {$inc: {stats: 1}}, {new: true})
+        let offer = await ohmyOffersModel.findOneAndUpdate({pid: 'shemdoe'}, {$inc: {stats: 1}}, {new: true})
 
         res.redirect(offer.url)
         setTimeout(()=>{
@@ -698,6 +698,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
         }, 10000)
     } catch (err) {
         console.log(err)
+        res.send('An error occurred..: Report telegram at @BlackberryTZ')
     }
 })
 

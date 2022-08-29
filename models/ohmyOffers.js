@@ -7,8 +7,13 @@ const offerSchema = new Schema({
     },
     stats: {
         type: Number,
+    },
+    pid: {
+        type: String,
+        default: 'shemdoe'
     }
 }, { timestamps: true, strict: false })
 
-const model = mongoose.model('offers', offerSchema)
+const db = mongoose.connection.useDb('ohmyNew')
+const model = db.model('offers', offerSchema)
 module.exports = model
