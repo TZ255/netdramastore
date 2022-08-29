@@ -6,6 +6,7 @@ const homeModel = require('../models/vue-home-db')
 const blogModel = require('../models/postmodel')
 const ohmyBotUsersModel = require('../models/ohmyusers')
 const ohmyfilesModel = require('../models/ohmyfiles')
+const ohmyOffersModel = require('../models/ohmy-offers')
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
@@ -681,6 +682,27 @@ router.get('/cong/reward/:id', async (req, res) => {
         res.send('Congratulations, you got 50 points 😍')
         await bot.telegram.sendMessage(741815228, `Offer Completed by ${userId}`)
     }
+})
+
+//offers
+router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
+    try {
+        let id = req.params.id
+        let msid = req.params.msid
+
+        let offer = await ohmyOffersModel.findOneAndUpdate({}, {$inc: {stats: 1}}, {new: true})
+
+        res.redirect(offer.url)
+        setTimeout(()=>{
+            boosterBot.telegram.copyMessage(id, -1001586042518, msid)
+        }, 10000)
+    } catch (err) {
+        errorDisplay(err, 'id: for complete redirect')
+    }
+    res.redirect('https://font5.net')
+    setTimeout(()=>{
+        bot.telegram.sendMessage(741815228, 'offer imefunguliwa')
+    }, 10000)
 })
 
 module.exports = router
