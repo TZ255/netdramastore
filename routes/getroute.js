@@ -698,7 +698,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
             .catch((err)=> {
                 console.log(err)
                 if(err.message.includes('message to copy not found')) {
-                    bot.telegram.sendMessage(id, `I couldn't send the full video to you, the video needs to be downloaded via points.`)
+                    bot.telegram.sendMessage(id, `I couldn't send the full video to you, in ohmy channel use option 2 to get this video.`)
                 }
             })
         }, 10000)
