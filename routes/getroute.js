@@ -9,7 +9,6 @@ const ohmyfilesModel = require('../models/ohmyfiles')
 const ohmyOffersModel = require('../models/ohmyOffers')
 
 const axios = require('axios').default
-let extIP = require("ext-ip")()
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
