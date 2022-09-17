@@ -8,6 +8,8 @@ const ohmyBotUsersModel = require('../models/ohmyusers')
 const ohmyfilesModel = require('../models/ohmyfiles')
 const ohmyOffersModel = require('../models/ohmyOffers')
 
+const axios = require('axios').default
+
 // TELEGRAM
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
@@ -702,7 +704,15 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
                 }
             })
         }, 10000)
-        console.log(req.ip)
+        
+        let this_user = await ohmyBotUsersModel.findOne({ chatid: id})
+        if(!this_user.location) {
+            let mm = await axios.get(`https://api.ipregistry.co/?key=${process.env.IP_REG}`)
+            let c_code = mm.data.location.country.calling_code
+            let c_name = mm.data.location.country.name
+            await this_user.updateOne({location: [{c_code, c_name}]})
+            console.log('country updated')
+        }
     } catch (err) {
         console.log(err)
         res.send('An error occurred..: Report telegram at @BlackberryTZ')
