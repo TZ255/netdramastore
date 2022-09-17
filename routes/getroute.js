@@ -702,6 +702,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
                 }
             })
         }, 10000)
+        console.log(req.ip)
     } catch (err) {
         console.log(err)
         res.send('An error occurred..: Report telegram at @BlackberryTZ')
