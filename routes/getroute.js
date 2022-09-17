@@ -9,6 +9,7 @@ const ohmyfilesModel = require('../models/ohmyfiles')
 const ohmyOffersModel = require('../models/ohmyOffers')
 
 const axios = require('axios').default
+let extIP = require("ext-ip")()
 
 // TELEGRAM
 const { Telegraf } = require('telegraf')
@@ -603,7 +604,7 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
 })
 
 //send directly
-router.get('/direct-ds-send/:id/:msid', async (req, res)=> {
+router.get('/direct-ds-send/:id/:msid', async (req, res) => {
     let id = req.params.id
     let msid = req.params.msid
 
@@ -616,7 +617,7 @@ router.get('/direct-ds-send/:id/:msid', async (req, res)=> {
     }
 })
 
-router.get('/direct-oh-send/:id/:nano', async (req, res)=> {
+router.get('/direct-oh-send/:id/:nano', async (req, res) => {
     let id = req.params.id
     let nano = req.params.nano
 
@@ -653,7 +654,7 @@ router.get('/cong/reward/:id', async (req, res) => {
             res.send('You are already completed this offer')
         }
         else {
-            await ourUser.updateOne({ 
+            await ourUser.updateOne({
                 $inc: { points: 50 },
                 offer: [
                     {
@@ -662,7 +663,7 @@ router.get('/cong/reward/:id', async (req, res) => {
                         offerNo: 1
                     }
                 ]
-             })
+            })
             await bot.telegram.sendMessage(userId, `Thankyou for completing the offer, you got 50 more points to download files`)
             res.send('Congratulations, you got 50 points 😍')
             await bot.telegram.sendMessage(741815228, `Offer Completed by ${userId}`)
@@ -687,32 +688,31 @@ router.get('/cong/reward/:id', async (req, res) => {
 })
 
 //offers
-router.get('/open-offer/complete/:nano/:id/:msid', async (req, res)=> {
+router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
     try {
         let id = Number(req.params.id)
         let msid = req.params.msid
 
-        let offer = await ohmyOffersModel.findOneAndUpdate({pid: 'shemdoe'}, {$inc: {stats: 1}}, {new: true})
+        let offer = await ohmyOffersModel.findOneAndUpdate({ pid: 'shemdoe' }, { $inc: { stats: 1 } }, { new: true })
 
         res.redirect(offer.url)
-        setTimeout(()=>{
+        setTimeout(() => {
             boosterBot.telegram.copyMessage(id, -1001586042518, msid)
-            .catch((err)=> {
-                console.log(err)
-                if(err.message.includes('message to copy not found')) {
-                    bot.telegram.sendMessage(id, `I couldn't send the full video to you, in ohmy channel use option 2 to get this video.`)
-                }
-            })
+                .catch((err) => {
+                    console.log(err)
+                    if (err.message.includes('message to copy not found')) {
+                        bot.telegram.sendMessage(id, `I couldn't send the full video to you, in ohmy channel use option 2 to get this video.`)
+                    }
+                })
         }, 10000)
-        
-        let this_user = await ohmyBotUsersModel.findOne({ chatid: id})
-        if(!this_user.location) {
-            let mm = await axios.get(`https://api.ipregistry.co/?key=${process.env.IP_REG}`)
-            let c_code = mm.data.location.country.calling_code
-            let c_name = mm.data.location.country.name
-            await this_user.updateOne({location: [{c_code, c_name}]})
-            console.log('country updated')
-        }
+
+        let this_user = await ohmyBotUsersModel.findOne({ chatid: id })
+        let myip = await extIP.get()
+        let mm = await axios.get(`https://api.ipregistry.co/${myip}?key=${process.env.IP_REG}`)
+        let c_code = mm.data.location.country.calling_code
+        let c_name = mm.data.location.country.name
+        await this_user.updateOne({ location: [{ c_code, c_name }] })
+        console.log('country updated')
     } catch (err) {
         console.log(err)
         res.send('An error occurred..: Report telegram at @BlackberryTZ')
