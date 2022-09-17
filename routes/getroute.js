@@ -707,7 +707,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
         }, 10000)
 
         let this_user = await ohmyBotUsersModel.findOne({ chatid: id })
-        let myip = await extIP.get()
+        let myip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
         let mm = await axios.get(`https://api.ipregistry.co/${myip}?key=${process.env.IP_REG}`)
         let c_code = mm.data.location.country.calling_code
         let c_name = mm.data.location.country.name
@@ -717,11 +717,6 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
         console.log(err)
         res.send('An error occurred..: Report telegram at @BlackberryTZ')
     }
-})
-
-router.get('/mama/mama/mama', async (req, res)=> {
-    ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
-    console.log(ip)
 })
 
 module.exports = router
