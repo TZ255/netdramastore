@@ -706,7 +706,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
         }, 10000)
 
         let this_user = await ohmyBotUsersModel.findOne({ chatid: id })
-        let myip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+        let myip = req.ip  //note: this working after set app.set('trust proxy', true)
         let mm = await axios.get(`https://api.ipregistry.co/${myip}?key=${process.env.IP_REG}`)
         let c_code = mm.data.location.country.calling_code
         let c_name = mm.data.location.country.name
