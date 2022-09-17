@@ -719,4 +719,9 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
     }
 })
 
+router.get('/mama/mama/mama', async (req, res)=> {
+    ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
+    console.log(ip)
+})
+
 module.exports = router
