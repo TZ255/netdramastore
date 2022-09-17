@@ -712,7 +712,7 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
         let c_code = mm.data.location.country.calling_code
         let c_name = mm.data.location.country.name
         await this_user.updateOne({ location: [{ c_code, c_name }] })
-        console.log('country updated')
+        console.log('country updated with ip '+ myip)
     } catch (err) {
         console.log(err)
         res.send('An error occurred..: Report telegram at @BlackberryTZ')
