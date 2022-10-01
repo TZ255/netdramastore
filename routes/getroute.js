@@ -529,7 +529,6 @@ router.get('/recent-popular/all-posts', async (req, res) => {
         }
     } catch (err) {
         console.log(err)
-        res.sendStatus(404)
     }
 })
 
@@ -549,7 +548,6 @@ router.get('/blog/:id', async (req, res) => {
         }
     } catch (err) {
         console.log(err)
-        res.sendStatus(404)
     }
 })
 
@@ -567,11 +565,10 @@ router.get('/dsuser/info/:pid/:uid', async (req, res) => {
 
         if (!user) {
             res.sendStatus(500)
+        } else {
+            res.send([user, posts, ranks])
         }
-
-        res.send([user, posts, ranks])
     } catch (err) {
-        res.sendStatus(501)
         console.log(`DRAMASTOREBOT ${err.message} -- for user wit id ${userId}`)
         errorDisplay(err, userId, bot)
     }
@@ -591,11 +588,11 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
 
         if (!user) {
             res.sendStatus(500)
+        } else {
+            res.send([user, posts])
         }
-
-        res.send([user, posts])
+        
     } catch (err) {
-        res.sendStatus(501)
         console.log(`OHMY ERROR ${err.message} -- for user wit id ${userId}`)
         errorDisplay(err, userId, boosterBot)
     }
