@@ -19,11 +19,33 @@
 
     <%- include('./partials/style.ejs'); %>
         <%- include('../Global/nav-style.ejs'); %>
+        <style>
+            .main-title {
+                width: 98%;
+                background-color: black;
+                padding: 12px;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+                margin: 12px auto;
+                text-align: center;
+            }
+
+            .main-title h1 {
+                color: white;
+                font-size: 24px;
+                font-weight: bold;
+            }
+        </style>
 </head>
 
 <body>
     <%- include('../Global/navhtml.ejs'); %>
 
+    <div class="main-title">
+        <h1 class="title" itemprop="name">
+            <%= drama.newDramaName %>
+        </h1>
+    </div>
         <div class="ads adsterra250">
             <script type="text/javascript">
                 atOptions = {
@@ -52,9 +74,6 @@
 
         <div class="schema" itemscope itemtype="https://schema.org/TVSeries">
             <div class="dramaCont">
-                <h1 class="title" itemprop="name">
-                    <%= drama.newDramaName %>
-                </h1>
                 <div class="pic-and-desc">
                     <div class="img">
                         <img src="<%= drama.coverUrl %> " alt="<%= drama.newDramaName %> " itemprop="image">
