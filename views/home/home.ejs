@@ -34,13 +34,13 @@
             </div>
             <ul class="list-group">
                 <% popular.forEach(drama=> { %>
-                    <li onclick="window.open('/<%= drama.id %>', '_self')"
+                    <a href="/<%= drama.id %>"
                         class="list-group-item d-flex justify-content-between align-items-center">
                         <%= drama.newDramaName %>
                             <span class="badge bg-primary rounded-pill"><i class="fa-solid fa-download"></i>
                                 <%= drama.timesLoaded %>
                             </span>
-                    </li>
+                    </a>
                     <% }) %>
             </ul>
         </div>
@@ -50,17 +50,17 @@
             <div class="drama-cont">
                 <div class="drama">
                     <% latest.forEach(drama=> { %>
-                        <div class="img" onclick="window.open('<%= drama.idToHome %>', '_self')">
-                            <img src="<%= drama.imageUrl %> " alt="<%= drama.dramaName %> ">
+                        <a class="img" href="/<%= drama.idToHome %>">
+                            <img src="<%= drama.imageUrl %>" alt="<%= drama.dramaName %> ">
                             <h3>
                                 <%= drama.dramaName %>
                             </h3>
-                        </div>
+                        </a>
                         <% }) %>
                 </div>
                 <div class="btn">
-                    <button onclick="window.open('/list-of-dramastore-dramas', '_self')">LOAD MORE &nbsp; <i
-                            class="fa-solid fa-circle-chevron-down"></i></button>
+                    <a href="/list-of-dramastore-dramas">LOAD MORE &nbsp; <i
+                            class="fa-solid fa-circle-chevron-down"></i></a>
                 </div>
             </div>
         </div>
@@ -83,8 +83,10 @@
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2022.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -103,8 +105,10 @@
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2021.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -124,8 +128,10 @@
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2020.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -140,13 +146,15 @@
                             📺 2019 Drama (A-Z)
                         </button>
                     </h2>
-                    <div id="flush-collapseFour" class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour"
+                        data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2019.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -161,13 +169,15 @@
                             📺 2018 Drama (A-Z)
                         </button>
                     </h2>
-                    <div id="flush-collapseFive" class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive"
+                        data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2018.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -177,18 +187,19 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingSix">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#flush-collapseSix" aria-expanded="false"
-                            aria-controls="flush-collapseSix">
+                            data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
                             📺 2017 Drama (A-Z)
                         </button>
                     </h2>
-                    <div id="flush-collapseSix" class="accordion-collapse collapse"
-                        aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix"
+                        data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2017.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -208,8 +219,10 @@
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2016.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
@@ -229,8 +242,10 @@
                         <div class="accordion-body">
                             <ol class="list-group list-group-numbered">
                                 <% drama2015.forEach(drama=> { %>
-                                    <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
-                                        <%= drama.name %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
                                     </li>
                                     <% }) %>
                             </ol>
