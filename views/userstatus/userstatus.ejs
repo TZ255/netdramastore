@@ -67,9 +67,8 @@
                 <b class="white">Waiting Time: &nbsp;</b>
                 <span id="eat" class="stts">⌛</span>
                 <ul class="maelekezoWaiting">
-                    <li><sup>*</sup>Points below 5 = 7 seconds</li>
-                    <li class="li2"><sup>*</sup>Points above 5 = 15 seconds</li>
-                    <li class="li3"><sup>*</sup>Points above 40 = 30 seconds</li>
+                    <li><sup>*</sup>Points below 10 you'll have a waiting time of 7 seconds</li>
+                    <li class="li2"><sup>*</sup>10 points and above you'll have a waiting time of 1 minute</li>
                 </ul>
             </li>
         </ul>
@@ -82,17 +81,13 @@
             <button id="shadow" class="shadow" disabled>
                 <i class="fa-solid fa-circle-pause"></i> WAITING . . . <span id="wait" class="wait">00</span> sec
             </button>
-            <span class="above">⚠ Click above to increase your points.</span>
+            <span class="above">⚠ Click above to add your points.</span>
         </div>
     </div>
     <br>
     <br>
     <hr><br>
     <div class="leaderboard">
-        <h4>
-            <b>Dramastore Leader Board | Top 25</b><br>
-            <span class="ranking">🎖 By Episodes downloaded</span>
-        </h4>
         <%- include('./partials/table.ejs'); %>
     </div>
 

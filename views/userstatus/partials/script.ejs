@@ -15,18 +15,11 @@
 
     function waiting() {
         let counting = 7
-        if (points > 4 && points < 40) {
-            EAT.innerText = '15 seconds'
-            counting = 15
-        } else if (points > 39 && points < 60) {
-            EAT.innerText = '30 seconds'
-            counting = 30
-        } else if (points > 59) {
+        if (points > 9) {
             EAT.innerText = '1 minute'
             counting = 60
-        } else if (points<5) {
-            EAT.innerText = '7 seconds'
-            counting = 7
+        } else {
+            EAT.innerText = counting + ' seconds'
         }
 
         let interval = setInterval(() => {

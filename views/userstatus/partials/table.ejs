@@ -1,13 +1,18 @@
-<table class="table table-dark table-striped">
-  <thead>
+<table class="table table-striped caption-top">
+  <caption>
+    <span class="cap">Top 1,000 dramastore <b>Koreaboo 😍</b></span>
+    <span class="desc">Koreaboo = <i>someone who is obsessed with K-dramas or k-pop.</i></span>
+</caption>
+  <thead style="font-size: 14px;">
     <tr>
       <th scope="col">#</th>
       <th scope="col">Name</th>
       <th scope="col">Points</th>
-      <th scope="col">Eps. downloaded</th>
+      <th scope="col">Downloads</th>
+      <th scope="col">Last down'd</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody style="font-size: 12px;">
     <% ranks.forEach((user, index)=> { %>
       <tr>
         <th scope="row">
@@ -26,6 +31,9 @@
         </td>
         <td>
           <%= user.downloaded.toLocaleString('en-US') %>
+        </td>
+        <td>
+          <%= user.updatedAt %>
         </td>
         <% }) %>
       </tr>

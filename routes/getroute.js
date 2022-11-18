@@ -8,6 +8,12 @@ const ohmyBotUsersModel = require('../models/ohmyusers')
 const ohmyfilesModel = require('../models/ohmyfiles')
 const ohmyOffersModel = require('../models/ohmyOffers')
 
+//Times
+const TimeAgo = require('javascript-time-ago')
+const en = require('javascript-time-ago/locale/en')
+TimeAgo.addDefaultLocale(en)
+const timeAgo = new TimeAgo('en-US')
+
 const axios = require('axios').default
 
 // TELEGRAM
@@ -207,7 +213,20 @@ router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
         const userId = req.params.id
 
         let user = await botUsersModel.findOne({ userId })
-        let ranks = await botUsersModel.find().limit(25).sort('-downloaded')
+        let temp = await botUsersModel.find().limit(1000).sort('-downloaded').select('fname points downloaded updatedAt userId')
+        let ranks = []
+
+        for (let u of temp) {
+            if (u.userId == 1473393723) {
+                ranks.push({
+                    fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: "🤦🏽‍♂️"
+                })
+            } else {
+                ranks.push({
+                    fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: timeAgo.format(new Date(u.updatedAt))
+                })
+            }
+        }
 
         res.render('userstatus/userstatus', { user, ranks })
     } catch (err) {
