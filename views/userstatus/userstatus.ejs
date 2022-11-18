@@ -26,17 +26,11 @@
                 onclick="window.open('tg://resolve?domain=shemdoe', '_self')">@shemdoe</span></span>
     </header>
 
-    <div class="ads adsterra250">
-        <script type="text/javascript">
-            atOptions = {
-                'key': '6c89ef113e8ce37b4357824ebcfc4a66',
-                'format': 'iframe',
-                'height': 250,
-                'width': 300,
-                'params': {}
-            };
-            document.write('<scr' + 'ipt type="text/javascript" src="http' + (location.protocol === 'https:' ? 's' : '') + '://lectureolympics.com/6c89ef113e8ce37b4357824ebcfc4a66/invoke.js"></scr' + 'ipt>');
-        </script>
+    <div class="ads">
+        <%- include('../Global/ads/320ad.ejs'); %>
+    </div>
+    <div class="ads">
+        <%- include('../Global/ads/keeper-header.ejs'); %>
     </div>
 
     <div class="userbox <%= (user.points>=2) ? 'green' : 'red' %> ">
@@ -85,8 +79,10 @@
         </div>
     </div>
     <br>
+    <div class="ads">
+        <%- include('../Global/ads/in-article.ejs'); %>
+    </div>
     <br>
-    <hr><br>
     <div class="leaderboard">
         <%- include('./partials/table.ejs'); %>
     </div>
@@ -113,13 +109,18 @@
                 integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
                 crossorigin="anonymous"></script>
 
-    <!-- Propellar Vignette banner -->
-    <script>(function (d, z, s) { s.src = '//' + d + '/401/' + z; try { (document.body || document.documentElement).appendChild(s) } catch (e) { } })('glizauvo.net', 4963015, document.createElement('script'))</script>
+            <!-- Propellar Vignette banner -->
+            <%- include('../Global/propellarads.ejs'); %>
 
-    <!-- adskeeper mobile-top-down -->
-    <div id="M797576ScriptRootC1337589">
-    </div>
-    <script src="https://jsc.adskeeper.co.uk/d/r/dramastore.net.1337589.js" async>
-    </script>
+            <!-- adskeeper mobile-top-down -->
+            <div id="M797576ScriptRootC1337589">
+            </div>
+            <script src="https://jsc.adskeeper.co.uk/d/r/dramastore.net.1337589.js" async>
+            </script>
+
+            <!-- adskeeper notifications -->
+            <div id="M797576ScriptRootC1388311"></div>
+            <script src="https://jsc.adskeeper.co.uk/d/r/dramastore.net.1388311.js" async></script>
 </body>
+
 </html>
