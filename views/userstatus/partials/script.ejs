@@ -15,9 +15,15 @@
 
     function waiting() {
         let counting = 7
-        if (points > 10) {
+        if (points > 10 && points <= 24) {
             EAT.innerText = '45 seconds'
             counting = 45
+        } else if(points > 24 && points <= 32) {
+            EAT.innerText = '60 seconds'
+            counting = 60
+        } else if(points > 32) {
+            EAT.innerText = '100 seconds'
+            counting = 100
         } else {
             EAT.innerText = counting + ' seconds'
         }
