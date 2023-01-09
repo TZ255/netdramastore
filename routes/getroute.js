@@ -37,6 +37,7 @@ router.get('/', async (req, res) => {
 
         let dramas = await homeModel.find().sort('-year').sort('dramaName')
 
+        let drama2023 = []
         let drama2022 = []
         let drama2021 = []
         let drama2020 = []
@@ -52,7 +53,14 @@ router.get('/', async (req, res) => {
         // Add new if under foreach to find dramas of new year
 
         dramas.forEach(drama => {
-            if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
+            if (drama.year == 2023 || drama.dramaName.includes('(2023)')) {
+                drama2023.push({
+                    name: drama.dramaName,
+                    path: drama.episodesUrl
+                })
+            }
+
+            else if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
                 drama2022.push({
                     name: drama.dramaName,
                     path: drama.episodesUrl
@@ -186,7 +194,7 @@ router.get('/', async (req, res) => {
             }
         })
 
-        res.render('home/home', { latest, popular, drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015 })
+        res.render('home/home', { latest, popular, drama2023, drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015 })
     } catch (err) {
         console.log(err)
         res.send('Internal Error, try again later')
@@ -266,6 +274,7 @@ router.get('/:id', async (req, res, next) => {
 
             let dramas = await homeModel.find().sort('-year').sort('dramaName')
 
+            let drama2023 = []
             let drama2022 = []
             let drama2021 = []
             let drama2020 = []
@@ -281,7 +290,14 @@ router.get('/:id', async (req, res, next) => {
             // Add new if under foreach to find dramas of new year
 
             dramas.forEach(drama => {
-                if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
+                if (drama.year == 2023 || drama.dramaName.includes('(2023)')) {
+                    drama2023.push({
+                        name: drama.dramaName,
+                        path: drama.episodesUrl
+                    })
+                }
+
+                else if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
                     drama2022.push({
                         name: drama.dramaName,
                         path: drama.episodesUrl
@@ -419,7 +435,7 @@ router.get('/:id', async (req, res, next) => {
                 res.send('The drama you try to access is not available, Request it from Drama Store Admin (Telegram @shemdoe)')
             }
             else {
-                res.render('subpage/subpage', { drama, popular, drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015 })
+                res.render('subpage/subpage', { drama, popular, drama2023, drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015 })
             }
         }
     } catch (err) {
@@ -433,6 +449,7 @@ router.get('/list-of-dramastore-dramas', async (req, res) => {
     try {
         let dramas = await homeModel.find().sort('-year').sort('dramaName')
 
+        let drama2023 = []
         let drama2022 = []
         let drama2021 = []
         let drama2020 = []
@@ -449,7 +466,17 @@ router.get('/list-of-dramastore-dramas', async (req, res) => {
         // Add new if under foreach to find dramas of new year
 
         dramas.forEach(drama => {
-            if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
+            if (drama.year == 2023 || drama.dramaName.includes('(2023)')) {
+                drama2023.push({
+                    name: drama.dramaName,
+                    path: drama.episodesUrl
+                })
+                allDrama.push({
+                    name: drama.dramaName,
+                    path: drama.episodesUrl
+                })
+            }
+            else if (drama.year == 2022 || drama.dramaName.includes('(2022)')) {
                 drama2022.push({
                     name: drama.dramaName,
                     path: drama.episodesUrl
@@ -615,7 +642,7 @@ router.get('/list-of-dramastore-dramas', async (req, res) => {
             }
         })
 
-        res.render('searchpage/searchpage', { drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015, allDrama })
+        res.render('searchpage/searchpage', { drama2023, drama2022, drama2021, drama2020, drama2019, drama2018, drama2017, drama2016, drama2015, allDrama })
 
     } catch (err) {
         console.log(err)

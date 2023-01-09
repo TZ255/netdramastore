@@ -73,6 +73,28 @@
         <div class="yracc">
             <div class="accordion accordion-flush" id="accordionFlushExample">
                 <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading2023">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapse2023" aria-expanded="false" aria-controls="flush-collapse2023">
+                            📺 2023 Drama (A-Z)
+                        </button>
+                    </h2>
+                    <div id="flush-collapse2023" class="accordion-collapse collapse" aria-labelledby="flush-heading2023"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <ol class="list-group list-group-numbered">
+                                <% drama2023.forEach(drama=> { %>
+                                    <li class="list-group-item">
+                                        <a href="<%= drama.path %>">
+                                            <%= drama.name %>
+                                        </a>
+                                    </li>
+                                    <% }) %>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
