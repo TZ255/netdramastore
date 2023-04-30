@@ -26,9 +26,7 @@
                 onclick="window.open('tg://resolve?domain=shemdoe', '_self')">@shemdoe</span></span>
     </header>
 
-    <div class="ads">
-        <%- include('../Global/ads/320ad.ejs'); %>
-    </div>
+    
 
     <div class="userbox <%= (user.points>=2) ? 'green' : 'red' %> ">
         <h2 class="title">DRAMASTORE USER STATUS</h2>
@@ -106,7 +104,7 @@
                 crossorigin="anonymous"></script>
 
             <!-- Propellar Vignette banner -->
-            <%- include('../Global/propellarads.ejs'); %>
+            <%- include('../Global/ads/vignette-antads.ejs'); %>
 </body>
 
 </html>
