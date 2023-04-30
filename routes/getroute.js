@@ -830,7 +830,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         await bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
 
         let user = await botUsersModel.findOneAndUpdate({ userId }, {$inc: {downloaded: 1}}, {new: true})
-        let users = await botUsersModel.find().sort('-downloaded').select('fname downloaded updatedAt userId').limit(2000)
+        let users = await botUsersModel.find().sort('-downloaded').select('fname downloaded updatedAt userId').limit(1000)
         let wote = []
         for (let huyu of users) {
             if (huyu.userId == 1473393723) {
