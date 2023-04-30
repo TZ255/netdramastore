@@ -7,6 +7,7 @@ const blogModel = require('../models/postmodel')
 const ohmyBotUsersModel = require('../models/ohmyusers')
 const ohmyfilesModel = require('../models/ohmyfiles')
 const ohmyOffersModel = require('../models/ohmyOffers')
+const episodeModel = require('../models/dramastore-episode')
 
 //Times
 const TimeAgo = require('javascript-time-ago')
@@ -794,6 +795,55 @@ router.get('/ohuser/info/:pid/:uid', async (req, res) => {
         errorDisplay(err, userId, boosterBot)
     }
 
+})
+
+//new episode req
+router.get('/download/episode/:_id/:userid', async (req, res) => {
+    try {
+        const ep_id = req.params._id
+        const userId = req.params.userid
+
+        let episode = await episodeModel.findById(ep_id)
+        let user = await botUsersModel.findOne({ userId })
+        user = {
+            fname: user.fname,
+            userId,
+            points: user.points,
+            downloaded: user.downloaded,
+            last: timeAgo.format(new Date(user.updatedAt))
+        }
+
+        res.render('episode-view/episode', { episode, user })
+    } catch (err) {
+        console.log(err.message)
+    }
+})
+
+router.get('/success/send/:_id/:userid', async (req, res) => {
+    let _id = req.params._id
+    let userId = req.params.userid
+    let dbChannel = -1001239425048
+    let shemdoe = 741815228
+
+    try {
+        let epinfo = await episodeModel.findById(_id)
+        await bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
+
+        let user = await botUsersModel.findOneAndUpdate({ userId }, {$inc: {downloaded: 1}}, {new: true})
+        let users = await botUsersModel.find().sort('-downloaded').select('fname downloaded updatedAt userId').limit(2000)
+        let wote = []
+        for (let huyu of users) {
+            if (huyu.userId == 1473393723) {
+                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: '🤪🤪🤪' })
+            } else {
+                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: timeAgo.format(new Date(huyu.updatedAt)) })
+            }
+        }
+        res.render('epsent/sent', { user, wote })
+    } catch (err) {
+        console.log(err)
+        res.status(404).send(err.message + '. Refresh this page to resolve, if error persist send the screenshot of this error to dramastore admin')
+    }
 })
 
 //send directly

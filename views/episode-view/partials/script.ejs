@@ -1,0 +1,29 @@
+<script>
+    const progCont = document.getElementById('progCont')
+    const prog = document.getElementById('prog')
+    const divButton = document.getElementById('divButton')
+
+    function percentCounter() {
+        let pcnt = 100
+        let start = 0
+        let counting = document.getElementById('counting')
+
+        let interval = setInterval(() => {
+            pcnt = pcnt - 1
+            start = start + 1
+            prog.innerText = pcnt + '%'
+            prog.setAttribute('style', `width: ${pcnt}%;`)
+            counting.innerText = 'preparing the episode. '+ start + '%'
+
+            if (pcnt == 0) {
+                clearInterval(interval)
+                counting.innerText = 'episode is ready to download'
+                counting.style.color = 'green'
+
+                progCont.style.display = 'none'
+                divButton.style.display = 'block'
+            }
+        }, 100)
+    }
+    percentCounter()
+</script>

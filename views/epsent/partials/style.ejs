@@ -1,0 +1,90 @@
+<style>
+    .land {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 16px auto;
+        width: 98%;
+    }
+
+    .land .tick i {
+        color: #ffd700;
+        font-size: 100px;
+        display: flex;
+        margin-bottom: 12px;
+    }
+
+    .land .check {
+        display: block;
+        margin-top: 2px;
+        font-size: 12px;
+        font-style: italic;
+    }
+
+    .land .user {
+        background-color: #ffd700;
+        text-align: left;
+        padding: 16px;
+        border-radius: 6px;
+    }
+
+    .land .user h5 {
+        padding: 12px;
+        margin: 1px auto;
+        font-size: 12px !important;
+    }
+
+    .land #return {
+        cursor: pointer;
+        text-decoration: underline;
+        color: #1e90ff;
+        display: block;
+        margin-top: 12px;
+    }
+
+    .top {
+        margin-top: 16px;
+    }
+
+    caption {
+        background-color: black;
+        color: white;
+        padding: 12px 4px;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+
+    caption span {
+        display: block;
+    }
+
+    caption .cap {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    caption .cap b {
+        color: gold;
+    }
+
+    caption .desc {
+        font-size: 10px;
+        background-color: white;
+        color: black;
+        padding: 2px;
+    }
+
+    #spin {
+        z-index: 999;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+</style>
