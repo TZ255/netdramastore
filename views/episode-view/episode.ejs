@@ -22,12 +22,16 @@
 
 <body>
     <%- include('../Global/navhtml.ejs'); %>
-
+        <hr class="style-eight">
         <div class="ep-us">
             <div class="epinfo">
-                <h4>Dear, <%= user.fname.substring(0,22) %>
+                <h4>Dear, <b>
+                        <%= user.fname.substring(0,22) %>
+                    </b>,
                 </h4>
-                <h5>You are about to download <%= episode.drama_name.split('(20')[0] %> - Episode <%= episode.epno %>
+                <h5>You are about to download <b>
+                        <%= episode.drama_name.split('(20')[0] %> - Episode <%= episode.epno %>
+                    </b>
                 </h5>
             </div>
             <br>
@@ -40,7 +44,9 @@
                 </div>
             </div>
             <div class="divButton" id="divButton" style="display: none;">
-                <button onclick="window.open('/success/send/<%= episode._id %>/<%= user.userId %>')">DOWNLOAD YOUR EPISODE</button>
+                <button onclick="window.open('/success/send/<%= episode._id %>/<%= user.userId %>')"><i
+                        class="fa-solid fa-download"></i> GET YOUR EPISODE <i
+                        class="fa-brands fa-telegram"></i></button>
             </div>
             <div class="preparing"><span id="counting">00%</span></div>
         </div>
