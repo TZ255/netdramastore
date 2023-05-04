@@ -802,18 +802,32 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
     try {
         const ep_id = req.params._id
         const userId = req.params.userid
+        const myip = req.ip
 
         let episode = await episodeModel.findById(ep_id)
-        let user = await botUsersModel.findOne({ userId })
-        user = {
-            fname: user.fname,
+        let the_user = await botUsersModel.findOne({ userId })
+        let user = {
+            fname: the_user.fname,
             userId,
-            points: user.points,
-            downloaded: user.downloaded,
-            last: timeAgo.format(new Date(user.updatedAt))
+            points: the_user.points,
+            downloaded: the_user.downloaded,
+            last: timeAgo.format(new Date(the_user.updatedAt))
         }
 
         res.render('episode-view/episode', { episode, user })
+
+        //ip & update country
+        if (the_user.country.c_code == 'unknown') {
+            let mm = await axios.get(`https://api.ipregistry.co/${myip}?key=${process.env.IP_REG}`)
+
+            let country = {
+                name: mm.data.location.country.name,
+                c_code: mm.data.location.country.calling_code
+            }
+
+            await the_user.updateOne({ $set: { country } })
+            console.log(`${user.fname} with ip ${myip} - country updated to ${country.name}`)
+        }
     } catch (err) {
         console.log(err.message)
     }
