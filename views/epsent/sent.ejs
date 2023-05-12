@@ -59,7 +59,7 @@
                 </caption>
                 <thead style="font-size: 14px;">
                     <tr>
-                        <th scope="col">#</th>
+                        <th class="centerall" scope="col">#</th>
                         <th scope="col">Username</th>
                         <th scope="col">Downloads</th>
                         <th scope="col">Last activity</th>
@@ -68,8 +68,13 @@
                 <tbody>
                     <% wote.forEach((u, i)=> { %>
                         <tr>
-                            <td>
-                                <%= i + 1 %>.
+                            <td class="centerall">
+                                <% if (i == 0) { %>
+                                 <span class="admin">Admin</span>
+                                <% } %>
+                                <% if (i > 0) { %>
+                                 <%= i + 1 %>.
+                                <% } %>
                             </td>
                             <td class="tname">
                                 <% if (u.fname.startsWith('@')) { %>
@@ -82,7 +87,7 @@
                                     <%= u.fname.substring(0,16) %>
                                 <% } %>
                             </td>
-                            <td>
+                            <td class="centerall">
                                 <%= u.downloaded.toLocaleString('en-US') %>
                             </td>
                             <td>
