@@ -847,8 +847,8 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         let users = await botUsersModel.find().sort('-downloaded').select('fname downloaded updatedAt userId').limit(1000)
         let wote = []
         for (let huyu of users) {
-            if (huyu.userId == 1473393723) {
-                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: '🤪🤪🤪' })
+            if (huyu.userId == 741815228) {
+                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: '⌚ just now' })
             } else {
                 wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: timeAgo.format(new Date(huyu.updatedAt)) })
             }

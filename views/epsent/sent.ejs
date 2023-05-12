@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="top">
-            <table class="table caption-top table-striped">
+            <table class="table caption-top table-striped-columns">
                 <caption>
                     <span class="cap">Top 1,000 dramastore <b>Koreaboo 😍</b></span>
                     <span class="desc">Koreaboo = <i>someone who is obsessed with K-dramas or k-pop.</i></span>
@@ -60,9 +60,9 @@
                 <thead style="font-size: 14px;">
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">1st name</th>
+                        <th scope="col">Username</th>
                         <th scope="col">Downloads</th>
-                        <th scope="col">Last down'd</th>
+                        <th scope="col">Last activity</th>
                     </tr>
                 </thead>
                 <tbody style="font-size: 12px;">
@@ -71,8 +71,16 @@
                             <td>
                                 <%= i + 1 %>.
                             </td>
-                            <td>
-                                <%= u.fname.substring(0,22) %>
+                            <td class="tname">
+                                <% if (u.fname.startsWith('@')) { %>
+                                    <a href="https://t.me/<%= u.fname.replace('@', '') %>">
+                                        <%= u.fname.substring(0,14) %>
+                                        <i class="fa-brands fa-telegram"></i>
+                                    </a>
+                                <% } %>
+                                <% if (!u.fname.startsWith('@')) { %>
+                                    <%= u.fname.substring(0,16) %>
+                                <% } %>
                             </td>
                             <td>
                                 <%= u.downloaded %>

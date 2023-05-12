@@ -16,7 +16,7 @@ const telegraph = require('telegraph-node')
 const ph = new telegraph()
 
 // database connection
-mongoose.connect(`mongodb+srv://${process.env.USER}:${process.env.PASS}@nodetuts.ngo9k.mongodb.net/dramastore?retryWrites=true&w=majority`)
+mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-shard-00-00.ngo9k.mongodb.net:27017,nodetuts-shard-00-01.ngo9k.mongodb.net:27017,nodetuts-shard-00-02.ngo9k.mongodb.net:27017/dramastore?authSource=admin&replicaSet=atlas-pyxyme-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true`)
 .then(()=> console.log('Connected to database'))
 .catch((err)=> {
     console.log(err)
