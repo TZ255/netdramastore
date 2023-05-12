@@ -65,7 +65,7 @@
                         <th scope="col">Last activity</th>
                     </tr>
                 </thead>
-                <tbody style="font-size: 12px;">
+                <tbody>
                     <% wote.forEach((u, i)=> { %>
                         <tr>
                             <td>
@@ -74,7 +74,7 @@
                             <td class="tname">
                                 <% if (u.fname.startsWith('@')) { %>
                                     <a href="https://t.me/<%= u.fname.replace('@', '') %>">
-                                        <%= u.fname.substring(0,14) %>
+                                        <%= u.fname.substring(0,15) %>
                                         <i class="fa-brands fa-telegram"></i>
                                     </a>
                                 <% } %>
@@ -83,7 +83,7 @@
                                 <% } %>
                             </td>
                             <td>
-                                <%= u.downloaded %>
+                                <%= u.downloaded.toLocaleString('en-US') %>
                             </td>
                             <td>
                                 <%= u.last %>
