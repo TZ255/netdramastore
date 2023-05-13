@@ -222,13 +222,13 @@ router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
         const userId = req.params.id
 
         let user = await botUsersModel.findOne({ userId })
-        let temp = await botUsersModel.find().limit(200).sort('-downloaded').select('fname points downloaded updatedAt userId')
+        let temp = await botUsersModel.find().limit(500).sort('-downloaded').select('fname points downloaded updatedAt userId')
         let ranks = []
 
         for (let u of temp) {
-            if (u.userId == 1473393723) {
+            if (u.fname == '@shemdoe') {
                 ranks.push({
-                    fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: "🤦🏽‍♂️"
+                    fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: "just now"
                 })
             } else {
                 ranks.push({
