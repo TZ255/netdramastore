@@ -228,7 +228,7 @@ router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
         for (let u of temp) {
             if (u.fname == '@shemdoe') {
                 ranks.push({
-                    fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: "just now"
+                    fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: "a moment ago"
                 })
             } else {
                 ranks.push({
@@ -848,7 +848,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         let wote = []
         for (let huyu of users) {
             if (huyu.userId == 741815228) {
-                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: '⌚ just now' })
+                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: 'a moment ago' })
             } else {
                 wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: timeAgo.format(new Date(huyu.updatedAt)) })
             }
