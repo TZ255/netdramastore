@@ -976,4 +976,8 @@ router.get('/open-offer/complete/:nano/:id/:msid', async (req, res) => {
     }
 })
 
+router.all('*', (req, res) => {
+    res.sendStatus(404)
+})
+
 module.exports = router
