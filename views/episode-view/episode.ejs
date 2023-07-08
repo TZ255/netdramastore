@@ -26,11 +26,15 @@
     <hr class="style-eight">
     <div class="ep-us">
         <div class="epinfo">
+            <% if (user.userId == '1006615854') { %>
+            <%- include('./partials/bestie.ejs'); %>
+            <% } else { %>
             <h4>Dear
                 <b>
                     <%= user.fname.substring(0,22) %>
                 </b>,
             </h4>
+            <% } %>
             <h5>You're about to download
                 <b>
                     Episode <%= episode.epno %> of <%= episode.drama_name.split('(20')[0] %>
