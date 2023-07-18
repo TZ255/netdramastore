@@ -838,25 +838,18 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let userId = req.params.userid
     let dbChannel = -1001239425048
     let shemdoe = 741815228
+    let prop = `http://itespurrom.com/4/6141068`
 
     try {
+        res.redirect(prop)
         let epinfo = await episodeModel.findById(_id)
-        await bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
-
-        let user = await botUsersModel.findOneAndUpdate({ userId }, {$inc: {downloaded: 1}}, {new: true})
-        let users = await botUsersModel.find().sort('-downloaded').select('fname downloaded updatedAt userId').limit(1000)
-        let wote = []
-        for (let huyu of users) {
-            if (huyu.userId == 741815228) {
-                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: 'a moment ago' })
-            } else {
-                wote.push({ fname: huyu.fname, downloaded: huyu.downloaded, last: timeAgo.format(new Date(huyu.updatedAt)) })
-            }
-        }
-        res.render('epsent/sent', { user, wote })
+        setTimeout(() => {
+            bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
+            .catch(e => console.log(e.message))
+        }, 3000)
+        await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 }})
     } catch (err) {
         console.log(err)
-        res.status(404).send(err.message + '. Refresh this page to resolve, if error persist send the screenshot of this error to dramastore admin')
     }
 })
 
