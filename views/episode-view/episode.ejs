@@ -18,11 +18,19 @@
 
     <%- include('./partials/style.ejs'); %>
     <%- include('../Global/nav-style.ejs'); %>
+    <%- include('../Global/ads/style.ejs'); %>
+    <!-- mondiad -->
+    <script async src="https://ss.mndsrv.com/banner.js"></script>
+    <script async src="https://ss.mndsrv.com/native.js"></script>
 </head>
 
 <body>
     <%- include('../Global/navhtml.ejs'); %>
-    <hr class="style-eight">
+
+    <div class="ad s300">
+        <div data-mndbanid="6b9e786c-9ec2-4827-9a07-eee7238cfab2"></div>
+    </div>
+
     <div class="ep-us">
         <div class="epinfo">
             <% if (user.userId == '1006615854') { %>
@@ -58,7 +66,11 @@
         </div>
         <div class="preparing"><span id="counting">00%</span></div>
     </div>
-    <hr class="style-eight">
+    
+    <div class="ad native">
+        <div data-mndazid="b5add47f-f7dc-4b78-8e0a-a90bfbb08bc8"></div>
+    </div>
+
     <div class="userinfo">
         <ul>
             <h5><u>About You</u></h5>
