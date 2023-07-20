@@ -839,14 +839,15 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let dbChannel = -1001239425048
     let shemdoe = 741815228
     let prop = `http://itespurrom.com/4/6141068`
+    let hiltop = `https://stupidfinding.com/bu3JV.0gP/3hpGvEbjmbV/JrZED/0/0KNhz/cY1IN/zIg-5/L/TUQZ3ENhzxUT3PORTyA_`
 
     try {
-        res.redirect(prop)
+        res.redirect(hiltop)
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
             .catch(e => console.log(e.message))
-        }, 3000)
+        }, 5000)
         await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 }})
     } catch (err) {
         console.log(err)
