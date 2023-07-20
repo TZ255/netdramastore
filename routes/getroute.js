@@ -270,7 +270,7 @@ router.get('/:id', async (req, res, next) => {
         }
 
         else {
-            const drama = await newDramaModel.findOneAndUpdate({ id }, { $inc: { timesLoaded: 100 } }, { new: true })
+            const drama = await newDramaModel.findOneAndUpdate({ id }, { $inc: { timesLoaded: 100, thisMonth: 97, thisWeek: 97, today: 97 } }, { new: true })
             const popular = await newDramaModel.find().sort('-timesLoaded').limit(50)
 
             let dramas = await homeModel.find().sort('-year').sort('dramaName')

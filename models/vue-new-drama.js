@@ -53,6 +53,9 @@ const NewDrama = new Schema(
       type: Number,
       default: 1,
     },
+    today: {type: Number},
+    thisWeek: {type: Number},
+    thisMonth: {type: Number}
   },
   { timestamps: true, strict: false }
 );
