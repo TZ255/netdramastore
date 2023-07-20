@@ -842,7 +842,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let hiltop = `https://stupidfinding.com/bu3JV.0gP/3hpGvEbjmbV/JrZED/0/0KNhz/cY1IN/zIg-5/L/TUQZ3ENhzxUT3PORTyA_`
 
     try {
-        res.redirect(hiltop)
+        res.redirect(prop)
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
