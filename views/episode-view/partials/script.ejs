@@ -13,7 +13,7 @@
             start = start + 1
             prog.innerText = pcnt + '%'
             prog.setAttribute('style', `width: ${pcnt}%;`)
-            counting.innerText = 'preparing the episode. '+ start + '%'
+            counting.innerText = 'preparing the episode. ' + start + '%'
 
             if (pcnt == 0) {
                 clearInterval(interval)
@@ -26,4 +26,21 @@
         }, 100)
     }
     percentCounter()
+
+    function sendEpis() {
+        let userId = '<%= user.userId %>'
+        let epId = '<%= episode._id %>'
+        let btn = document.getElementById('btnEp')
+        let stts = document.getElementById('counting')
+        let spinner = `<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`
+
+        let req = `/success/send/${epId}/${userId}`
+        btn.innerHTML = spinner
+        btn.style.backgroundColor = 'lightgray'
+        btn.style.color = 'gray'
+        stts.innerText = 'sending to telegram...'
+        setTimeout(()=> {
+            window.open(`${req}`, '_self')
+        }, 2000)
+    }
 </script>
