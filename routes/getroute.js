@@ -806,6 +806,15 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
 
         let episode = await episodeModel.findById(ep_id)
         let the_user = await botUsersModel.findOne({ userId })
+        let temp = await botUsersModel.find().limit(500).sort('-downloaded').select('fname points downloaded updatedAt userId')
+        let ranks = []
+
+        for (let u of temp) {
+            ranks.push({
+                fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: timeAgo.format(new Date(u.updatedAt))
+            })
+        }
+
         let user = {
             fname: the_user.fname,
             userId,
@@ -814,7 +823,7 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
             last: timeAgo.format(new Date(the_user.updatedAt))
         }
 
-        res.render('episode-view/episode', { episode, user })
+        res.render('episode-view/episode', { episode, user, ranks })
 
         //ip & update country
         if (the_user.country.c_code == 'unknown') {
@@ -846,9 +855,9 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
-            .catch(e => console.log(e.message))
+                .catch(e => console.log(e.message))
         }, 5000)
-        await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 }})
+        await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } })
     } catch (err) {
         console.log(err)
     }
