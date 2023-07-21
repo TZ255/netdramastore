@@ -34,7 +34,7 @@ router.get('/favicon.ico', (req, res) => res.status(204).end());
 router.get('/', async (req, res) => {
     try {
         const latest = await homeModel.find().sort('-year').sort('-createdAt').limit(10)
-        const popular = await newDramaModel.find().sort('-timesLoaded').limit(15)
+        const popular = await newDramaModel.find().sort('-thisMonth').limit(25)
 
         let dramas = await homeModel.find().sort('-year').sort('dramaName')
 
