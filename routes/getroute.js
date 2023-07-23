@@ -286,10 +286,6 @@ router.get('/:id', async (req, res, next) => {
             let drama2015 = []
 
 
-            // Add new if under foreach to find dramas of new year
-            // Add new if under foreach to find dramas of new year
-            // Add new if under foreach to find dramas of new year
-
             dramas.forEach(drama => {
                 if (drama.year == 2023 || drama.dramaName.includes('(2023)')) {
                     drama2023.push({
