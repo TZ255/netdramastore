@@ -699,11 +699,10 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let userId = req.params.userid
     let dbChannel = -1001239425048
     let shemdoe = 741815228
-    let prop = `http://itespurrom.com/4/6141068`
-    let adsterra = `https://www.highwaycpmrevenue.com/rha1eibt?key=ff261964d9caf1492ea19335d93dc3a0`
+    let prop = `http://meenetiy.com/4/6141068`
 
     try {
-        res.redirect(adsterra)
+        res.redirect(prop)
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
