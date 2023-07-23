@@ -33,7 +33,7 @@
         let btn = document.getElementById('btnEp')
         let stts = document.getElementById('counting')
         let spinner = `<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`
-        let orgHTML = `<i class="fa-solid fa-rotate-right"></i> REDOWNLOAD EPISODE (<%= episode.size %>) <i class="fa-brands fa-telegram"></i>`
+        let orgHTML = `<i class="fa-solid fa-rotate-right"></i> REDOWNLOAD EPISODE (<%= episode.size %>)`
 
         let req = `/success/send/${epId}/${userId}`
         btn.innerHTML = spinner
@@ -42,10 +42,13 @@
         stts.innerText = 'sending to telegram...'
         setTimeout(() => {
             window.open(`${req}`, '_self')
+        }, 2000)
+
+        setTimeout(() => {
             stts.innerText = '✅ sent - check your telegram inbox'
             btn.innerHTML = orgHTML
             btn.style.backgroundColor = 'green'
             btn.style.color = 'white'
-        }, 2000)
+        }, 4000)
     }
 </script>
