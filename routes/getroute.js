@@ -664,7 +664,7 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
             fname: u.fname,
             points: u.points,
             downloaded: u.downloaded,
-            updatedAt: timeAgo.format(new Date(u.updatedAt))
+            updatedAt: timeAgo.format(new Date(u.updatedAt), 'twitter-minute')
         }))
 
         let user = {

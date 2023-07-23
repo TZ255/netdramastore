@@ -1,15 +1,15 @@
-<table class="table table-striped-columns caption-top">
+<table class="table table-striped caption-top" style="background-color: white;">
     <caption>
       <span class="cap">Top 500 dramastore <b>Koreaboo 😍</b></span>
       <span class="desc">Koreaboo = <i>someone who is obsessed with K-dramas or k-pop.</i></span>
     </caption>
-    <thead style="font-size: 14px;">
+    <thead style="font-size: 11px;">
       <tr>
         <th scope="col" class="centerall">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Points</th>
-        <th scope="col">Downloads</th>
-        <th scope="col">Last activity</th>
+        <th scope="col" class="centerall">Pts</th>
+        <th scope="col" class="centerall">Dwnld</th>
+        <th scope="col" class="centerall">Last activity</th>
       </tr>
     </thead>
     <tbody style="font-size: 10px;">
@@ -25,7 +25,7 @@
         <td>
           <% if (user.fname.startsWith('@') ) { %>
           <a href="https://t.me/<%= user.fname.replace('@', '') %>" target="_blank">
-            <%= user.fname.substring(0,15) %>
+            <%= user.fname.substring(0,12) %>
             <i class="fa-brands fa-telegram"></i>
           </a>
           <% } else { %>
@@ -38,7 +38,7 @@
         <td class="centerall">
           <%= user.downloaded.toLocaleString('en-US') %>
         </td>
-        <td>
+        <td class="centerall">
           <%= user.updatedAt %>
         </td>
         <% }) %>
