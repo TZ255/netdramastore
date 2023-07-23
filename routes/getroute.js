@@ -660,14 +660,16 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
 
         let episode = await episodeModel.findById(ep_id)
         let the_user = await botUsersModel.findOne({ userId })
-        let temp = await botUsersModel.find().limit(1000).sort('-downloaded').select('fname points downloaded updatedAt userId')
-        let ranks = []
+        let temp = await botUsersModel.find()
+            .limit(500).sort('-downloaded')
+            .select('fname points downloaded updatedAt userId')
 
-        for (let u of temp) {
-            ranks.push({
-                fname: u.fname, points: u.points, downloaded: u.downloaded, updatedAt: timeAgo.format(new Date(u.updatedAt))
-            })
-        }
+        const ranks = temp.map(u => ({
+            fname: u.fname,
+            points: u.points,
+            downloaded: u.downloaded,
+            updatedAt: timeAgo.format(new Date(u.updatedAt))
+        }))
 
         let user = {
             fname: the_user.fname,
