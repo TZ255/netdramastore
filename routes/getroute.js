@@ -702,10 +702,10 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let dbChannel = -1001239425048
     let shemdoe = 741815228
     let prop = `http://itespurrom.com/4/6141068`
-    let hiltop = `https://stupidfinding.com/bu3JV.0gP/3hpGvEbjmbV/JrZED/0/0KNhz/cY1IN/zIg-5/L/TUQZ3ENhzxUT3PORTyA_`
+    let adsterra = `https://www.highwaycpmrevenue.com/rha1eibt?key=ff261964d9caf1492ea19335d93dc3a0`
 
     try {
-        res.redirect(prop)
+        res.redirect(adsterra)
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
