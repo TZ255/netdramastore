@@ -23,7 +23,7 @@
                 progCont.style.display = 'none'
                 divButton.style.display = 'block'
             }
-        }, 100)
+        }, 150)
     }
     percentCounter()
 
@@ -42,14 +42,14 @@
         stts.innerText = 'sending to telegram...'
         setTimeout(() => {
             window.open(`${req}`, '_self')
-        }, 2000)
+        }, 4000)
 
         setTimeout(() => {
             stts.innerText = '✅ sent - check your telegram inbox'
             btn.innerHTML = orgHTML
             btn.style.backgroundColor = 'green'
             btn.style.color = 'white'
-        }, 4000)
+        }, 15000)
     }
 
     function openSurvey() {

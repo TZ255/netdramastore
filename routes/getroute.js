@@ -707,7 +707,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
                 .catch(e => console.log(e.message))
-        }, 5000)
+        }, 10000)
         await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } })
     } catch (err) {
         console.log(err)
