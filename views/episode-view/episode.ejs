@@ -23,12 +23,19 @@
 
 <body>
     <%- include('../Global/navhtml.ejs'); %>
+    <h1 style="width: 98%; margin: 12px auto; font-size: 18px; font-weight: bold;">
+        Download <%= episode.drama_name.split('(20')[0] %> - Episode <%= episode.epno %>
+    </h1>
 
     <div class="ad">
         <%- include('../Global/ads/300x250.ejs'); %>
     </div>
 
     <div class="ep-us">
+        <div class="heading">
+            <i class="fa-brands fa-telegram"></i>
+            DOWNLOAD SECTION
+        </div>
         <div class="epinfo">
             <% if (user.userId == '1006615854') { %>
             <%- include('./partials/bestie.ejs'); %>
@@ -65,7 +72,7 @@
     </div>
 
     <br>
-    <div class="ad adcash-native">
+    <div class="adcash-native">
         <div id="awn-z7213314"></div>
     </div>
     <br>
