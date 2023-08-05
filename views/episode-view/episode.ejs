@@ -48,7 +48,8 @@
             <% } %>
             <h5>You're about to download
                 <b>
-                    Episode <%= episode.epno %> of <%= episode.drama_name.split('(20')[0] %>
+                    <%= episode.drama_name.split('(20')[0] %> <br>
+                    Episode <%= episode.epno %>
                 </b>
             </h5>
         </div>
@@ -72,9 +73,6 @@
     </div>
 
     <br>
-    <div class="adcash-native">
-        <div id="awn-z7213314"></div>
-    </div>
     <br>
     <% if (!['1006615854', '1937862156', '1652556985', '5999858750'].includes(user.userId)) { %>
     <div class="ad">
@@ -173,10 +171,6 @@
 
     <!-- Propellar Vignette banner -->
     <%- include('../Global/ads/vignette.ejs'); %>
-
-    <!-- native & inpage adcash -->
-    <%- include('../Global/ads/native-adcash.ejs'); %>
-    <%- include('../Global/ads/inpage-adcash.ejs'); %>
 </body>
 
 </html>
