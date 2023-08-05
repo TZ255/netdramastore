@@ -6,14 +6,20 @@
     function percentCounter() {
         let pcnt = 100
         let start = 0
+        let mbs = '<%= episode.size %>'
+        mbs = mbs.split(' MB')[0]
+        let factor = Number(mbs)/100
+        console.log(factor)
+        let mbing = 0
         let counting = document.getElementById('counting')
 
         let interval = setInterval(() => {
             pcnt = pcnt - 1
             start = start + 1
+            mbing = mbing + factor
             prog.innerText = pcnt + '%'
             prog.setAttribute('style', `width: ${pcnt}%;`)
-            counting.innerText = 'preparing the episode. ' + start + '%'
+            counting.innerText = `preparing the episode... ${mbing.toFixed(1)}/${mbs} MB`
 
             if (pcnt == 0) {
                 clearInterval(interval)
