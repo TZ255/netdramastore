@@ -13,6 +13,17 @@ const userSchema = new Schema({
     },
     downloaded: {
         type: Number
+    },
+    blocked: {
+        type: Boolean,
+        default: false
+    },
+    adult: {
+        type: Boolean,
+        default: true
+    },
+    country: {
+        type: Object
     }
 }, { timestamps: true, strict: false })
 
