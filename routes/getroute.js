@@ -705,7 +705,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     try {
         let user = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, {new: true})
         if(user.adult == true) {
-            res.redirect(crak)
+            res.redirect(prop)
         } else {
             res.redirect(prop)
         }
