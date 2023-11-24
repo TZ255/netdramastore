@@ -34,15 +34,8 @@ app.use(express.static(__dirname + '/public'))
 app.use(cors())
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
 
-// Create a custom key generator function to extract the real client IP
-const keyGenerator = (req) => {
-    // Extract the real client IP from the X-Forwarded-For header
-    const realIp = req.headers['x-forwarded-for'].split(',')[0].trim();
-    return realIp;
-  };
-
 const limiter = elimit({
-    keyGenerator,
+    keyGenerator: (req, res) => req.ip, //distinguish users based on ip
     windowMs: 60 * 1000, // 1 minute
     max: 15, // Limit each IP to 5 requests per `window` (here, per 1 minute)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
