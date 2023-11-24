@@ -677,19 +677,6 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
         }
 
         res.render('episode-view/episode', { episode, user, ranks })
-
-        //ip & update country
-        if (the_user.country.c_code == 'unknown') {
-            let mm = await axios.get(`https://api.ipregistry.co/${myip}?key=${process.env.IP_REG}`)
-
-            let country = {
-                name: mm.data.location.country.name,
-                c_code: mm.data.location.country.calling_code
-            }
-
-            await the_user.updateOne({ $set: { country } })
-            console.log(`${user.fname} with ip ${myip} - country updated to ${country.name}`)
-        }
     } catch (err) {
         console.log(err.message)
     }
