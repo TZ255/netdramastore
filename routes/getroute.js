@@ -653,6 +653,7 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
         const ep_id = req.params._id
         const userId = req.params.userid
         const myip = req.ip
+        console.log(myip)
 
         let episode = await episodeModel.findById(ep_id)
         let the_user = await botUsersModel.findOne({ userId })
