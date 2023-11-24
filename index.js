@@ -28,7 +28,7 @@ mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-sha
 
 const limiter = elimit({
     windowMs: 60 * 1000, // 1 minute
-    max: 5, // Limit each IP to 5 requests per `window` (here, per 1 minute)
+    max: 15, // Limit each IP to 5 requests per `window` (here, per 1 minute)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
     message: "To many request, please try again after 3 minutes"
@@ -41,7 +41,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.use(cors())
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
-app.get('/x-forwarded-for', (request, response) => response.send(request.headers['x-forwarded-for']))
 app.use(limiter)
 app.use(postRouter)
 app.use(getRouter)
