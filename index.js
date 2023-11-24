@@ -19,7 +19,7 @@ const ph = new telegraph()
 mongoose.set('strictQuery', false)
 mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-shard-00-00.ngo9k.mongodb.net:27017,nodetuts-shard-00-01.ngo9k.mongodb.net:27017,nodetuts-shard-00-02.ngo9k.mongodb.net:27017/dramastore?ssl=true&replicaSet=atlas-pyxyme-shard-0&authSource=admin&retryWrites=true&w=majority`)
     .then(() => {
-        console.log('Connected to database')
+        console.log('✅ Connected to database')
     }).catch((err) => {
         console.log(err)
         bot.telegram.sendMessage(741815228, err.message)
