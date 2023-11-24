@@ -40,7 +40,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.use(cors())
-app.set('trust proxy', 2) //our app is hosted on server using proxy to pass user request
+app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
+app.get('/x-forwarded-for', (request, response) => response.send(request.headers['x-forwarded-for']))
 app.use(limiter)
 app.use(postRouter)
 app.use(getRouter)
