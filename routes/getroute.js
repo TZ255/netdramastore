@@ -707,6 +707,15 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     }
 })
 
+router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res)=> {
+    try {
+        let ep_id = req.params.ep_id
+        res.redirect(`http://telegram.me/dramastorebot?start=marikiID-${ep_id}`)
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
 router.all('*', (req, res) => {
     res.sendStatus(404)
 })
