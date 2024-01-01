@@ -36,9 +36,24 @@
         </div>
     </div>
 
+    <div id="d2024" class="most d2024">
+        <div class="header">
+            <span class="title">2024 Dramas</span>
+            <a href="#d2023" class="jump">Go 2023 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
+        </div>
+        <ol class="list-group list-group-numbered">
+            <% drama2024.forEach(drama=> { %>
+            <li onclick="window.open('<%= drama.path %>', '_self')" class="list-group-item">
+                <%= drama.name %>
+            </li>
+            <% }) %>
+        </ol>
+    </div>
+
     <div id="d2023" class="most d2023">
         <div class="header">
             <span class="title">2023 Dramas</span>
+            <a href="#d2024" class="jump up">Up 2024 &nbsp; <i class="fa-solid fa-angles-up"></i></a>
             <a href="#d2022" class="jump">Go 2022 &nbsp; <i class="fa-solid fa-angles-down"></i></a>
         </div>
         <ol class="list-group list-group-numbered">
