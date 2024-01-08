@@ -40,7 +40,7 @@ const limiter = elimit({
     max: 15, // Limit each IP to 5 requests per `window` (here, per 1 minute)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    message: "To many request, please try again after 3 minutes",
+    message: "To many request, try again after 3 minutes",
 })
 app.use(limiter)
 app.use(postRouter)
