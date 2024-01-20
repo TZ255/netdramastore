@@ -1,47 +1,127 @@
-<table class="table table-striped caption-top" style="background-color: white;">
-    <caption>
-      <span class="cap">Top 100 dramastore <b>Koreaboo 😍</b></span>
-      <span class="desc">Koreaboo = <i>someone who is obsessed with K-dramas or k-pop.</i></span>
-    </caption>
-    <thead style="font-size: 11px;">
-      <tr>
-        <th scope="col" class="centerall">#</th>
-        <th scope="col">Name</th>
-        <th scope="col" class="centerall">Pts</th>
-        <th scope="col" class="centerall">Dwnld</th>
-        <th scope="col" class="centerall">Last activity</th>
-      </tr>
-    </thead>
-    <tbody style="font-size: 10px;">
-      <% ranks.forEach((user, index)=> { %>
-      <tr>
-        <th scope="row" class="centerall">
-          <% if (user.fname=='@shemdoe' ) { %>
-          <span class="admin">Admin</span>
-          <% } else { %>
-          <%= index + 1 %>
-          <% } %>
-        </th>
-        <td>
-          <% if (user.fname.startsWith('@') ) { %>
-          <a href="https://t.me/<%= user.fname.replace('@', '') %>" target="_blank">
-            <%= user.fname.substring(0,12) %>
-            <i class="fa-brands fa-telegram"></i>
-          </a>
-          <% } else { %>
-          <%= user.fname.substring(0, 16) %>
-          <% } %>
-        </td>
-        <td class="centerall">
-          <%= user.points.toLocaleString('en-US') %>
-        </td>
-        <td class="centerall">
-          <%= user.downloaded.toLocaleString('en-US') %>
-        </td>
-        <td class="centerall">
-          <%= user.updatedAt %>
-        </td>
-        <% }) %>
-      </tr>
-    </tbody>
-  </table>
+<table id="userTable" class="table table-striped caption-top" style="background-color: white;">
+  <caption>
+    <span class="cap">Top 100 dramastore <b>Koreaboo 😍</b></span>
+    <span class="desc">Koreaboo = <i>someone who is obsessed with K-dramas or k-pop.</i></span>
+  </caption>
+  <thead style="font-size: 11px;">
+    <tr>
+      <th scope="col" class="centerall">#</th>
+      <th scope="col">Name</th>
+      <th scope="col" class="centerall">Pts</th>
+      <th scope="col" class="centerall">Dwnld</th>
+      <th scope="col" class="centerall">Last activity</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody" style="font-size: 10px;"></tbody>
+</table>
+
+<div class="req_btn" id="req_btn" style="text-align: center; color: black;">
+  <h5 style="font-size: small; color: brown;">*click the button below to unfold the list of top 100 dramastore users</h5>
+  <div>
+    <button id="updateButton"
+      style="background-color: green; border: none; padding: 12px 16px; font-weight: bold; color: white; border-radius: 8px; width: 75%;">Top 100
+      Koreaboo</button>
+  </div>
+</div>
+
+<div class="the_spinner" style="text-align: center;">
+  <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<script>
+  const updateButton = document.getElementById('updateButton')
+  const req_btn = document.getElementById('req_btn')
+
+  async function fetchData() {
+    try {
+      const response = await fetch('/shemdoe/req/top-100'); // Assuming your API endpoint is at /api/data
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      return [];
+    }
+  }
+
+  async function updateTable() {
+    const tableBody = document.getElementById('tableBody');
+    const updateButton = document.getElementById('updateButton');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+
+    // Show the loading spinner
+    loadingSpinner.style.display = 'inline-block';
+
+    try {
+      const ranks = await fetchData();
+
+      // Simulate a loading delay for 3 seconds
+      await new Promise(resolve => setTimeout(resolve, 3000));
+
+      // Clear existing table rows
+      tableBody.innerHTML = '';
+
+      ranks.forEach((user, index) => {
+        const row = document.createElement('tr');
+
+        // Add data to the table cells
+        const indexCell = document.createElement('th');
+        indexCell.setAttribute('scope', 'row');
+        indexCell.classList.add('centerall');
+        if (user.fname === '@shemdoe') {
+          const adminSpan = document.createElement('span');
+          adminSpan.classList.add('admin');
+          adminSpan.textContent = 'Admin';
+          indexCell.appendChild(adminSpan);
+        } else {
+          indexCell.textContent = index + 1;
+        }
+        row.appendChild(indexCell);
+
+        const nameCell = document.createElement('td');
+        if (user.fname.startsWith('@')) {
+          const link = document.createElement('a');
+          link.href = `https://t.me/${user.fname.replace('@', '')}`;
+          link.target = '_blank';
+          link.textContent = user.fname.substring(0, 12);
+          const icon = document.createElement('i');
+          icon.classList.add('fa-brands', 'fa-telegram');
+          link.appendChild(icon);
+          nameCell.appendChild(link);
+        } else {
+          nameCell.textContent = user.fname.substring(0, 16);
+        }
+        row.appendChild(nameCell);
+
+        const pointsCell = document.createElement('td');
+        pointsCell.classList.add('centerall');
+        pointsCell.textContent = user.points.toLocaleString('en-US');
+        row.appendChild(pointsCell);
+
+        const downloadedCell = document.createElement('td');
+        downloadedCell.classList.add('centerall');
+        downloadedCell.textContent = user.downloaded.toLocaleString('en-US');
+        row.appendChild(downloadedCell);
+
+        const updatedAtCell = document.createElement('td');
+        updatedAtCell.classList.add('centerall');
+        updatedAtCell.textContent = user.updatedAt;
+        row.appendChild(updatedAtCell);
+
+        // Append the row to the table body
+        tableBody.appendChild(row);
+      });
+    } catch (error) {
+      console.error('Error updating table:', error);
+    } finally {
+      // Hide the loading spinner and show the table
+      loadingSpinner.style.display = 'none';
+    }
+  }
+
+  updateButton.addEventListener('click', () => {
+    updateTable()
+    req_btn.style.display = 'none'
+  })
+</script>

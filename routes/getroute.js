@@ -390,8 +390,8 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let crak = `https://t.assxm.link/153258/3785/0?source=dramastore&bo=2753,2754,2755,2756&pyt=multi&po=6456`
 
     try {
-        let user = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, {new: true})
-        if(user.adult == true) {
+        let user = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, { new: true })
+        if (user.adult == true) {
             res.redirect(prop)
         } else {
             res.redirect(prop)
@@ -406,7 +406,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     }
 })
 
-router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res)=> {
+router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res) => {
     try {
         let ep_id = req.params.ep_id
         res.redirect(`http://telegram.me/dramastorebot?start=marikiID-${ep_id}`)
@@ -414,6 +414,29 @@ router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res)=> {
         console.log(error.message)
     }
 })
+
+router.get('/shemdoe/req/top-100', async (req, res) => {
+    try {
+        // Fetch data from MongoDB using Mongoose
+        const temp = await botUsersModel.find()
+            .limit(100).sort('-downloaded')
+            .select('fname points downloaded updatedAt userId');
+
+        // Transform the data into the desired format
+        const ranks = temp.map(u => ({
+            fname: u.fname,
+            points: u.points,
+            downloaded: u.downloaded,
+            updatedAt: timeAgo.format(new Date(u.updatedAt), 'twitter-minute')
+        }));
+
+        // Send the transformed data in the response
+        res.status(200).json(ranks);
+    } catch (error) {
+        console.error('Error fetching data:', error.message);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 router.all('*', (req, res) => {
     res.sendStatus(404)
