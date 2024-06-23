@@ -376,16 +376,12 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let userId = req.params.userid
     let dbChannel = -1001239425048
     let shemdoe = 741815228
-    let prop = `https://kaushooptawo.net/4/7514550`
+    let prop = `https://chiglees.com/4/7646739`
     let crak = `https://t.assxm.link/153258/3785/0?source=dramastore&bo=2753,2754,2755,2756&pyt=multi&po=6456`
 
     try {
-        let user = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } }, { new: true })
-        if (user.adult == true) {
-            res.redirect(prop)
-        } else {
-            res.redirect(prop)
-        }
+        await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } })
+        res.redirect(prop)
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
