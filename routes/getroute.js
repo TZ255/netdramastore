@@ -376,7 +376,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let userId = req.params.userid
     let dbChannel = -1001239425048
     let shemdoe = 741815228
-    let prop = `https://chiglees.com/4/7646739`
+    let prop = `https://glookomtoh.net/4/7646739`
     let crak = `https://t.assxm.link/153258/3785/0?source=dramastore&bo=2753,2754,2755,2756&pyt=multi&po=6456`
 
     try {
