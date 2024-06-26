@@ -12,6 +12,9 @@ const app = express()
 const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
+const { Bot, webhookCallback } = require('grammy')
+const Gbot = new Bot(process.env.HOOK_TOKEN)
+
 // TELEGRAPH
 const telegraph = require('telegraph-node')
 const ph = new telegraph()
@@ -33,6 +36,16 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.static(__dirname + '/public'))
 app.use(cors())
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
+app.use('/tele/hookbot', webhookCallback(Gbot, 'express'))
+
+//bots
+Gbot.command('start', async ctx => {
+    try {
+        await ctx.reply('karibu')
+    } catch (error) {
+        console.log(error.message, error)
+    }
+})
 
 const limiter = elimit({
     keyGenerator: (req, res) => req.ip, //distinguish users based on ip
@@ -46,6 +59,10 @@ app.use(limiter)
 app.use(postRouter)
 app.use(getRouter)
 
+Gbot.api.setWebhook(`https://web-production-c69b.up.railway.app/tele/hookbot`)
+    .then(() => Gbot.api.sendMessage(741815228, 'hook settled'))
+    .catch(e => console.log(e.message))
+    
 app.listen(process.env.PORT || 3000, () => console.log('Connected to port 3000'))
 
 
