@@ -29,14 +29,14 @@ const Bot1Function = async (app) => {
 
     bot.command('mama', async ctx => {
         try {
-            await ctx.reply('Mimi sio mama yako')
+            let mm = await ctx.reply('Mimi sio mama yako')
         } catch (error) {
             console.error(error.message, error)
         }
     })
 
     if (process.env.PROD == 'true') {
-        bot.api.setWebhook(`https://web-production-c69b.up.railway.app/tele/hookbot`, {
+        bot.api.setWebhook(`https://${process.env.DOMAIN}/tele/hookbot`, {
             drop_pending_updates: true
         })
             .then(() => bot.api.sendMessage(741815228, 'hook settled'))
