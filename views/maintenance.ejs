@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,40 @@
             width: 70%;
             margin: 32px auto;
         }
+
+        .joinus {
+            background-color: dodgerblue;
+            color: white;
+            border-radius: 48px;
+            padding: 12px;
+            margin: 12px auto;
+            width: 90%;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .joinus sup {
+            font-size: xx-small;
+            font-weight: normal;
+        }
+
+        .joinus:hover,
+        .joinus:active {
+            background-color: black;
+        }
     </style>
 </head>
+
 <body>
     <div>
         <h3>Website is in maintenance mode. We will be back soon...</h3>
         <h5>Sorry for any inconvenience 🙇‍♂️</h5>
+        <h5>Meanwhile you can use our Telegram channel</h5>
+        <div class="joinus" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">
+            <i class="fa-brands fa-telegram"></i> JOIN US ON TELEGRAM <br>
+            <sup>Download new korean series on Telegram</sup>
+        </div>
     </div>
 </body>
 </html>
