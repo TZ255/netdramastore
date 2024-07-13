@@ -41,8 +41,6 @@ const Bot1Function = async (app) => {
         })
             .then(() => bot.api.sendMessage(741815228, 'hook settled'))
             .catch(e => console.log(e.message))
-    } else if (process.env.PROD == 'false') {
-        bot.start().catch(e => console.log(e.message))
     }
 }
 
