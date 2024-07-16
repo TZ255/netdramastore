@@ -141,10 +141,10 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
 //new episode req by query params
 router.get('/download/episode', async (req, res) => {
     try {
-        let {ep_id, userid} = req.query
+        let { ep_id, userid } = req.query
 
         //check if there is no ep_id and userid queries
-        if(!ep_id && !userid) {
+        if (!ep_id && !userid) {
             ep_id = '643d1da000e9b3ff97e5e269'
             userid = 741815228
         }
@@ -218,6 +218,29 @@ router.get('/shemdoe/req/top-100', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+router.get('/ebook/free/download/:book', async (req, res) => {
+    try {
+        const book = req.params.book
+        switch (book) {
+            case 'atomic':
+                let info = {
+                    title: 'Atomic Habits',
+                    dd: `https://mega.nz/file/jxwnjKbZ#Ba5fFrfgDEYwfpVqmSsAHWOYejUpMPaYA0s5w_lDbW4`,
+                    cover: '/images/atomic.webp',
+                    sub: `The most fundamental information about habit formation, so you can accomplish more by focusing on less.`
+                }
+                res.render('zlanding/landing', { info })
+                break;
+
+            default:
+                res.status(404).send('Book not found')
+        }
+
+    } catch (err) {
+        console.log(err.message, err)
+    }
+})
 
 router.all('*', (req, res) => {
     res.sendStatus(404)
