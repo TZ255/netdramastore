@@ -38,6 +38,9 @@
             <%= episode.drama_name %>
         </div>
         <div class="epinfo">
+            <div class="logo" style="text-align: center; font-size: 48px;">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+            </div>
             <% if (user.userId == '1006615854') { %>
             <%- include('./partials/bestie.ejs'); %>
             <% } else { %>
@@ -45,7 +48,6 @@
                 <b>
                     <%= user.fname.substring(0,22) %>
                 </b>
-                (Drama Store Koreaboo)
             </h4>
             <% } %>
             <h5>You're about to download
