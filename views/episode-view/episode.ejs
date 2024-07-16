@@ -35,16 +35,17 @@
     <div class="ep-us">
         <div class="heading">
             <i class="fa-brands fa-telegram"></i>
-            DOWNLOADING SECTION
+            <%= episode.drama_name %>
         </div>
         <div class="epinfo">
             <% if (user.userId == '1006615854') { %>
             <%- include('./partials/bestie.ejs'); %>
             <% } else { %>
-            <h4>Dear
+            <h4>
                 <b>
                     <%= user.fname.substring(0,22) %>
-                </b>,
+                </b>
+                (Drama Store Koreaboo)
             </h4>
             <% } %>
             <h5>You're about to download

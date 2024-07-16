@@ -4,7 +4,7 @@
     const divButton = document.getElementById('divButton')
 
     function percentCounter() {
-        let pcnt = 100
+        let pcnt = 0
         let start = 0
         let mbs = '<%= episode.size %>'
         mbs = mbs.split(' MB')[0]
@@ -14,14 +14,14 @@
         let counting = document.getElementById('counting')
 
         let interval = setInterval(() => {
-            pcnt = pcnt - 1
+            pcnt = pcnt + 1
             start = start + 1
             mbing = mbing + factor
             prog.innerText = pcnt + '%'
             prog.setAttribute('style', `width: ${pcnt}%;`)
             counting.innerText = `preparing the episode... ${mbing.toFixed(1)}/${mbs} MB`
 
-            if (pcnt == 0) {
+            if (pcnt == 100) {
                 clearInterval(interval)
                 counting.innerText = 'episode is ready to download'
                 counting.style.color = 'green'

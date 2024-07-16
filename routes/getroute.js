@@ -114,7 +114,7 @@ router.get('/:id', async (req, res, next) => {
 
 })
 
-//new episode req
+//new episode req by paths
 router.get('/download/episode/:_id/:userid', async (req, res) => {
     try {
         const ep_id = req.params._id
@@ -135,6 +135,35 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
         res.render('episode-view/episode', { episode, user })
     } catch (err) {
         console.log(err.message)
+    }
+})
+
+//new episode req by query params
+router.get('/download/episode', async (req, res) => {
+    try {
+        let {ep_id, userid} = req.query
+
+        //check if there is no ep_id and userid queries
+        if(!ep_id && !userid) {
+            ep_id = '643d1da000e9b3ff97e5e269'
+            userid = 741815228
+        }
+
+        let episode = await episodeModel.findById(ep_id)
+        let the_user = await botUsersModel.findOne({ userId: Number(userid) })
+
+        let user = {
+            fname: the_user.fname,
+            userId: the_user.userId,
+            points: the_user.points,
+            downloaded: the_user.downloaded,
+            last: timeAgo.format(new Date(the_user.updatedAt))
+        }
+
+        res.render('episode-view/episode', { episode, user })
+    } catch (err) {
+        console.log(err.message)
+        res.status(404).send(`You followed an incorrect url. Please ensure you clicked a button sent to you by dramastore bot<br></br>If this error persist contact dramastore admin @shemdoe`)
     }
 })
 
