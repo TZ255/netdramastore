@@ -173,17 +173,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let dbChannel = -1001239425048
     let shemdoe = 741815228
     let props = [
-        `https://psujekreen.net/4/3311014`,
-        `https://phithewhoars.com/4/3311028`,
         `https://gronsoakoube.net/4/7646739`,
-        `https://pampafax.com/4/5344594`,
-        `https://shoonsory.net/4/6141068`,
-        `https://glocheexi.com/4/4184987`,
-        `https://jouwheeboati.com/4/7736114`,
-        `https://ptaupsom.com/4/7514550`,
-        `https://ptaiptistie.com/4/7748641`,
-        `https://staglecme.com/4/7748642`,
-        `https://potsaglu.net/4/7748641`,
         `https://ptaixout.net/4/7748642`,
         `https://whulsaux.com/4/7514550`,
         `https://gleemahortus.com/4/7736114`,
@@ -192,7 +182,17 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         `https://saicewheefe.net/4/5344594`,
         `https://psauwaun.com/4/7748641`,
         `https://ptugnins.net/4/3311028`,
-        `https://noakiglo.com/4/3311014`
+        `https://noakiglo.com/4/3311014`,
+        `https://zaipegrob.net/4/7749674`,
+        `https://juzaugleed.com/4/7749675`,
+        `https://soglaitsy.com/4/7749676`,
+        `https://gouthishoust.net/4/7749677`,
+        `https://stighoazon.com/4/7749678`,
+        `https://ithougroa.net/4/7749679`,
+        `https://ouphaips.net/4/7749680`,
+        `https://ptaiptistie.com/4/7749682`,
+        `https://whoursie.com/4/7749683`,
+        `https://eekseecm.net/4/7749685`,
     ]
 
     try {
