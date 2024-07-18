@@ -172,11 +172,23 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let userId = req.params.userid
     let dbChannel = -1001239425048
     let shemdoe = 741815228
-    let prop = `https://sicouthautso.net/4/7736114`
+    let props = [
+        `https://psujekreen.net/4/3311014`,
+        `https://phithewhoars.com/4/3311028`,
+        `https://gronsoakoube.net/4/7646739`,
+        `https://pampafax.com/4/5344594`,
+        `https://shoonsory.net/4/6141068`,
+        `https://glocheexi.com/4/4184987`,
+        `https://jouwheeboati.com/4/7736114`,
+        `https://ptaupsom.com/4/7514550`,
+        `https://ptaiptistie.com/4/7748641`,
+        `https://staglecme.com/4/7748642`
+    ]
 
     try {
         await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } })
-        res.redirect(prop)
+        let randomIndex = Math.floor(Math.random() * props.length);
+        res.redirect(props[randomIndex])
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
             bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
