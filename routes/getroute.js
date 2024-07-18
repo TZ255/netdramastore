@@ -182,7 +182,17 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         `https://jouwheeboati.com/4/7736114`,
         `https://ptaupsom.com/4/7514550`,
         `https://ptaiptistie.com/4/7748641`,
-        `https://staglecme.com/4/7748642`
+        `https://staglecme.com/4/7748642`,
+        `https://potsaglu.net/4/7748641`,
+        `https://ptaixout.net/4/7748642`,
+        `https://whulsaux.com/4/7514550`,
+        `https://gleemahortus.com/4/7736114`,
+        `https://mauhouphoa.com/4/4184987`,
+        `https://laicoomaumoo.net/4/6141068`,
+        `https://saicewheefe.net/4/5344594`,
+        `https://psauwaun.com/4/7748641`,
+        `https://ptugnins.net/4/3311028`,
+        `https://noakiglo.com/4/3311014`
     ]
 
     try {
