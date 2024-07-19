@@ -4,8 +4,8 @@ const blogModel = require('../models/postmodel')
 const router = express.Router()
 
 // TELEGRAM
-const { Telegraf } = require('telegraf')
-const bot = new Telegraf(process.env.BOT_TOKEN)
+const { Bot } = require('grammy')
+const bot = new Bot(process.env.BOT_TOKEN)
 
 // TELEGRAPH
 const telegraph = require('telegraph-node')

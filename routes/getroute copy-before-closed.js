@@ -18,9 +18,9 @@ const timeAgo = new TimeAgo('en-US')
 const axios = require('axios').default
 
 // TELEGRAM
-const { Telegraf } = require('telegraf')
-const bot = new Telegraf(process.env.BOT_TOKEN)
-const boosterBot = new Telegraf(process.env.OH_BOT2)
+const { Bot } = require('grammy')
+const bot = new Bot(process.env.BOT_TOKEN)
+const boosterBot = new Bot(process.env.OH_BOT2)
 
 // TELEGRAPH
 const telegraph = require('telegraph-node')
@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
     } catch (err) {
         console.log(err)
         res.send('Internal Error, try again later')
-        bot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
+        bot.api.sendMessage(process.env.TG_SHEMDOE, err.message)
     }
 })
 
@@ -49,13 +49,13 @@ router.get('/', async (req, res) => {
 function errorDisplay(error, userId, multiBot) {
     if (error.message) {
         console.log(error.message)
-        multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `${error.message} for user with ${userId}`)
+        multibot.api.sendMessage(process.env.TG_SHEMDOE, `${error.message} for user with ${userId}`)
     }
     if (error.description) {
         console.log(error.description)
-        multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `${error.description} for user with ${userId}`)
+        multibot.api.sendMessage(process.env.TG_SHEMDOE, `${error.description} for user with ${userId}`)
     } else {
-        multiBot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
+        multibot.api.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
     }
 }
 
@@ -83,7 +83,7 @@ router.get(['/user/:id/boost', '/user/:id/boost/:ignore'], async (req, res) => {
     } catch (err) {
         console.log(err)
         res.send(`<h2>Error:</h2> ${err.message}`)
-        bot.telegram.sendMessage(process.env.TG_SHEMDOE, err.message)
+        bot.api.sendMessage(process.env.TG_SHEMDOE, err.message)
     }
 })
 
@@ -92,14 +92,14 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
     try {
         let botuser = await botUsersModel.findOneAndUpdate({ userId }, { $inc: { points: 1 } }, { new: true })
         res.send(botuser)
-        bot.telegram.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
+        bot.api.sendMessage(userId, `+1 more point added... you've <b>${botuser.points} points</b>`, { parse_mode: 'HTML' })
             .catch((err) => {
                 errorDisplay(err, userId, bot)
             })
     } catch (err) {
         console.log(err)
         res.status(400).send(`<h2>Error: Couldn't add point, try again later</h2>`)
-        bot.telegram.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}`)
+        bot.api.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}`)
     }
 })
 
@@ -384,7 +384,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         res.redirect(prop)
         let epinfo = await episodeModel.findById(_id)
         setTimeout(() => {
-            bot.telegram.copyMessage(userId, dbChannel, epinfo.epid)
+            bot.api.copyMessage(userId, dbChannel, epinfo.epid)
                 .catch(e => console.log(e.message))
         }, 10000)
     } catch (err) {

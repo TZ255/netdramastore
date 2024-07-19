@@ -9,8 +9,8 @@ const elimit = require('express-rate-limit')
 const app = express()
 
 // TELEGRAM
-const { Telegraf } = require('telegraf')
-const Tbot = new Telegraf(process.env.BOT_TOKEN)
+const { Bot } = require('grammy')
+const Tbot = new Bot(process.env.BOT_TOKEN)
 const { Bot1Function } = require('./bots/1bot/bot')
 
 // TELEGRAPH
@@ -24,7 +24,7 @@ mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-sha
         console.log('✅ Connected to database')
     }).catch((err) => {
         console.log(err)
-        Tbot.telegram.sendMessage(741815228, err.message)
+        Tbot.api.sendMessage(741815228, err.message)
     })
 
 // MIDDLEWARES
