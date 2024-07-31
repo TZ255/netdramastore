@@ -209,7 +209,7 @@ router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res) => {
 
 router.get('/shemdoe/req/top-100', async (req, res) => {
     try {
-        // Fetch data from MongoDB using Mongoose
+        // Fetch data from MongoDB
         const temp = await botUsersModel.find()
             .limit(100).sort('-downloaded')
             .select('fname points downloaded updatedAt userId');
