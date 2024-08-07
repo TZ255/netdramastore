@@ -172,12 +172,19 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
     let userId = req.params.userid
     let dbChannel = -1001239425048
     let shemdoe = 741815228
+
+    //on dramastore zone. high cpm links
     let props = [
-        `https://thuthoock.net/4/7514550`,
-        `https://thomtubsaro.com/4/7514550`,
-        `https://eptougry.net/4/7514550`,
-        `https://whoursie.com/4/7514550`,
-        `https://oudsutch.com/4/7514550`
+        `https://choadecixa.net/4/7852411`,
+        `https://ptaiceckir.net/4/7852411`,
+        `https://fatchaiwhicy.net/4/7852411`,
+        `https://oglaipsa.com/4/7852411`,
+        `https://dustaitch.com/4/7852411`,
+        `https://stotseepta.com/4/7852411`,
+        `https://oastoarsooso.com/4/7852411`,
+        `https://waubibubaiz.com/4/7852411`,
+        `https://hoopsaule.com/4/7852411`,
+        `https://weeshicaise.com/4/7852411`
     ]
 
     try {
