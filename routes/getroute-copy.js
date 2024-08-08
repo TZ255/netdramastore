@@ -49,13 +49,13 @@ router.get('/', async (req, res) => {
 function errorDisplay(error, userId, multiBot) {
     if (error.message) {
         console.log(error.message)
-        multibot.api.sendMessage(process.env.TG_SHEMDOE, `${error.message} for user with ${userId}`)
+        bot.api.sendMessage(process.env.TG_SHEMDOE, `${error.message} for user with ${userId}`)
     }
     if (error.description) {
         console.log(error.description)
-        multibot.api.sendMessage(process.env.TG_SHEMDOE, `${error.description} for user with ${userId}`)
+        bot.api.sendMessage(process.env.TG_SHEMDOE, `${error.description} for user with ${userId}`)
     } else {
-        multibot.api.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
+        bot.api.sendMessage(process.env.TG_SHEMDOE, `Error in adding points for ${userId}, critical check logs`)
     }
 }
 
