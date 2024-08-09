@@ -29,8 +29,7 @@ const Bot1Function = async (app) => {
 
     bot.command('mama', async ctx => {
         try {
-            await ctx.reply('Starting resolving')
-            await new Promise(resolve => setTimeout(resolve, 50000))
+            let mm = await ctx.reply('Mimi sio mama yako')
         } catch (error) {
             console.error(error.message, error)
         }
@@ -42,8 +41,6 @@ const Bot1Function = async (app) => {
         })
             .then(() => bot.api.sendMessage(741815228, 'hook settled'))
             .catch(e => console.log(e.message))
-    } else {
-        bot.start()
     }
 }
 
