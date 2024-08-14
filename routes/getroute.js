@@ -187,13 +187,10 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         `https://weeshicaise.com/4/7852411`
     ]
 
-    let cpaGrip = `https://getfilessnow.com/1599712`
-
     try {
         await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } })
-        //let randomIndex = Math.floor(Math.random() * props.length);
-        //res.redirect(props[randomIndex])
-        res.redirect(cpaGrip)
+        let randomIndex = Math.floor(Math.random() * props.length);
+        res.redirect(props[randomIndex])
         let epinfo = await episodeModel.findById(_id)
         let under_ep_file_link = `https://t.me/+jvPuUGDq-IM1Zjc0`
         setTimeout(() => {
