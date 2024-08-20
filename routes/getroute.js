@@ -103,6 +103,42 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
     }
 })
 
+router.get('/list/all', async (req, res) => {
+    try {
+        let dramas = await homeModel.find().sort('-year').sort('dramaName').select('dramaName episodesUrl')
+        let allDrama = []
+
+        dramas.forEach(drama => {
+            let path = drama.episodesUrl
+            if (!path.includes('joinchat')) {
+                path = `/open/${drama.episodesUrl}`
+            }
+            allDrama.push({name: drama.dramaName, path})
+        })
+
+        res.render('searchpage/searchpage', { allDrama })
+
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
+router.get('/open/:id', async (req, res) => {
+    try {
+        let drama = await newDramaModel.findOne({id: req.params.id})
+        let chan = drama.tgChannel
+        if (chan.startsWith('tg://')) {
+            let chan_path = chan.split('?invite=')[1]
+            chan = `https://t.me/+${chan_path}`
+        }
+        res.redirect(chan)
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
 router.get('/:id', async (req, res, next) => {
     try {
         const id = req.params.id
