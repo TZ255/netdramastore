@@ -105,7 +105,7 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
 
 router.get('/list/all', async (req, res) => {
     try {
-        let dramas = await homeModel.find().sort('-year').sort('dramaName').select('dramaName episodesUrl')
+        let dramas = await homeModel.find().sort('dramaName').select('dramaName episodesUrl')
         let allDrama = []
 
         dramas.forEach(drama => {
