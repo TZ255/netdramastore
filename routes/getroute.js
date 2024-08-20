@@ -126,7 +126,9 @@ router.get('/list/all', async (req, res) => {
 
 router.get('/open/:id', async (req, res) => {
     try {
-        let drama = await newDramaModel.findOne({id: req.params.id})
+        //update drama downloads
+        let drama = await newDramaModel.findOneAndUpdate({ id: req.params.id }, { $inc: { timesLoaded: 100, thisMonth: 97, thisWeek: 97, today: 97 } }, { new: true })
+
         let chan = drama.tgChannel
         if (chan.startsWith('tg://')) {
             let chan_path = chan.split('?invite=')[1]
