@@ -34,7 +34,7 @@
         </div>
         <ul class="list-group">
             <% popular.forEach(drama=> { %>
-            <a href="/<%= drama._id %>" class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/<%= drama.id %>" class="list-group-item d-flex justify-content-between align-items-center">
                 <%= drama.newDramaName %>
                 <span class="badge bg-primary rounded-pill"><i class="fa-solid fa-download"></i>
                     <%= drama.thisMonth %>
@@ -49,7 +49,7 @@
         <div class="drama-cont">
             <div class="drama">
                 <% latest.forEach(drama=> { %>
-                <a class="img" href="/<%= drama._id %>">
+                <a class="img" href="/<%= drama.id %>">
                     <img src="<%= drama.imageUrl %>" alt="<%= drama.dramaName %> ">
                     <h3>
                         <%= drama.dramaName %>

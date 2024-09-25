@@ -45,6 +45,31 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const id = req.params.id
+
+        if (id.startsWith('list-of')) {
+            next()
+        }
+
+        else {
+            const drama = await newDramaModel.findOneAndUpdate({ id }, { $inc: { timesLoaded: 100, thisMonth: 97, thisWeek: 97, today: 97 } }, { new: true })
+            const popular = await newDramaModel.find().sort('-timesLoaded').limit(50)
+
+            if (!drama) {
+                res.send('The drama you try to access is not available, Request it from Drama Store Admin (Telegram @shemdoe)')
+            }
+            else {
+                res.render('subpage/subpage', { drama, popular })
+            }
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
 //only for telegram
 function errorDisplay(error, userId, multiBot) {
     if (error.message) {
@@ -103,7 +128,7 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
     }
 })
 
-router.get('/list/all', async (req, res) => {
+router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
     try {
         let dramas = await homeModel.find().sort('dramaName').select('dramaName episodesUrl')
         let allDrama = []
@@ -141,16 +166,16 @@ router.get('/open/:id', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
-    try {
-        const id = req.params.id
-        res.render('maintenance')
-    } catch (err) {
-        console.log(err)
-        res.status(400).send(`${err.message}\n`)
-    }
+// router.get('/:id', async (req, res, next) => {
+//     try {
+//         const id = req.params.id
+//         res.render('maintenance')
+//     } catch (err) {
+//         console.log(err)
+//         res.status(400).send(`${err.message}\n`)
+//     }
 
-})
+// })
 
 //new episode req by paths
 router.get('/download/episode/:_id/:userid', async (req, res) => {
