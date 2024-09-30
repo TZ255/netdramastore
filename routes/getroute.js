@@ -201,7 +201,7 @@ router.get('/open/:id', async (req, res) => {
         let chan = drama.tgChannel
         if (chan.startsWith('tg://')) {
             let chan_path = chan.split('?invite=')[1]
-            chan = `https://t.me/+${chan_path}`
+            chan = `https://telegram.dog/+${chan_path}`
         }
         res.redirect(chan)
     } catch (err) {
@@ -315,7 +315,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
 router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res) => {
     try {
         let ep_id = req.params.ep_id
-        res.redirect(`http://telegram.me/dramastorebot?start=marikiID-${ep_id}`)
+        res.redirect(`http://telegram.dog/dramastorebot?start=marikiID-${ep_id}`)
     } catch (error) {
         console.log(error.message)
     }
