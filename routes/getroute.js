@@ -35,9 +35,10 @@ router.get('/', async (req, res) => {
     try {
         const latest = await homeModel.find().sort('-year').sort('-createdAt').limit(16)
         const popular = await newDramaModel.find().sort('-thisMonth').limit(25)
+        const latest_episodes = await episodeModel.find().sort('-createdAt').limit(25)
 
 
-        res.render('home/home', { latest, popular })
+        res.render('home/home', { latest, popular, latest_episodes })
     } catch (err) {
         console.log(err)
         res.send('Internal Error, try again later')
