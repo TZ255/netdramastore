@@ -138,11 +138,54 @@ router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
             if (!path.includes('joinchat')) {
                 path = `/open/${drama.episodesUrl}`
             }
-            allDrama.push({name: drama.dramaName, path})
+            allDrama.push({ name: drama.dramaName, path })
         })
 
         res.render('searchpage/searchpage', { allDrama })
 
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
+router.get(['/new/episodes', '/new/episodes/0'], async (req, res) => {
+    try {
+        let episodes = await episodeModel.find().sort('-createdAt').limit(100).select('_id drama_name size epno epid, drama_chan_id updatedAt')
+
+        let total = episodes.length
+        let page = { next: 1, prev: -1 }
+
+        res.render('updated-eps/update', { episodes, page })
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
+router.get(['/new/episodes/:page_no'], async (req, res) => {
+    try {
+        let page_no = Number(req.params.page_no)
+        let episodes = await episodeModel.find().skip(page_no * 100).sort('-createdAt').limit(100).select('_id drama_name size epno epid, drama_chan_id updatedAt')
+
+        if (episodes.length > 0 && page_no >= 0) {
+            let page = { next: page_no + 1, prev: page_no - 1 }
+
+            res.render('updated-eps/update', { episodes, page })
+        } else {
+            res.send('No any other episodes was found')
+        }
+
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
+    }
+})
+
+router.get('/op/drama/:chanid', async (req, res) => {
+    try {
+        let drama = await newDramaModel.findOne({ chan_id: Number(req.params.chanid) })
+        res.redirect(`/open/${drama.id}`)
     } catch (err) {
         console.log(err)
         res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
@@ -259,7 +302,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         setTimeout(() => {
             bot.api.copyMessage(userId, dbChannel, epinfo.epid, {
                 reply_markup: {
-                    inline_keyboard: [[{text: `🔥 JOIN | DRAMASTORE 🔥`, url: under_ep_file_link}]]
+                    inline_keyboard: [[{ text: `🔥 JOIN | DRAMASTORE 🔥`, url: under_ep_file_link }]]
                 }
             }).catch(e => console.log(e.message))
         }, 10000)

@@ -12,7 +12,8 @@
           <li class="nav-item">
             <b class="navbold" onclick="opening('join')">Join Us Telegram</b> <br>
             <b class="navbold" onclick="opening('admin')">Contact Admin</b> <br>
-            <b class="navbold" onclick="(opening('all'))">All Drama</b>
+            <b class="navbold" onclick="(opening('all'))">All Drama</b> <br>
+            <b class="navbold" onclick="opening('new')">New Uploaded Episodes</b> <br>
           </li>
         </ul>
         <form class="d-flex">
@@ -32,6 +33,9 @@
       }
       else if (e == 'all') {
         window.open('/list/all', '_self')
+      }
+      else if (e == 'new') {
+        window.open('/new/episodes', '_self')
       }
     }
   </script>
