@@ -116,6 +116,31 @@
         </span>
     </div>
     <br>
+    <% if (episodes.length > 0) { %>
+    <div class="episodesTele">
+        <h3 style="font-size: 16px; color: white; padding-left: 6px;"><%= drama.newDramaName %> Telegram Episodes</h3>
+        <h6 style="font-size: 8px; color: white; padding-left: 6px;">* Note: You can download full drama by clicking the <b style="color: green;">"JOIN THE CHANNEL"</b> button above</h6>
+        <div class="alls">
+            <ul class="list-group">
+                <% episodes.forEach(ep=> { %>
+                <li class="list-group-item epi-list">
+                    <span class="b-sp date">
+                        Updated On <%= new Date(ep.updatedAt).toLocaleString() %>
+                    </span>
+                    <span class="b-sp title">
+                        Episode <%= String(ep.epno).padStart(2, '0') %>
+                    </span>
+                    <div class="downloads">
+                        <button class="b-sp" onclick="window.open('/download/episode/option2/<%= ep._id %>/shemdoe')">
+                            Download on Telegram <i class="fa-brands fa-telegram"></i>
+                        </button>
+                    </div>
+                </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+    <% } %>
     <br>
     <div class="most">
         <div class="header">
