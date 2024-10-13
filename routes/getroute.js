@@ -19,7 +19,9 @@ const axios = require('axios').default
 
 // TELEGRAM
 const { Bot } = require('grammy')
-const bot = new Bot(process.env.BOT_TOKEN)
+const bot = new Bot(process.env.BOT_TOKEN, {
+    client: {apiRoot: process.env.API_ROOT}
+})
 const boosterBot = new Bot(process.env.OH_BOT2)
 
 // TELEGRAPH

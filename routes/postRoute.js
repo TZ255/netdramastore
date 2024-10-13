@@ -5,7 +5,9 @@ const router = express.Router()
 
 // TELEGRAM
 const { Bot } = require('grammy')
-const bot = new Bot(process.env.BOT_TOKEN)
+const bot = new Bot(process.env.BOT_TOKEN, {
+    client: {apiRoot: process.env.API_ROOT}
+})
 
 // TELEGRAPH
 const telegraph = require('telegraph-node')
