@@ -304,11 +304,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         let epinfo = await episodeModel.findById(_id)
         let under_ep_file_link = `https://t.me/+jvPuUGDq-IM1Zjc0`
         setTimeout(() => {
-            bot.api.copyMessage(userId, dbChannel, epinfo.epid, {
-                reply_markup: {
-                    inline_keyboard: [[{ text: `🔥 JOIN | DRAMASTORE 🔥`, url: under_ep_file_link }]]
-                }
-            }).catch(e => console.log(e.message))
+            bot.api.copyMessage(userId, dbChannel, epinfo.epid).catch(e => console.log(e.message))
         }, 10000)
     } catch (err) {
         console.log(err.message, err)
