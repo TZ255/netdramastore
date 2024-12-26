@@ -155,7 +155,7 @@ router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
 
 router.get(['/new/episodes', '/new/episodes/0'], async (req, res) => {
     try {
-        let episodes = await episodeModel.find().sort('-createdAt').limit(100).select('_id drama_name size epno epid, drama_chan_id updatedAt')
+        let episodes = await episodeModel.find().sort('-createdAt').limit(100).select('_id drama_name size epno epid drama_chan_id updatedAt quality')
 
         let total = episodes.length
         let page = { next: 1, prev: -1 }
@@ -170,7 +170,7 @@ router.get(['/new/episodes', '/new/episodes/0'], async (req, res) => {
 router.get(['/new/episodes/:page_no'], async (req, res) => {
     try {
         let page_no = Number(req.params.page_no)
-        let episodes = await episodeModel.find().skip(page_no * 100).sort('-createdAt').limit(100).select('_id drama_name size epno epid, drama_chan_id updatedAt')
+        let episodes = await episodeModel.find().skip(page_no * 100).sort('-createdAt').limit(100).select('_id drama_name size epno epid drama_chan_id updatedAt quality')
 
         if (episodes.length > 0 && page_no >= 0) {
             let page = { next: page_no + 1, prev: page_no - 1 }
@@ -363,16 +363,6 @@ router.get('/ebook/free/download/:book', async (req, res) => {
 
     } catch (err) {
         console.log(err.message, err)
-    }
-})
-
-router.get('/mama/mama/mama', async (req, res) => {
-    try {
-        await episodeModel.updateMany({}, {$set: {quality: '540p'}})
-        res.send('Done')
-    } catch (error) {
-        console.log(error)
-        res.send(error.message)
     }
 })
 

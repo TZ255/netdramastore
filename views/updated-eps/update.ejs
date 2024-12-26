@@ -40,7 +40,7 @@
                 </span>
                 <span class="b-sp title">
                     Episode <%= String(ep.epno).padStart(2, '0') %> - <%= ep.drama_name %> <br>
-                    Quality: <%= ep?.quality %>
+                    <span class="text-muted">Quality: <%= ep?.quality %></span>
                 </span>
                 <div class="downloads">
                     <button class="b-sp" onclick="window.open('/download/episode/option2/<%= ep._id %>/shemdoe')">
