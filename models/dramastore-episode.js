@@ -9,6 +9,7 @@ const newEpisodeSchema = new Schema(
     drama_name: {type: String},
     drama_chan_id: {type: Number},
     poll_msg_id: {type: Number},
+    quality: {type: String, default: '540p'}
   },
   { timestamps: true, strict: false }
 );

@@ -128,7 +128,7 @@
                         Updated On <%= new Date(ep.updatedAt).toLocaleString() %>
                     </span>
                     <span class="b-sp title">
-                        Episode <%= String(ep.epno).padStart(2, '0') %>
+                        Episode <%= String(ep.epno).padStart(2, '0') %> | Quality: <%= ep?.quality %>
                     </span>
                     <div class="downloads">
                         <button class="b-sp" onclick="window.open('/download/episode/option2/<%= ep._id %>/shemdoe')">

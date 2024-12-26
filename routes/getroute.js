@@ -366,6 +366,16 @@ router.get('/ebook/free/download/:book', async (req, res) => {
     }
 })
 
+router.get('/mama/mama/mama', async (req, res) => {
+    try {
+        await episodeModel.updateMany({}, {$set: {quality: '540p'}})
+        res.send('Done')
+    } catch (error) {
+        console.log(error)
+        res.send(error.message)
+    }
+})
+
 router.all('*', (req, res) => {
     res.sendStatus(404)
 })
