@@ -35,7 +35,7 @@
         <ul class="list-group">
             <% latest_episodes.forEach(ep=> { %>
             <a href="/new/episodes" class="list-group-item d-flex justify-content-between align-items-center text-muted">
-                Episode <%= String(ep.epno).padStart(2, '0') %> (<%= ep?.quality %>) - <%= ep.drama_name %>
+                Episode <%= String(ep.epno).padStart(2, '0') - <%= ep.drama_name %>
             </a>
             <% }) %>
         </ul>
@@ -85,6 +85,20 @@
     </section>
     <div class="yracc" onclick="window.open('/list/all', '_self')">
         <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading2025">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapse2025" aria-expanded="false" aria-controls="flush-collapse2025">
+                        📺 2025 Drama (A-Z)
+                    </button>
+                </h2>
+                <div id="flush-collapse2025" class="accordion-collapse collapse" aria-labelledby="flush-heading2025"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <h4>Loading...</h4>
+                    </div>
+                </div>
+            </div>
             <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-heading2024">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
