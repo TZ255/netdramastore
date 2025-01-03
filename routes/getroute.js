@@ -58,13 +58,12 @@ router.get('/:id', async (req, res, next) => {
             const drama = await newDramaModel.findOneAndUpdate({ id }, { $inc: { timesLoaded: 100, thisMonth: 97, thisWeek: 97, today: 97 } }, { new: true })
             const popular = await newDramaModel.find().sort('-timesLoaded').limit(50)
 
-            //find episodes
-            let episodes = await episodeModel.find({drama_name: drama.newDramaName}).sort('epno')
-
             if (!drama) {
                 res.send('The drama you try to access is not available, Request it from Drama Store Admin (Telegram @shemdoe)')
             }
             else {
+                //find episodes
+                let episodes = await episodeModel.find({ drama_name: drama.newDramaName }).sort('epno')
                 res.render('subpage/subpage', { drama, popular, episodes })
             }
         }
