@@ -32,7 +32,7 @@ const router = express.Router()
 //send success (no content) response to browser
 router.get('/favicon.ico', (req, res) => res.status(204).end());
 
-router.get('/', blockReq, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const latest = await homeModel.find().sort('-year').sort('-createdAt').limit(16)
         const popular = await newDramaModel.find().sort('-thisMonth').limit(25)
@@ -47,7 +47,7 @@ router.get('/', blockReq, async (req, res) => {
     }
 })
 
-router.get('/:id', blockReq, async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
     try {
         const id = req.params.id
 
