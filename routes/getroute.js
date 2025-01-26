@@ -140,7 +140,7 @@ router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
         dramas.forEach(drama => {
             let path = drama.episodesUrl
             if (!path.includes('joinchat') && !path.includes('t.me')) {
-                path = `/open/${drama.episodesUrl}`
+                path = `/${drama.episodesUrl}`
             }
             allDrama.push({ name: drama.dramaName, path })
         })
