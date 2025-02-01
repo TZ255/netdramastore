@@ -325,7 +325,7 @@ router.get('/shemdoe/req/top-100', async (req, res) => {
         // Fetch data from MongoDB
         const temp = await botUsersModel.find()
             .limit(100).sort('-downloaded')
-            .select('fname points downloaded updatedAt userId');
+            .select('fname points downloaded updatedAt for userId');
 
         // Transform the data into the desired format
         const ranks = temp.map(u => ({
