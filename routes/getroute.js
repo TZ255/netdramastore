@@ -366,6 +366,10 @@ router.get('/ebook/free/download/:book', async (req, res) => {
     }
 })
 
+router.get('/post/drama', (req, res)=> {
+    res.render('postdrama')
+})
+
 router.all('*', (req, res) => {
     res.sendStatus(404)
 })

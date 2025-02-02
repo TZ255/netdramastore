@@ -28,7 +28,8 @@
     "grammy": "^1.25.1",
     "javascript-time-ago": "^2.5.9",
     "mongoose": "^6.2.7",
-    "nodemon": "^2.0.15",
+    "nanoid": "^3.3.4",
+    "nodemon": "^3.1.9",
     "telegraf": "^4.7.0",
     "telegraph-node": "^1.0.4"
   },
