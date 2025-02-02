@@ -32,7 +32,7 @@ const router = express.Router()
 //send success (no content) response to browser
 router.get('/favicon.ico', (req, res) => res.status(204).end());
 
-router.get('/', async (req, res) => {
+router.get('/', blockReq, async (req, res) => {
     try {
         const latest = await homeModel.find().sort('-year').sort('-createdAt').limit(16)
         const popular = await newDramaModel.find().sort('-thisMonth').limit(25)
@@ -47,7 +47,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', blockReq, async (req, res, next) => {
     try {
         const id = req.params.id
 
@@ -140,7 +140,7 @@ router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
         dramas.forEach(drama => {
             let path = drama.episodesUrl
             if (!path.includes('joinchat') && !path.includes('t.me')) {
-                path = `/${drama.episodesUrl}`
+                path = `/open/${drama.episodesUrl}`
             }
             allDrama.push({ name: drama.dramaName, path })
         })

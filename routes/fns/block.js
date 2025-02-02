@@ -1,5 +1,5 @@
 const blockReq = (req, res) => {
-    return res.render('maintenance.ejs')
+    return res.status(404).render('maintenance.ejs')
 }
 
 module.exports = blockReq
