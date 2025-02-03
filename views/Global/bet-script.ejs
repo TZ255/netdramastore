@@ -1,0 +1,17 @@
+<script>
+    function openAff(brand) {
+        let links = {
+            india: 'https://grwptraq.com/?serial=61313634&creative_id=4491',
+            betway: 'https://www.betway.com.gh/jackpots/?btag=P94949-PR37768-CM109174-TS1971458&',
+            bwinner: 'https://bw-prm.com/carlos-bonus/?p=%2Fregistration%2F&lang=en&id=29lf'
+        }
+
+        let promo_url = links[brand] || links['bwinner'];
+        window.open(promo_url, '_blank', 'noopener,noreferrer');
+    }
+
+    //betmodal
+    setTimeout(() => {
+        new bootstrap.Modal(document.getElementById('bet_ad_modal')).show();
+    }, 3000);
+</script>

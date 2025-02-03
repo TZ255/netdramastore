@@ -25,6 +25,8 @@ const boosterBot = new Bot(process.env.OH_BOT2)
 // TELEGRAPH
 const telegraph = require('telegraph-node')
 const blockReq = require('./fns/block')
+const getUserLocation = require('./fns/userIp')
+const detectBettingSites = require('./fns/detect-betting')
 const ph = new telegraph()
 
 const router = express.Router()
@@ -44,6 +46,27 @@ router.get('/', blockReq, async (req, res) => {
         console.log(err)
         res.send('Internal Error, try again later')
         bot.api.sendMessage(process.env.TG_SHEMDOE, err.message)
+    }
+})
+
+router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
+    try {
+        let dramas = await homeModel.find().sort('dramaName').select('dramaName episodesUrl')
+        let allDrama = []
+
+        dramas.forEach(drama => {
+            let path = drama.episodesUrl
+            if (!path.includes('joinchat') && !path.includes('t.me')) {
+                path = `/open/${drama.episodesUrl}`
+            }
+            allDrama.push({ name: drama.dramaName, path })
+        })
+
+        res.render('searchpage/searchpage', { allDrama })
+
+    } catch (err) {
+        console.log(err)
+        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
     }
 })
 
@@ -132,27 +155,6 @@ router.get('/dramastore-add-points/user/:id', async (req, res) => {
     }
 })
 
-router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
-    try {
-        let dramas = await homeModel.find().sort('dramaName').select('dramaName episodesUrl')
-        let allDrama = []
-
-        dramas.forEach(drama => {
-            let path = drama.episodesUrl
-            if (!path.includes('joinchat') && !path.includes('t.me')) {
-                path = `/open/${drama.episodesUrl}`
-            }
-            allDrama.push({ name: drama.dramaName, path })
-        })
-
-        res.render('searchpage/searchpage', { allDrama })
-
-    } catch (err) {
-        console.log(err)
-        res.status(400).send(`${err.message}\n<h2>Error: Couldn't load the resources, try agin later</h2>`)
-    }
-})
-
 router.get(['/new/episodes', '/new/episodes/0'], async (req, res) => {
     try {
         let episodes = await episodeModel.find().sort('-createdAt').limit(100).select('_id drama_name size epno epid drama_chan_id updatedAt quality')
@@ -231,7 +233,6 @@ router.get('/download/episode/:_id/:userid', async (req, res) => {
         const userId = req.params.userid
         //const myip = req.ip
         const userIp = req?.clientIp
-        console.log(userIp)
 
         let episode = await episodeModel.findById(ep_id)
         let the_user = await botUsersModel.findOne({ userId })
@@ -272,7 +273,22 @@ router.get('/download/episode', async (req, res) => {
             last: timeAgo.format(new Date(the_user.updatedAt))
         }
 
-        res.render('episode-view/episode', { episode, user })
+        //check ip for ads
+        let bet_ad_code = '404'
+        let userip = req?.clientIp
+        let ip_data = await getUserLocation(userip)
+
+        if(ip_data?.status === "success") {
+            bet_ad_code = detectBettingSites(ip_data.c_code)
+
+            //update user data
+            the_user.country = {name: ip_data.country, c_code: ip_data.c_code}
+            the_user.save().catch(e => console.log(e.message))
+        } else {
+            console.log(ip_data)
+        }
+
+        res.render('episode-view/episode', { episode, user, bet_ad_code })
     } catch (err) {
         console.log(err.message)
         res.status(404).send(`You followed an incorrect url. Please ensure you clicked a button sent to you by dramastore bot<br></br>If this error persist contact dramastore admin @shemdoe`)
