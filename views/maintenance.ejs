@@ -2,18 +2,56 @@
 <html lang="en">
 
 <head>
+    <!-- Vignette Ads -->
+    <%- include('./Global/ads/vignette.ejs'); %>
+    <!-- Google Tag -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAMA STORE - Welcome</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
-        integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Maintenance</title>
+          integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
-        div {
-            width: 80%;
-            margin: 32px auto;
+        /* --- Global Styles --- */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
         }
 
+        main {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- Hero (First Viewport) --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+            padding: 2rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e90ff;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        /* --- Join Us Button --- */
         .joinus {
             background-color: #1e90ff;
             color: white;
@@ -21,6 +59,7 @@
             padding: 18px 4px;
             margin: 16px auto;
             width: 90%;
+            max-width: 300px;
             text-align: center;
             font-weight: bold;
             cursor: pointer;
@@ -33,29 +72,99 @@
 
         .joinus:hover,
         .joinus:active {
-            background-color: black;
+            background-color: #f5f5f5;
+            border: 2px solid #1e90ff;
+            color: #333;
+        }
+
+        /* --- Article Section --- */
+        .content-article {
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .content-article h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #1e90ff;
+        }
+
+        .content-article p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            max-width: 800px;
+        }
+
+        .content-article p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .content-article h2 {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div>
-        <h3>Website is in maintenance. We will be back soon...</h3>
-        <p>
-            We're currently performing updates to improve your experience. Our website will be back online shortly!
-            <br><br>
-            We apologize for any inconvenience this may cause and appreciate your patience. In the meantime, feel free
-            to <b style="color: #1e90ff;" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">join our Telegram channel</b> below for the latest updates and support.
-            <br><br>
-            Thank you for your understanding! 🙇‍♂️
-        </p>
-        <div class="joinus" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">
-            <i class="fa-brands fa-telegram"></i> JOIN US ON TELEGRAM <br>
-            <sup>Download new korean series on Telegram</sup>
-        </div>
-    </div>
+    <main>
+        <!-- Hero Section / First Viewport -->
+        <section class="hero">
+            <h1>Welcome to DRAMA STORE</h1>
+            <p>
+                Discover the latest and greatest Korean dramas. 
+                Join our Telegram channel to download your favorite episodes for free!
+            </p>
+            <div class="joinus" onclick="window.open('tg://join?invite=mTx_t-6TBx9hNTc8', '_self')">
+                <i class="fa-brands fa-telegram"></i> JOIN US ON TELEGRAM <br>
+                <sup>Download new Korean series on Telegram</sup>
+            </div>
+        </section>
 
-    <%- include('./Global/ads/vignette.ejs'); %>
+        <!-- Article Section -->
+        <section class="content-article" style="margin-left: auto; margin-right: auto;">
+            <h2>The Beauty of Korean Dramas</h2>
+            <p>
+                Korean dramas (K-Dramas) have taken the world by storm for their unique blend of romance, 
+                emotion, and immersive storytelling. Each series brings a fresh perspective, whether it’s 
+                a light-hearted comedy set in Seoul, a historical romance in the Joseon era, or a thrilling
+                crime investigation.
+            </p>
+            <p>
+                What truly sets K-Dramas apart is the cultural richness they offer. Viewers get a taste of 
+                Korean customs, language, food, and family values woven seamlessly into each storyline.
+                This cultural flair, combined with high production quality and well-crafted plots, makes 
+                for an experience that keeps fans coming back for more.
+            </p>
+            <p>
+                From heartwarming dramas that explore deep personal connections, to action-packed series 
+                that keep you on the edge of your seat, the world of K-Dramas is vast and inviting. 
+                At DRAMA STORE, we are committed to bringing you these stories right at your fingertips 
+                through our Telegram channel, ensuring you never miss an episode of your favorite show.
+            </p>
+            <p>
+                So sit back, relax, and let these stories transport you to another world. 
+                Happy watching and we hope you enjoy your stay at DRAMA STORE!
+            </p>
+            <br>
+            <h2>New Released Episodes</h2>
+            <ul style="list-style: circle; color: #444;">
+                <% latest_episodes.forEach(ep => { %>
+                 <li>Episode <%= String(ep.epno).padStart(2, '0') %> - <%= ep.drama_name %></li>
+                <% }) %>
+            </ul>
+            <br><br>
+            <h2>Most Trending Dramas This Month in DRAMA STORE</h2>
+            <ul style="list-style: circle; color: #444;">
+                <% popular.forEach(drama => { %>
+                 <li><%= drama.newDramaName %></li>
+                <% }) %>
+            </ul>
+        </section>
+    </main>
 </body>
-
 </html>
