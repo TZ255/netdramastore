@@ -3,6 +3,9 @@ const newDramaModel = require('../../models/vue-new-drama')
 
 const blockReq = async (req, res) => {
     try {
+        //const myip = req.ip
+        const userIp = req?.clientIp
+        console.log(userIp)
         const latest_episodes = await episodeModel.find().sort('-createdAt').limit(25)
         const popular = await newDramaModel.find().sort('-thisMonth').limit(25)
         return res.status(200).render('maintenance.ejs', { popular, latest_episodes })

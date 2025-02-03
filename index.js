@@ -6,6 +6,7 @@ const getRouterCopy = require('./routes/getroute-copy')
 const postRouter = require('./routes/postRoute')
 const cors = require('cors')
 const elimit = require('express-rate-limit')
+const requestIp = require('request-ip');
 
 const app = express()
 
@@ -37,9 +38,10 @@ app.use(express.static(__dirname + '/public'))
 Bot1Function(app).catch(e => console.log(e))
 app.use(cors())
 app.set('trust proxy', true) //our app is hosted on server using proxy to pass user request
+app.use(requestIp.mw());
 
 const limiter = elimit({
-    keyGenerator: (req, res) => req.ip, //distinguish users based on ip
+    keyGenerator: (req, res) => req.clientIp, //distinguish users based on ip
     windowMs: 60 * 1000, // 1 minute
     max: 15, // Limit each IP to 5 requests per `window` (here, per 1 minute)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
