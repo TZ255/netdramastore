@@ -10,7 +10,6 @@ const getUserLocation = async (ip) => {
         // Check for cached data first.
         const cachedData = ipCache.get(ip);
         if (cachedData) {
-            console.log(`User IP data is cached --- ${ip}`);
             return cachedData;
         }
 
