@@ -112,7 +112,7 @@ router.post('/post/drama', async (req, res) => {
                             tag: 'li',
                             children: [
                                 { tag: 'b', children: ['Episodes: '] },
-                                { tag: 'i', children: [output.episodes] },
+                                { tag: 'i', children: [String(output.episodes)] },
                             ],
                         },
                         {
