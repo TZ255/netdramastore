@@ -83,6 +83,8 @@ router.post('/post/drama', async (req, res) => {
             also_known: detailsObj["Also Known As"] || ""
         };
 
+        console.log(output)
+
 
         // Create a Telegraph page with the drama information
         let page = await ph.createPage(
