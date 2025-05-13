@@ -275,18 +275,18 @@ router.get('/download/episode', async (req, res) => {
 
         //check ip for ads
         let bet_ad_code = '404'
-        let userip = req?.clientIp
-        let ip_data = await getUserLocation(userip)
+        // let userip = req?.clientIp
+        // let ip_data = await getUserLocation(userip)
 
-        if(ip_data?.status === "success") {
-            bet_ad_code = detectBettingSites(ip_data.c_code)
+        // if(ip_data?.status === "success") {
+        //     bet_ad_code = detectBettingSites(ip_data.c_code)
 
-            //update user data
-            the_user.country = {name: ip_data.country, c_code: ip_data.c_code}
-            the_user.save().catch(e => console.log(e.message))
-        } else {
-            console.log(ip_data)
-        }
+        //     //update user data
+        //     the_user.country = {name: ip_data.country, c_code: ip_data.c_code}
+        //     the_user.save().catch(e => console.log(e.message))
+        // } else {
+        //     console.log(ip_data)
+        // }
 
         res.render('episode-view/episode', { episode, user, bet_ad_code })
     } catch (err) {
