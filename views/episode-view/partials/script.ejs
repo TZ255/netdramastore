@@ -19,7 +19,7 @@
             mbing = mbing + factor
             prog.innerText = pcnt + '%'
             prog.setAttribute('style', `width: ${pcnt}%;`)
-            counting.innerText = `preparing the episode... ${mbing.toFixed(1)}/${mbs} MB`
+            counting.innerText = `preparing the episode... ${pcnt}%`
 
             if (pcnt == 100) {
                 clearInterval(interval)
