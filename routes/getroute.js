@@ -336,7 +336,7 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         // Build share deep link
         const ep_file_link = `https://dramastore.net/download/episode/option2/${_id}/shemdoe`;
         const text = `📥 Download Episode ${epinfo.epno} of ${epinfo.drama_name}\n${ep_file_link}`;
-        const deep_link = `https://t.me/share/url?url=${encodeURIComponent(ep_file_link)}&text=${encodeURIComponent(text)}`;
+        const deep_link = `https://t.me/share/url?text=${encodeURIComponent(text)}`;
 
         // Send Telegram message after a short delay
         setTimeout(async () => {
