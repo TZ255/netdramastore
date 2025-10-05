@@ -296,13 +296,12 @@ router.get('/download/episode', async (req, res) => {
 })
 
 router.get('/success/send/:_id/:userid', async (req, res) => {
-    let _id = req.params._id
-    let userId = req.params.userid
-    let dbChannel = -1001239425048
-    let shemdoe = 741815228
+    const { _id, userid: userId } = req.params;
+    const dbChannel = -1001239425048;
+    const shemdoe = 741815228;
 
-    //on dramastore zone. high cpm links
-    let props = [
+    // High CPM redirect links
+    const props = [
         `https://choadecixa.net/4/7852411`,
         `https://ptaiceckir.net/4/7852411`,
         `https://fatchaiwhicy.net/4/7852411`,
@@ -313,21 +312,51 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         `https://waubibubaiz.com/4/7852411`,
         `https://hoopsaule.com/4/7852411`,
         `https://weeshicaise.com/4/7852411`
-    ]
+    ];
 
     try {
-        await botUsersModel.findOneAndUpdate({ userId }, { $inc: { downloaded: 1 } })
-        let randomIndex = Math.floor(Math.random() * props.length);
-        res.redirect(props[randomIndex])
-        let epinfo = await episodeModel.findById(_id)
-        let under_ep_file_link = `https://t.me/+jvPuUGDq-IM1Zjc0`
-        setTimeout(() => {
-            bot.api.copyMessage(userId, dbChannel, epinfo.epid).catch(e => console.log(e.message))
-        }, 10000)
+        // Increment user download count
+        await botUsersModel.findOneAndUpdate(
+            { userId },
+            { $inc: { downloaded: 1 } },
+            { upsert: true }
+        );
+
+        // Redirect user immediately
+        const randomIndex = Math.floor(Math.random() * props.length);
+        res.redirect(props[randomIndex]);
+
+        // Fetch episode info
+        const epinfo = await episodeModel.findById(_id);
+        if (!epinfo) {
+            console.warn(`Episode not found: ${_id}`);
+            return;
+        }
+
+        // Build share deep link
+        const ep_file_link = `https://dramastore.net/download/episode/option2/${_id}/shemdoe`;
+        const text = `📥 Download Episode ${epinfo.epno} of ${epinfo.drama_name}\n${ep_file_link}`;
+        const deep_link = `https://t.me/share/url?url=${encodeURIComponent(ep_file_link)}&text=${encodeURIComponent(text)}`;
+
+        // Send Telegram message after a short delay
+        setTimeout(async () => {
+            try {
+                await bot.api.copyMessage(userId, dbChannel, epinfo.epid, {
+                    reply_markup: {
+                        inline_keyboard: [
+                            [{ text: `🔗 Share Episode`, url: deep_link }]
+                        ]
+                    }
+                });
+            } catch (err) {
+                console.error("Error copying message:", err.message);
+            }
+        }, 10000);
     } catch (err) {
-        console.log(err.message, err)
+        console.error("Router error:", err.message);
     }
-})
+});
+
 
 router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res) => {
     try {
@@ -384,7 +413,7 @@ router.get('/ebook/free/download/:book', async (req, res) => {
     }
 })
 
-router.get('/post/drama', (req, res)=> {
+router.get('/post/drama', (req, res) => {
     res.render('postdrama')
 })
 
