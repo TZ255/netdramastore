@@ -26,14 +26,13 @@
     "ejs": "^3.0.2",
     "express": "^4.17.3",
     "express-rate-limit": "^7.1.4",
-    "grammy": "^1.25.1",
+    "grammy": "^1.38.3",
     "javascript-time-ago": "^2.5.9",
     "mongoose": "^6.2.7",
     "nanoid": "^3.3.4",
     "node-cache": "^5.1.2",
     "nodemon": "^3.1.9",
     "request-ip": "^3.3.0",
-    "telegraf": "^4.7.0",
     "telegraph-node": "^1.0.4"
   },
   "devDependencies": {

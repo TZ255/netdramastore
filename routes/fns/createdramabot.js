@@ -1,6 +1,6 @@
 const botListModel = require("../../bots/dramasbot/database/botlist")
 
-const token = '8255756682:AAFM1HmGqdP846t9M_glTqrPaGMhwp8_2bU'
+const token = ''
 const botname = 'TyphoonFamilyKoreaDramaBot'
 const chan_id = -1003116326981
 

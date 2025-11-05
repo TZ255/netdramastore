@@ -6,10 +6,6 @@ const dramasModel = require('../models/vue-new-drama')
 const homeModel = require('../models/vue-home-db')
 const {nanoid} = require('nanoid')
 
-// TELEGRAM
-const { Bot } = require('grammy')
-const bot = new Bot(process.env.BOT_TOKEN)
-
 // TELEGRAPH
 const telegraph = require('telegraph-node')
 const ph = new telegraph()
