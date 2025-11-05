@@ -129,6 +129,7 @@ const handleSetWebhook = async (token, message) => {
             drop_pending_updates: true,
             allowed_updates: ["update_id", "message", "callback_query", "channel_post", "inline_query"]
         })
+        await sendMessage(token, message.chat.id, `Webhook for ${botname} set as ${webhookUrl}`)
     } catch (error) {
         console.error('handleStats error:', error.message)
         await sendMessage(token, message.chat.id, 'Error fetching stats.')
