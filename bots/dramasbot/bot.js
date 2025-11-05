@@ -114,7 +114,7 @@ const handleSetWebhook = async (token, message) => {
         }
 
         let [, botname] = message.text.split(' ').map(item => item.trim())
-        if (!botname || String(botname).toLowerCase().endsWith('bot')) {
+        if (!botname || !String(botname).toLowerCase().endsWith('bot')) {
             return await sendMessage(token, message.chat.id, 'Wrong setwebhook command');
         }
 
