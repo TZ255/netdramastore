@@ -13,6 +13,7 @@ const imp = {
     dstore: -1001245181784,
     airtz1: 1426255234,
     airtz2: 5940671686,
+    elibariki: 8479906894
 }
 
 
