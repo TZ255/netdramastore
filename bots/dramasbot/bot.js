@@ -107,32 +107,32 @@ const handleStats = async (token, message) => {
     }
 }
 
-const handleSetWebhook = async (token, message) => {
+const handleSetWebhook = async (update_token, message) => {
     try {
         if(!Object.values(imp).includes(message.chat.id)) {
-            return await sendMessage(token, message.chat.id, 'Not authorized for this command');
+            return await sendMessage(update_token, message.chat.id, 'Not authorized for this command');
         }
 
         let [, botname] = message.text.split(' ').map(item => item.trim())
         if (!botname || !String(botname).toLowerCase().endsWith('bot')) {
-            return await sendMessage(token, message.chat.id, 'Wrong setwebhook command');
+            return await sendMessage(update_token, message.chat.id, 'Wrong setwebhook command');
         }
 
         const bot = await botListModel.findOne({ botname })
         if (!bot) {
-            return await sendMessage(token, message.chat.id, `No bot found on DB with ${botname}`);
+            return await sendMessage(update_token, message.chat.id, `No bot found on DB with ${botname}`);
         }
 
         const webhookUrl = `https://${process.env.DOMAIN}/telebot/dramastore/${process.env.USER}/${botname}`
-        await axios.post(`https://api.telegram.org/bot${token}/setWebhook`, {
+        await axios.post(`https://api.telegram.org/bot${bot.token}/setWebhook`, {
             url: webhookUrl,
             drop_pending_updates: true,
             allowed_updates: ["update_id", "message", "callback_query", "channel_post", "inline_query"]
         })
-        await sendMessage(token, message.chat.id, `Webhook for ${botname} set as ${webhookUrl}`)
+        await sendMessage(update_token, message.chat.id, `Webhook for ${botname} set as ${webhookUrl}`)
     } catch (error) {
         console.error('handleStats error:', error.message)
-        await sendMessage(token, message.chat.id, 'Error fetching stats.')
+        await sendMessage(update_token, message.chat.id, 'Error fetching stats.')
     }
 }
 
