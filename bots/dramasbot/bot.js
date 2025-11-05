@@ -45,7 +45,7 @@ const handleStart = async (token, message, botData) => {
         const botname = botData.botname
 
         // Save user to database
-        let user = await otheBotsUsersModel.findOne({ chatid: chatId })
+        let user = await otheBotsUsersModel.findOne({ chatid: chatId, botname })
         if (!user) {
             await otheBotsUsersModel.create({
                 chatid: chatId,
