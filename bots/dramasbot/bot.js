@@ -46,11 +46,11 @@ const handleStart = async (token, message, botData) => {
         // Save user to database
         let user = await otheBotsUsersModel.findOne({ chatid: chatId })
         if (!user) {
-            await otheBotsUsersModel.create({ 
-                chatid: chatId, 
-                first_name: firstName, 
-                botname, 
-                token: botData.token 
+            await otheBotsUsersModel.create({
+                chatid: chatId,
+                first_name: firstName,
+                botname,
+                token: botData.token
             })
         }
 
@@ -74,12 +74,12 @@ const handleStart = async (token, message, botData) => {
         }
 
         // Send drama info
-        const linkText = `<a href=${drama.tgChannel}>https://t.me/drama/${drama.id}</a>`
+        const linkText = `<a href="${drama.tgChannel}">https://t.me/drama/${drama.id}</a>`
         const text = `Hi, <b>${firstName}</b>\n\nDownload All ${drama.noOfEpisodes} Episodes of <b>${drama.newDramaName}</b> for free with English Subtitles Below\n\n<b>Full Drama 👇👇\n${linkText}</b>`
-        
-        await sendMessage(token, chatId, text, { 
-            parse_mode: 'HTML', 
-            protect_content: true 
+
+        await sendMessage(token, chatId, text, {
+            parse_mode: 'HTML',
+            protect_content: true
         })
     } catch (error) {
         console.error('handleStart error:', error.message)
@@ -106,6 +106,34 @@ const handleStats = async (token, message) => {
     }
 }
 
+const handleSetWebhook = async (token, message) => {
+    try {
+        if(!Object.values(imp).includes(message.chat.id)) {
+            return await sendMessage(token, message.chat.id, 'Not authorized for this command');
+        }
+
+        let [, botname] = message.text.split(' ').map(item => item.trim())
+        if (!botname || String(botname).toLowerCase().endsWith('bot')) {
+            return await sendMessage(token, message.chat.id, 'Wrong setwebhook command');
+        }
+
+        const bot = await botListModel.findOne({ botname })
+        if (!bot) {
+            return await sendMessage(token, message.chat.id, `No bot found on DB with ${botname}`);
+        }
+
+        const webhookUrl = `https://${process.env.DOMAIN}/telebot/dramastore/${process.env.USER}/${botname}`
+        await axios.post(`https://api.telegram.org/bot${token}/setWebhook`, {
+            url: webhookUrl,
+            drop_pending_updates: true,
+            allowed_updates: ["update_id", "message", "callback_query", "channel_post", "inline_query"]
+        })
+    } catch (error) {
+        console.error('handleStats error:', error.message)
+        await sendMessage(token, message.chat.id, 'Error fetching stats.')
+    }
+}
+
 // handle /other_drama command
 const handleOtherDrama = async (token, message) => {
     await sendMessage(token, message.chat.id, 'Download all latest korean dramas at www.dramastore.net')
@@ -113,7 +141,7 @@ const handleOtherDrama = async (token, message) => {
 
 const handleMessages = async (token, message) => {
     const chatId = message.chat.id
-    
+
     if (!message.reply_to_message || message.chat.type !== 'private' || !Object.values(imp).includes(chatId)) {
         return await sendMessage(token, chatId, 'Hello,\nClick /start to start downloading or check the menu for other options')
     }
@@ -125,24 +153,24 @@ const handleMessages = async (token, message) => {
         if (replyText.toLowerCase() === 'token') {
             await botListModel.create({ token: text, botname: 'unknown', drama_chanid: 0 })
             await sendMessage(token, chatId, `Token Added: 👉 ${text} 👈\n\nReply with username of bot and the channel id e.g: <examplebot> <-1234567890>`)
-        } 
+        }
         else if (replyText.includes('Token Added:')) {
             const [botname, chan_id] = text.split(' ').map(item => item.trim())
-            
+
             if (!botname || !chan_id || !String(chan_id).startsWith('-')) {
                 return await sendMessage(token, chatId, 'Wrong reply... Reply with botname and drama channel id in this format\n<example_bot> <channel_id>')
             }
 
             const botToken = replyText.split('👉 ')[1].split(' 👈')[0].trim()
             const drama = await newMovieModel.findOne({ chan_id: Number(chan_id) })
-            
+
             if (!drama) {
                 return await sendMessage(token, chatId, `No drama found with channel id ${chan_id}`)
             }
 
             const updatedBot = await botListModel.findOneAndUpdate(
-                { token: botToken }, 
-                { $set: { botname, drama_chanid: Number(chan_id) } }, 
+                { token: botToken },
+                { $set: { botname, drama_chanid: Number(chan_id) } },
                 { new: true }
             )
 
@@ -150,7 +178,7 @@ const handleMessages = async (token, message) => {
             const domain = process.env.DOMAIN
             const hookPath = `/telebot/dramastore/${process.env.USER}/${botname}`
             const webhookUrl = `https://${domain}${hookPath}`
-            
+
             await axios.post(`https://api.telegram.org/bot${botToken}/setWebhook`, {
                 url: webhookUrl,
                 drop_pending_updates: true,
@@ -202,7 +230,10 @@ const handleWebhook = async (token, update, botData) => {
             if (message.text.startsWith('/other_drama')) {
                 return await handleOtherDrama(token, message)
             }
-            
+            if (message.text.startsWith('/setwebhook')) {
+                return await handleSetWebhook(token, message)
+            }
+
             // Handle admin messages
             return await handleMessages(token, message)
         }
@@ -216,33 +247,33 @@ const handleWebhook = async (token, update, botData) => {
 const myBotsFn = async (app) => {
     try {
         const hookPath = `/telebot/dramastore/${process.env.USER}/:botname`
-        
+
         app.post(hookPath, async (req, res) => {
             const { botname } = req.params
             const update = req.body
-            
+
             // Always respond 200 OK to Telegram immediately
             res.status(200).json({ ok: true })
-            
+
             try {
                 // Fetch bot from database
                 const botData = await botListModel.findOne({ botname })
-                
+
                 if (!botData) {
                     console.error(`❌ Bot not found: ${botname}`)
                     return
                 }
-                
+
                 // Handle the update
                 await handleWebhook(botData.token, update, botData)
-                
+
             } catch (error) {
                 console.error(`❌ Webhook error for ${botname}:`, error.message)
             }
         })
-        
+
         console.log(`✅ Dynamic webhook route registered: ${hookPath}`)
-        
+
     } catch (err) {
         console.error('❌ DramaBots initialization error:', err.message)
     }
