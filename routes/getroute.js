@@ -27,6 +27,7 @@ const telegraph = require('telegraph-node')
 const blockReq = require('./fns/block')
 const getUserLocation = require('./fns/userIp')
 const detectBettingSites = require('./fns/detect-betting')
+const { insertOtherDramaBot } = require('./fns/createdramabot')
 const ph = new telegraph()
 
 const router = express.Router()
@@ -415,6 +416,15 @@ router.get('/ebook/free/download/:book', async (req, res) => {
 
 router.get('/post/drama', (req, res) => {
     res.render('postdrama')
+})
+
+router.get('/API/testing', async (req, res)=> {
+    try {
+        insertOtherDramaBot()
+        res.send({"ok": true, "message": "request executed"})
+    } catch (error) {
+        res.send('Error on testing:', error?.message)
+    }
 })
 
 router.all('*', (req, res) => {

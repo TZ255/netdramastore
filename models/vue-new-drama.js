@@ -45,6 +45,9 @@ const NewDrama = new Schema(
       type: String,
       required: false,
     },
+    chan_id: {
+      type: Number
+    },
     tgChannel: {
       type: String,
       required: true,
