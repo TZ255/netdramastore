@@ -197,11 +197,9 @@ router.post('/post/drama', async (req, res) => {
 
         //create homepgae
         await homeModel.create({
-            idToHome: path,
             year: output.year,
             dramaName: output.drama_name,
             imageUrl: output.photo_url,
-            episodesUrl: path,
         });
         res.send(`<h1>200 OK - ID: ${drama_doc._id}</h1>`)
     } catch (error) {
