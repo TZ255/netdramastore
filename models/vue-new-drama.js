@@ -5,7 +5,6 @@ const NewDrama = new Schema(
   {
     id: {
       type: String,
-      required: true,
     },
     newDramaName: {
       type: String,
@@ -56,13 +55,25 @@ const NewDrama = new Schema(
       type: Number,
       default: 1,
     },
-    today: {type: Number},
-    thisWeek: {type: Number},
-    thisMonth: {type: Number},
-    notify: {type: Boolean}
+    today: { type: Number },
+    thisWeek: { type: Number },
+    thisMonth: { type: Number },
+    notify: { type: Boolean }
   },
   { timestamps: true, strict: false }
 );
 
-const newMovieModel = mongooose.model("newDrama", NewDrama);
-module.exports = newMovieModel;
+// Pre-save hook to generate `id` from movie_name
+NewDrama.pre("save", function (next) {
+  let id = this.newDramaName
+    .toLowerCase()
+    .replace(/[^a-z0-9\s()]/g, "") // remove special chars except spaces and ()
+    .replace(/\s+/g, "-") // replace spaces with hyphens
+    .replace(/[()]/g, ""); // remove brackets
+
+  this.id = id;
+  next();
+});
+
+const newDramaModel = mongooose.model("newDrama", NewDrama);
+module.exports = newDramaModel;

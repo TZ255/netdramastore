@@ -6,7 +6,7 @@
     function percentCounter() {
         let pcnt = 0
         let start = 0
-        let mbs = '<%= episode.size %>'
+        let mbs = '<%= episode?.size || 200 %>'
         mbs = mbs.split(' MB')[0]
         let factor = Number(mbs)/100
         console.log(factor)
@@ -19,11 +19,11 @@
             mbing = mbing + factor
             prog.innerText = pcnt + '%'
             prog.setAttribute('style', `width: ${pcnt}%;`)
-            counting.innerText = `preparing the episode... ${pcnt}%`
+            counting.innerText = `preparing the file... ${pcnt}%`
 
             if (pcnt == 100) {
                 clearInterval(interval)
-                counting.innerText = 'episode is ready to download'
+                counting.innerText = 'the file is ready to download'
                 counting.style.color = 'green'
 
                 progCont.style.display = 'none'
@@ -34,14 +34,16 @@
     percentCounter()
 
     function sendEpis() {
+        let isMovie = `<%= isMovie %>`;
+        let msg_id = `<%= msg_id %>`
         let userId = '<%= user.userId %>'
         let epId = '<%= episode._id %>'
         let btn = document.getElementById('btnEp')
         let stts = document.getElementById('counting')
         let spinner = `<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>`
-        let orgHTML = `<i class="fa-solid fa-rotate-right"></i> REDOWNLOAD EPISODE (<%= episode.size %>)`
+        let orgHTML = `<i class="fa-solid fa-rotate-right"></i> DOWNLOAD AGAIN`
 
-        let req = `/success/send/${epId}/${userId}`
+        let req = `/success/send/${msg_id}/${userId}`
         btn.innerHTML = spinner
         btn.style.backgroundColor = 'lightgray'
         btn.style.color = 'gray'

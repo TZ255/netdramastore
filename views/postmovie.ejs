@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Drama Submission Form</title>
+    <title>Movie Submission Form</title>
     <!-- Bootstrap 5.2 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -16,12 +16,17 @@
 </head>
 
 <body>
-    <h1 class="text-center">Posting Drama</h1>
+    <h1 class="text-center">Posting Movie</h1>
     <hr>
     <div class="d-flex justify-content-center align-items-center">
-        <form action="/post/drama" method="POST" target="_blank" class="form-container">
+        <form action="/post/movie" method="POST" target="_blank" class="form-container">
             <div class="mb-3">
-                <label for="dramaName" class="form-label">Drama Name</label>
+                <label for="path" class="form-label">Doc Message ID</label>
+                <input type="number" class="form-control" id="path" name="msg_id" placeholder="MsgIid eg 345"
+                    required>
+            </div>
+            <div class="mb-3">
+                <label for="dramaName" class="form-label">Movie Name</label>
                 <input type="text" class="form-control" id="dramaName" name="dramaName" placeholder="Enter drama name"
                     required>
             </div>

@@ -28,6 +28,7 @@ const blockReq = require('./fns/block')
 const getUserLocation = require('./fns/userIp')
 const detectBettingSites = require('./fns/detect-betting')
 const { insertOtherDramaBot } = require('./fns/createdramabot')
+const movieModel = require('../models/movieModel')
 const ph = new telegraph()
 
 const router = express.Router()
@@ -263,7 +264,20 @@ router.get('/download/episode', async (req, res) => {
             userid = 741815228
         }
 
-        let episode = await episodeModel.findById(ep_id)
+        let episode = null
+        let isMovie = false
+        let msg_id = null
+
+        if (String(ep_id).endsWith('--movie')) {
+            let _id = String(ep_id).split('--movie')[0]
+            episode = await movieModel.findById(_id)
+            isMovie = true
+            msg_id = episode.msgId
+        } else {
+            episode = await episodeModel.findById(ep_id)
+            msg_id = episode.epid
+        }
+
         let the_user = await botUsersModel.findOne({ userId: Number(userid) })
 
         let user = {
@@ -289,15 +303,16 @@ router.get('/download/episode', async (req, res) => {
         //     console.log(ip_data)
         // }
 
-        res.render('episode-view/episode', { episode, user, bet_ad_code })
+        res.render('episode-view/episode', { episode, user, bet_ad_code, isMovie, msg_id })
     } catch (err) {
         console.log(err.message)
         res.status(404).send(`You followed an incorrect url. Please ensure you clicked a button sent to you by dramastore bot<br></br>If this error persist contact dramastore admin @shemdoe`)
     }
 })
 
-router.get('/success/send/:_id/:userid', async (req, res) => {
-    const { _id, userid: userId } = req.params;
+router.get('/success/send/:msg_id/:userid', async (req, res) => {
+    const { msg_id, userid: userId } = req.params;
+
     const dbChannel = -1001239425048;
     const shemdoe = 741815228;
 
@@ -327,28 +342,10 @@ router.get('/success/send/:_id/:userid', async (req, res) => {
         const randomIndex = Math.floor(Math.random() * props.length);
         res.redirect(props[randomIndex]);
 
-        // Fetch episode info
-        const epinfo = await episodeModel.findById(_id);
-        if (!epinfo) {
-            console.warn(`Episode not found: ${_id}`);
-            return;
-        }
-
-        // Build share deep link
-        const ep_file_link = `https://dramastore.net/download/episode/option2/${_id}/shemdoe`;
-        const text = `📥 Download Episode ${epinfo.epno} of ${epinfo.drama_name}\n${ep_file_link}`;
-        const deep_link = `https://t.me/share/url?text=${encodeURIComponent(text)}`;
-
         // Send Telegram message after a short delay
         setTimeout(async () => {
             try {
-                await bot.api.copyMessage(userId, dbChannel, epinfo.epid, {
-                    reply_markup: {
-                        inline_keyboard: [
-                            [{ text: `🔗 Share Episode`, url: deep_link }]
-                        ]
-                    }
-                });
+                await bot.api.copyMessage(userId, dbChannel, Number(msg_id));
             } catch (err) {
                 console.error("Error copying message:", err.message);
             }
@@ -363,6 +360,15 @@ router.get('/download/episode/option2/:ep_id/shemdoe', async (req, res) => {
     try {
         let ep_id = req.params.ep_id
         res.redirect(`http://t.me/dramastorebot?start=marikiID-${ep_id}`)
+    } catch (error) {
+        console.log(error.message)
+    }
+})
+
+router.get('/download/movie/option2/:movie_id/shemdoe', async (req, res) => {
+    try {
+        let movie_id = req.params.movie_id
+        res.redirect(`http://t.me/dramastorebot?start=KMOVIE-${movie_id}`)
     } catch (error) {
         console.log(error.message)
     }
@@ -418,10 +424,14 @@ router.get('/post/drama', (req, res) => {
     res.render('postdrama')
 })
 
-router.get('/API/testing', async (req, res)=> {
+router.get('/post/movie', (req, res) => {
+    res.render('postmovie')
+})
+
+router.get('/API/testing', async (req, res) => {
     try {
         insertOtherDramaBot()
-        res.send({"ok": true, "message": "request executed"})
+        res.send({ "ok": true, "message": "request executed" })
     } catch (error) {
         res.send('Error on testing:', error?.message)
     }
