@@ -344,7 +344,7 @@ router.post('/post/movie', async (req, res) => {
             subtitle: 'English',
             coverUrl: output.photo_url,
             synopsis: output.synopsis.replace(/\n/g, '<br>'),
-            msgId: msg_id,
+            msgId: Number(msg_id),
             backup: null,
             telegraph: telegraph_link,
             timesLoaded: 1,

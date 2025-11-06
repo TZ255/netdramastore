@@ -272,10 +272,10 @@ router.get('/download/episode', async (req, res) => {
             let _id = String(ep_id).split('--movie')[0]
             episode = await movieModel.findById(_id)
             isMovie = true
-            msg_id = episode.msgId
+            msg_id = Number(episode.msgId)
         } else {
             episode = await episodeModel.findById(ep_id)
-            msg_id = episode.epid
+            msg_id = Number(episode.epid)
         }
 
         let the_user = await botUsersModel.findOne({ userId: Number(userid) })

@@ -31,14 +31,14 @@ const NewDrama = new Schema(
             type: String,
         },
         released: {
-            type: Number,
+            type: String,
         },
         msgId: {
-            type: String,
+            type: Number,
             required: true,
         },
         backup: {
-            type: String,
+            type: Number,
         },
         timesLoaded: {
             type: Number,
