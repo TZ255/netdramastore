@@ -218,6 +218,13 @@ router.post('/post/movie', async (req, res) => {
             return res.status(403).json({ error: 'Unauthorized: Incorrect secret.' });
         }
 
+        //msgid and file size: eg 1234_S212
+        const [msgId, file_size] = String(msg_id).split('_S').map(Number)
+
+        if (!msgId || !file_size) {
+            return res.status(403).json({ error: 'Wrong msgid, file_size format.' });
+        }
+
         // Parse the details field into a key-value object
         const detailsObj = {};
         details.split('\n').forEach(line => {
@@ -342,7 +349,8 @@ router.post('/post/movie', async (req, res) => {
             subtitle: 'English',
             coverUrl: output.photo_url,
             synopsis: output.synopsis.replace(/\n/g, '<br>'),
-            msgId: Number(msg_id),
+            msgId: msgId,
+            file_size: file_size,
             backup: null,
             telegraph: telegraph_link,
             timesLoaded: 1,

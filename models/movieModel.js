@@ -37,6 +37,10 @@ const NewDrama = new Schema(
             type: Number,
             required: true,
         },
+        file_size: {
+            type: Number,
+            default: 200
+        },
         backup: {
             type: Number,
         },
