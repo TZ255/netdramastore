@@ -318,16 +318,10 @@ router.get('/success/send/:msg_id/:userid', async (req, res) => {
 
     // High CPM redirect links
     const props = [
-        `https://choadecixa.net/4/7852411`,
-        `https://ptaiceckir.net/4/7852411`,
-        `https://fatchaiwhicy.net/4/7852411`,
-        `https://oglaipsa.com/4/7852411`,
-        `https://dustaitch.com/4/7852411`,
-        `https://stotseepta.com/4/7852411`,
-        `https://oastoarsooso.com/4/7852411`,
-        `https://waubibubaiz.com/4/7852411`,
-        `https://hoopsaule.com/4/7852411`,
-        `https://weeshicaise.com/4/7852411`
+        `https://otieu.com/4/7749678`,
+        'https://otieu.com/4/7748641',
+        'https://otieu.com/4/7748642',
+        'https://otieu.com/4/7514550'
     ];
 
     try {
