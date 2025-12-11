@@ -317,12 +317,7 @@ router.get('/success/send/:msg_id/:userid', async (req, res) => {
     const shemdoe = 741815228;
 
     // High CPM redirect links
-    const props = [
-        `https://otieu.com/4/7749678`,
-        'https://otieu.com/4/7748641',
-        'https://otieu.com/4/7748642',
-        'https://otieu.com/4/7514550'
-    ];
+    const monetag = 'https://otieu.com/4/10311018'
 
     try {
         // Increment user download count
@@ -333,8 +328,7 @@ router.get('/success/send/:msg_id/:userid', async (req, res) => {
         );
 
         // Redirect user immediately
-        const randomIndex = Math.floor(Math.random() * props.length);
-        res.redirect(props[randomIndex]);
+        res.redirect(monetag);
 
         // Send Telegram message after a short delay
         setTimeout(async () => {
