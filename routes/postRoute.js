@@ -225,6 +225,8 @@ router.post('/post/movie', async (req, res) => {
             return res.status(403).json({ error: 'Wrong msgid, file_size format.' });
         }
 
+        const fileSize = Math.round(file_size / (1024 * 1024))
+
         // Parse the details field into a key-value object
         const detailsObj = {};
         details.split('\n').forEach(line => {
@@ -350,7 +352,7 @@ router.post('/post/movie', async (req, res) => {
             coverUrl: output.photo_url,
             synopsis: output.synopsis.replace(/\n/g, '<br>'),
             msgId: msgId,
-            file_size: file_size,
+            file_size: fileSize,
             backup: null,
             telegraph: telegraph_link,
             timesLoaded: 1,
