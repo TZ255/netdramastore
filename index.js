@@ -13,6 +13,7 @@ const app = express()
 const telegraph = require('telegraph-node')
 const { DramaStoreBot } = require('./bots/2-Dramastore/bot')
 const { myBotsFn } = require('./bots/1-Jumbe/bot')
+const { DramaBots } = require('./bots/dramasbot/bot')
 const ph = new telegraph()
 
 
@@ -35,6 +36,7 @@ mongoose.connect(`mongodb://${process.env.USER}:${process.env.PASS}@nodetuts-sha
         // BEFORE other routes are registered
         await DramaStoreBot(app)
         await myBotsFn()
+        await DramaBots(app)
 
         // Register other routes AFTER bot routes
         app.use(postRouter)
