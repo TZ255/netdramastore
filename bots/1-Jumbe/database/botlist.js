@@ -3,9 +3,8 @@ const Schema = mongoose.Schema
 
 const botListSchema = new Schema({
     token: {type: String},
-    botname: {type: String},
-    drama_chanid: {type: Number},
+    botname: {type: String}
 }, {timestamps: true, strict: false})
 
-const botListModel = mongoose.model('Drama Bot List', botListSchema)
-module.exports = botListModel
+const model = mongoose.model('botlist', botListSchema)
+module.exports = model

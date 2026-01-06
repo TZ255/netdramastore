@@ -8,6 +8,5 @@ const botUsersSchema = new Schema({
     token: {type: String}
 }, {timestamps: true, strict: false})
 
-
-const otheBotsUsersModel = mongoose.model('Other Drama Bot Users', botUsersSchema)
-module.exports = otheBotsUsersModel
+const model = mongoose.model('botusers', botUsersSchema)
+module.exports = model
