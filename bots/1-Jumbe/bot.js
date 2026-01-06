@@ -2,9 +2,9 @@ const { Bot, webhookCallback, InlineKeyboard, InlineQueryResultBuilder, InputFil
 const { autoRetry } = require("@grammyjs/auto-retry");
 const { limit } = require("@grammyjs/ratelimiter");
 
-const usersModel = require('../database/users')
-const listModel = require('../database/botlist')
-const jumbe = require('../database/sms.json')
+const usersModel = require('./database/users')
+const listModel = require('./database/botlist')
+const jumbe = require('./database/sms.json')
 
 const imp = {
     shemdoe2: 6638791469
