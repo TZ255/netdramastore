@@ -21,6 +21,9 @@ module.exports = async (bot, ctx, dt, anyErr) => {
         let username = ctx.chat.first_name
         let mid = ctx.message.message_id
 
+        //return if is direct message on channel
+        if (ctx.message?.sender_chat?.is_direct_messages) return
+
         //if the message is from important users send to shemdoe
         if (muhimu.includes(ctx.chat.id)) {
             return await bot.api.sendMessage(dt.shd, `<b>${txt}</b> \n\nfrom = <code>${username}</code>\nid = <code>${userid}</code>&mid=${mid}`, { parse_mode: 'HTML' })
