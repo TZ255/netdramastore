@@ -373,12 +373,10 @@ const DramaStoreBot = async (app) => {
         })
 
         bot.use(async (ctx, next) => {
-            console.log('On channel Post:', ctx.message)
             postEpisodesInChannel(bot, ctx, next, dt, anyErr, delay, InputFile)
         })
 
         bot.on(':text', async ctx => {
-            console.log('On text:', ctx.message)
             naomymatusi(bot, ctx, dt, anyErr)
         })
 

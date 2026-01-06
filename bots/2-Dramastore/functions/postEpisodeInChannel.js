@@ -9,6 +9,9 @@ module.exports = async (bot, ctx, next, dt, anyErr, delay, InputFile) => {
     try {
         // check if it is used in channel
         if (ctx.update.channel_post) {
+            //return if is direct messages
+            if(ctx.update.channel_post?.sender_chat?.is_direct_messages) return;
+            
             // check if it is dramastore database
             if (ctx.update.channel_post.sender_chat.id == dt.databaseChannel) {
                 // check if ni document
