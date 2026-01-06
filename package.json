@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Korean Drama Store",
   "main": "index.js",
+  "engines": {
+    "node": "22.15.x"
+  },
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js"
