@@ -15,4 +15,14 @@ const blockReq = async (req, res) => {
     }
 }
 
-module.exports = blockReq
+const send404 = async (req, res) => {
+    try {
+        let bet_ad_code = '404'
+        return res.status(404).send("Oh! Shit.. We have a problem. Please comeback later")
+    } catch (error) {
+        console.error(error)
+        res.status(404).send("Oh! Shit.. We have a problem. Please comeback later")
+    }
+}
+
+module.exports = { blockReq, send404 }

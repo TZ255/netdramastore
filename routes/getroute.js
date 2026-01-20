@@ -24,7 +24,7 @@ const boosterBot = new Bot(process.env.OH_BOT2)
 
 // TELEGRAPH
 const telegraph = require('telegraph-node')
-const blockReq = require('./fns/block')
+const {blockReq, send404} = require('./fns/block')
 const getUserLocation = require('./fns/userIp')
 const detectBettingSites = require('./fns/detect-betting')
 const { insertOtherDramaBot } = require('./fns/createdramabot')
@@ -72,7 +72,7 @@ router.get(['/list/all', '/list-of-dramastore-dramas'], async (req, res) => {
     }
 })
 
-router.get('/:id', blockReq, async (req, res, next) => {
+router.get('/:id', send404, async (req, res, next) => {
     try {
         const id = req.params.id
 
