@@ -90,11 +90,12 @@ const UploadingNewEpisode = async (ctx, txt, dt, bot, InputFile) => {
             {
               text: `📥 DOWNLOAD NOW E${ep} (${size})`,
               url: `https://${dt.link}marikiID-${episode_post._id}`,
+              style: 'primary'
             },
           ],
           [
-            { text: '📥 LINK #2', url: option2 },
-            { text: '💡 Help', callback_data: 'newHbtn2' },
+            { text: '📥 LINK #2', url: option2, style: 'primary' },
+            { text: '💡 Help', callback_data: 'newHbtn2', style: 'danger' },
           ],
         ],
       },
