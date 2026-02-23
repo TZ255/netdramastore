@@ -317,7 +317,7 @@ router.get('/success/send/:msg_id/:userid', async (req, res) => {
     const shemdoe = 741815228;
 
     // High CPM redirect links
-    const monetag = 'https://otieu.com/4/10456426'
+    const monetag = 'https://omg10.com/4/10456426'
 
     try {
         // Increment user download count
