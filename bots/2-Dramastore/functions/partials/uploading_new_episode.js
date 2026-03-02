@@ -69,7 +69,7 @@ const UploadingNewEpisode = async (ctx, txt, dt, bot, InputFile) => {
     let option2 = `http://dramastore.net/download/episode/option2/${episode_post._id}/shemdoe`;
 
     // Send a poll message to the channel asking for quality feedback.
-    const photo_caption = `${_ep_word} \n\n<blockquote>Click <b>Download Now</b>, then <b>Go to Download Page</b> to get the episode</blockquote>`
+    const photo_caption = `${_ep_word}`
 
     const sanitizeName = query.newDramaName.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
@@ -90,11 +90,11 @@ const UploadingNewEpisode = async (ctx, txt, dt, bot, InputFile) => {
             {
               text: `📥 DOWNLOAD NOW E${ep} (${size})`,
               url: `https://${dt.link}marikiID-${episode_post._id}`,
-              style: 'primary'
+              style: 'danger'
             },
           ],
           [
-            { text: '📥 LINK #2', url: option2, style: 'primary' },
+            { text: '📥 LINK #2', url: option2, style: 'danger' },
             { text: '💡 Help', callback_data: 'newHbtn2', style: 'danger' },
           ],
         ],
